@@ -46,6 +46,9 @@ public class DBupdateModel {
     public void setTable(String table) {
         this.table = table;
     }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> master
 }

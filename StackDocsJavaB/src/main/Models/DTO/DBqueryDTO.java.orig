@@ -30,6 +30,9 @@ public class DBqueryDTO {
     public void setData(ResultSet data) {
         this.data = data;
     }
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> master
 }
