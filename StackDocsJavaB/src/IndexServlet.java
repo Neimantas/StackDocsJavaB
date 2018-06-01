@@ -11,11 +11,6 @@ public class IndexServlet extends HttpServlet {
         super.doGet(req, resp);
 
 
-
-        switch(req.getParameter("action")) {
-            case "next": 
-
-        }
     }
 
     @Override

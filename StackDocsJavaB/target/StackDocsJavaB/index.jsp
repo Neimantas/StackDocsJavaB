@@ -5,6 +5,7 @@
 
 <head>
     <link rel="stylesheet" href="css.css">
+    <script src="js.js"></script>
     <title>Stack Docs JAVA</title>
 
 </head>
@@ -62,7 +63,7 @@
 
                     <div class="col-md-12 mb-3">
 
-                        <input class="form-control" type="text" placeholder="Įveskite frazę">
+                        <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
 
 
                     </div>
@@ -81,11 +82,11 @@
 
         <table class="table table-bordered shadow-lg p-3 mb-5 bg-white rounded">
 
-            <thead>
+            <tbody>
 
             <tr>
 
-                <td>
+                <td id="isvedamas-tekstas">
 
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
                     praesentium
@@ -104,7 +105,7 @@
                 </td>
             </tr>
 
-            </thead>
+            </tbody>
 
         </table>
 
@@ -112,13 +113,13 @@
 
             <ul class="pagination justify-content-center">
 
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                <li class="page-item">
+                    <a class="page-link text-dark" id="mugtukas-atgal" href="#" tabindex="-1" onclick="funkcija_atgal()">Atgal</a>
                 </li>
 
                 <!--KIEK BUS PUSLAPIU?-->
 
-                <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+                <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
                 <!--<li class="page-item"><a class="page-link text-dark" href="#">2</a></li>-->
                 <!--<li class="page-item"><a class="page-link text-dark" href="#">3</a></li>-->
                 <!--<li class="page-item"><a class="page-link text-dark" href="#">4</a></li>-->
@@ -126,11 +127,12 @@
 
 
                 <li class="page-item">
-                    <a class="page-link text-dark" href="#">Next</a>
+                    <a class="page-link text-dark" id="mygtukas-atgal" href="#" onclick="funkcija_pirmyn()">Pirmyn</a>
                 </li>
 
             </ul>
         </nav>
+
 
 
     <!--</div>-->
