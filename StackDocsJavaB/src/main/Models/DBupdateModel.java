@@ -7,14 +7,6 @@ public class DBupdateModel {
     private String upWhereValue;
     private String table;
 
-    public DBupdateModel(String upWhat, String upValue, String upWhere, String upWhereValue, String table) {
-        this.upWhat = upWhat;
-        this.upValue = upValue;
-        this.upWhere = upWhere;
-        this.upWhereValue = upWhereValue;
-        this.table = table;
-    }
-
     public String getUpWhat() {
         return upWhat;
     }
