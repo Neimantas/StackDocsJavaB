@@ -119,10 +119,10 @@
                 <!--KIEK BUS PUSLAPIU?-->
 
                 <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">4</a></li>
-                <li class="page-item"><a class="page-link text-dark" href="#">5</a></li>
+                <!--<li class="page-item"><a class="page-link text-dark" href="#">2</a></li>-->
+                <!--<li class="page-item"><a class="page-link text-dark" href="#">3</a></li>-->
+                <!--<li class="page-item"><a class="page-link text-dark" href="#">4</a></li>-->
+                <!--<li class="page-item"><a class="page-link text-dark" href="#">5</a></li>-->
 
 
                 <li class="page-item">

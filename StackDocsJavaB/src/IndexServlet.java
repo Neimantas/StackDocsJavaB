@@ -9,6 +9,13 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
+
+
+
+        switch(req.getParameter("action")) {
+            case "next": 
+
+        }
     }
 
     @Override
