@@ -1,13 +1,16 @@
 package test;
 
+import main.Models.DBupdateModel;
 import main.Models.DTO.DBqueryDTO;
 import main.Services.ICrud;
 import main.Services.IDataBase;
 import main.Services.Impl.Crud;
+import main.Services.Impl.DataBase;
 
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Testing {
     private static IDataBase db;
@@ -17,13 +20,18 @@ public class Testing {
 
         ICrud crud = new Crud();
         DBqueryDTO dto;
+//        db = new DataBase();
+//        connection = db.getConnection();
+//        Statement statement = connection.createStatement();
+//        String query = "create table person (id integer, name string)";
+//        statement.executeUpdate(query);
+//        dto = crud.create("create table person","id integer, name string");
+//        System.out.println(dto.isSuccess());
+//        System.out.println(dto.getMessage());
 
-        dto = crud.create("create table person (id integer, name string)");
-        System.out.println(dto.isSuccess());
-        System.out.println(dto.getMessage());
-        dto = crud.update("insert into person values(1, 'leo')");
-        dto = crud.update("insert into person values(2, 'yui')");
-        ResultSet rs = crud.read("select * from person").getData();
+//        dto = crud.create("person", "4, 'Johny'");
+//        dto = crud.create("person", "2, 'yui'");
+        ResultSet rs = crud.read("person").getData();
 //        db = new DataBase();
 //        connection = db.getConnection();
 //

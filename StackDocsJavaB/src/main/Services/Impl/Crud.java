@@ -1,11 +1,11 @@
 package main.Services.Impl;
 
+import main.Models.DBupdateModel;
 import main.Models.DTO.DBqueryDTO;
 import main.Services.ICrud;
 import main.Services.IDataBase;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -13,7 +13,6 @@ public class Crud implements ICrud {
 
     private Connection connection;
     private Statement statement;
-    private ResultSet rs;
     private IDataBase db;
     private DBqueryDTO dto;
 
@@ -22,12 +21,14 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO create(String table) {
+    public DBqueryDTO create(String table, String values) {
         try {
+            //TODO Check if table exists, if not create that table first
+            String query = "INSERT INTO " + table + " VALUES(" + values + ")";
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
-            statement.executeUpdate(table);
+            statement.executeUpdate(query);
             dto.setSuccess(true);
         } catch (SQLException e) {
             dto.setSuccess(false);
@@ -47,9 +48,10 @@ public class Crud implements ICrud {
     public DBqueryDTO read(String table) {
         try {
             dto = new DBqueryDTO();
+            String query = "SELECT * FROM " + table;
             connection = db.getConnection();
             statement = connection.createStatement();
-            dto.setData(statement.executeQuery(table));
+            dto.setData(statement.executeQuery(query));
             dto.setSuccess(true);
         } catch (SQLException e) {
             dto.setSuccess(false);
@@ -66,12 +68,50 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO update(String table) {
-        return create(table);
+    public DBqueryDTO update(DBupdateModel update) {
+        try {
+            //TODO Check if table exists, if not create that table first
+            String query = "UPDATE " + update.getTable() + " SET " + update.getUpWhat() + " = "
+                            + update.getUpValue() + " WHERE " + update.getUpWhere() + " = " + update.getUpWhereValue();
+            dto = new DBqueryDTO();
+            connection = db.getConnection();
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            dto.setSuccess(true);
+        } catch (SQLException e) {
+            dto.setSuccess(false);
+            dto.setMessage(e.getMessage());
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                db.closeConnection();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
+        return dto;
     }
 
     @Override
-    public DBqueryDTO delete(String table) {
-        return create(table);
+    public DBqueryDTO delete(String table, String id) {
+        try {
+            String query = "DELETE FROM " + table + "WHERE id = " + id;
+            dto = new DBqueryDTO();
+            connection = db.getConnection();
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            dto.setSuccess(true);
+        } catch (SQLException e) {
+            dto.setSuccess(false);
+            dto.setMessage(e.getMessage());
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                db.closeConnection();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
+        return dto;
     }
 }
