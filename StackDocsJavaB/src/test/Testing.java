@@ -19,23 +19,21 @@ public class Testing {
     public static void main(String[] args) throws Throwable {
 
         ICrud crud = new Crud();
-        DBqueryDTO dto;
-//        db = new DataBase();
-//        connection = db.getConnection();
-//        Statement statement = connection.createStatement();
+        DBqueryDTO dto = new DBqueryDTO();
+        db = new DataBase();
+        connection = db.getConnection();
+
 //        String query = "create table person (id integer, name string)";
 //        statement.executeUpdate(query);
 //        dto = crud.create("create table person","id integer, name string");
 //        System.out.println(dto.isSuccess());
 //        System.out.println(dto.getMessage());
-
 //        dto = crud.create("person", "4, 'Johny'");
 //        dto = crud.create("person", "2, 'yui'");
-        ResultSet rs = crud.read("person").getData();
-//        db = new DataBase();
-//        connection = db.getConnection();
-//
-//        Statement statement = connection.createStatement();
+        dto = crud.read("person", connection);
+        ResultSet rs = dto.getData();
+//        dto.setData(statement.executeQuery("SELECT * FROM person"));
+//        ResultSet rs = dto.getData();
 //        String query = "CREATE DATABASE STUDENTS";
 //        statement.executeUpdate("drop table if exists person");
 //        statement.executeUpdate("create table person (id integer, name string)");
@@ -57,6 +55,7 @@ public class Testing {
             System.out.println("name = " + rs.getString("name"));
             System.out.println("id = " + rs.getInt("id"));
         }
+        db.closeConnection();
         System.out.println("got here");
     }
 }

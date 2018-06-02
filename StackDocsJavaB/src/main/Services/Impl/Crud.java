@@ -6,6 +6,7 @@ import main.Services.ICrud;
 import main.Services.IDataBase;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -43,13 +44,15 @@ public class Crud implements ICrud {
         }
         return dto;
     }
-
+    /**
+     * Don't forget to close the connection after parsing the ResultSet
+     * db.closeConnection();
+     */
     @Override
-    public DBqueryDTO read(String table) {
+    public DBqueryDTO read(String table, Connection connection) {
         try {
             dto = new DBqueryDTO();
             String query = "SELECT * FROM " + table;
-            connection = db.getConnection();
             statement = connection.createStatement();
             dto.setData(statement.executeQuery(query));
             dto.setSuccess(true);
@@ -57,12 +60,6 @@ public class Crud implements ICrud {
             dto.setSuccess(false);
             dto.setMessage(e.getMessage());
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                db.closeConnection();
-            } catch (SQLException e) {
-                e.getMessage();
-            }
         }
         return dto;
     }
