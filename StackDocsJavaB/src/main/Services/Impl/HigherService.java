@@ -23,27 +23,27 @@ public class HigherService implements IHigherService {
         DBqueryDTO dto = crud.read("Examples");
         if (dto.isSuccess()) {
 
-            List<ExampleDAL> examplesList = new ArrayList<>();
+            List<Examples> list = new ArrayList<>();
             ResultSet rs = dto.getData();
 
             while(rs.next()) {
                 if (rs.getString("Title") == title) {
                     ExampleDAL dal = createExampleDALfromResultSet(rs);
-                    examplesList.add(dal);
+                    list.add(changeExampleDALtoExamples(dal));
                 }
             }
 
-            if (!examplesList.isEmpty()) {
-                HigherServiceDTO hDTO = new HigherServiceDTO();
-                hDTO.success = dto.isSuccess();
-                hDTO.examplesList = examplesList;
-                return hDTO;
-            } else {
-                HigherServiceDTO hDTO = new HigherServiceDTO();
-                hDTO.success = dto.isSuccess();
-                hDTO.message = "DB connection vas successfull, but cant find anything by title";
-                return hDTO;
-            }
+//            if (!examplesList.isEmpty()) {
+//                HigherServiceDTO hDTO = new HigherServiceDTO();
+//                hDTO.success = dto.isSuccess();
+//                hDTO.examplesList = examplesList;
+//                return hDTO;
+//            } else {
+//                HigherServiceDTO hDTO = new HigherServiceDTO();
+//                hDTO.success = dto.isSuccess();
+//                hDTO.message = "DB connection vas successfull, but cant find anything by title";
+//                return hDTO;
+//            }
         } else {
             return null;
         }
@@ -65,17 +65,17 @@ public class HigherService implements IHigherService {
                 }
             }
 
-            if (!examplesList.isEmpty()) {
-                HigherServiceDTO hDTO = new HigherServiceDTO();
-                hDTO.success = dto.isSuccess();
-                hDTO.examplesList = examplesList;
-                return hDTO;
-            } else {
-                HigherServiceDTO hDTO = new HigherServiceDTO();
-                hDTO.success = dto.isSuccess();
-                hDTO.message = "DB connection vas successfull, but cant find anything by title";
-                return hDTO;
-            }
+//            if (!examplesList.isEmpty()) {
+//                HigherServiceDTO hDTO = new HigherServiceDTO();
+//                hDTO.success = dto.isSuccess();
+//                hDTO.examplesList = examplesList;
+//                return hDTO;
+//            } else {
+//                HigherServiceDTO hDTO = new HigherServiceDTO();
+//                hDTO.success = dto.isSuccess();
+//                hDTO.message = "DB connection vas successfull, but cant find anything by title";
+//                return hDTO;
+//            }
         } else {
             return null;
         }
@@ -138,7 +138,21 @@ public class HigherService implements IHigherService {
         dal.setLastEditUserId(rs.getLong("LastEditUserId"));
         dal.setLastEditUserDisplayName(rs.getString("LastEditUserDisplayName"));
         dal.setContributorCount(rs.getLong("ContributorCount"));
-        dal.
+        dal.setExampleCount(rs.getLong("ExampleCount"));
+        dal.setExampleScore(rs.getLong("ExampleScore"));
+        //HTML
+        dal.setIntroductionHtml(rs.getString("IntroductionHtml"));
+        dal.setSyntaxHtml(rs.getString("SyntaxHtml"));
+        dal.setParametersHtml(rs.getString("ParametersHtml"));
+        dal.setRemarksHtml(rs.getString("RemarksHtml"));
+        //Markdown
+        dal.setIntroductionMarkdown(rs.getString("IntroductionMarkdown"));
+        dal.setSyntaxMarkdown(rs.getString("SyntaxMarkdown"));
+        dal.setParametersMarkdown(rs.getString("ParametersMarkdown"));
+        dal.setRemarksMarkdown(rs.getString("RemarksMarkdown"));
+        //
+        dal.setHelloWorldVersionsHtml(rs.getString("HelloWorldVersionsHtml"));
+        dal.setVersionsJson(rs.getString("VersionsJson"));
 
         return dal;
     }
@@ -148,7 +162,7 @@ public class HigherService implements IHigherService {
         return new Examples();
     }
 
-    private Examples changeExampleDALtExamples(ExampleDAL dal) {
+    private Examples changeExampleDALtoExamples(ExampleDAL dal) {
 
         return new Examples();
     }
