@@ -6,8 +6,8 @@ import main.Models.DTO.DBqueryDTO;
 import java.sql.Connection;
 
 public interface ICrud {
-    public DBqueryDTO create(String table, String values);
-    public DBqueryDTO read(String table, Connection connection);
-    public DBqueryDTO update(DBupdateModel update);
-    public DBqueryDTO delete(String table, String id);
+    DBqueryDTO create(String table, String values);
+    DBqueryDTO read(String table, Connection connection);
+    DBqueryDTO update(DBupdateModel update);
+    DBqueryDTO delete(String table, String id);
 }

@@ -22,32 +22,18 @@ public class Testing {
         DBqueryDTO dto = new DBqueryDTO();
         db = new DataBase();
         connection = db.getConnection();
-
-//        String query = "create table person (id integer, name string)";
-//        statement.executeUpdate(query);
-//        dto = crud.create("create table person","id integer, name string");
-//        System.out.println(dto.isSuccess());
-//        System.out.println(dto.getMessage());
+//        DBupdateModel update = new DBupdateModel();
+//        update.setTable("person");
+//        update.setUpValue("Blorg");
+//        update.setUpWhat("name");
+//        update.setUpWhere("id");
+//        update.setUpWhereValue("3");
+        crud.create("person", "8, 'test'");
 //        dto = crud.create("person", "4, 'Johny'");
 //        dto = crud.create("person", "2, 'yui'");
         dto = crud.read("person", connection);
         ResultSet rs = dto.getData();
-//        dto.setData(statement.executeQuery("SELECT * FROM person"));
-//        ResultSet rs = dto.getData();
-//        String query = "CREATE DATABASE STUDENTS";
-//        statement.executeUpdate("drop table if exists person");
-//        statement.executeUpdate("create table person (id integer, name string)");
-//        statement.executeUpdate("insert into person values(1, 'leo')");
-//        statement.executeUpdate("insert into person values(2, 'yui')");
-//        int b = statement.executeUpdate("drop table if exists person");
-//        int c = statement.executeUpdate("drop table if exists person");
-//        ResultSet rs = statement.executeQuery("select * from person");
-//        try {
-//            boolean a = statement.execute("select * from nowhere");
-//            System.out.println(a);
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
+
 
         System.out.println("boop");
         while (rs.next()) {

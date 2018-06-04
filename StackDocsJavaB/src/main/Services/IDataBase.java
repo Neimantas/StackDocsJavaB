@@ -4,6 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface IDataBase {
-    public Connection getConnection() throws SQLException;
-    public void closeConnection() throws SQLException;
+    Connection getConnection() throws SQLException;
+    void closeConnection() throws SQLException;
 }

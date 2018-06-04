@@ -6,7 +6,6 @@ import main.Services.ICrud;
 import main.Services.IDataBase;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -24,10 +23,9 @@ public class Crud implements ICrud {
     @Override
     public DBqueryDTO create(String table, String values) {
         try {
-            //TODO Check if table exists, if not create that table first
-            String query = "INSERT INTO " + table + " VALUES(" + values + ")";
             dto = new DBqueryDTO();
             connection = db.getConnection();
+            String query = "INSERT INTO " + table + " VALUES(" + values + ")";
             statement = connection.createStatement();
             statement.executeUpdate(query);
             dto.setSuccess(true);
@@ -67,9 +65,8 @@ public class Crud implements ICrud {
     @Override
     public DBqueryDTO update(DBupdateModel update) {
         try {
-            //TODO Check if table exists, if not create that table first
-            String query = "UPDATE " + update.getTable() + " SET " + update.getUpWhat() + " = "
-                            + update.getUpValue() + " WHERE " + update.getUpWhere() + " = " + update.getUpWhereValue();
+            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpWhat() + "' = '"
+                            + update.getUpValue() + "' WHERE " + update.getUpWhere() + " = " + update.getUpWhereValue();
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
@@ -92,7 +89,7 @@ public class Crud implements ICrud {
     @Override
     public DBqueryDTO delete(String table, String id) {
         try {
-            String query = "DELETE FROM " + table + "WHERE id = " + id;
+            String query = "DELETE FROM " + table + " WHERE id = " + id;
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
