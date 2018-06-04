@@ -23,7 +23,7 @@ public class HigherService implements IHigherService {
         DBqueryDTO dto = crud.read("Examples");
         if (dto.isSuccess()) {
 
-            List<Examples> list = new ArrayList<>();
+            List<Example> list = new ArrayList<>();
             ResultSet rs = dto.getData();
 
             while(rs.next()) {
@@ -157,24 +157,74 @@ public class HigherService implements IHigherService {
         return dal;
     }
 
-    private Examples changeDocTagsDALtoDocTags(DocTagsDAL dal) {
+    private Example changeDocTagsDALtoDocTags(DocTagsDAL dal) {
 
-        return new Examples();
+        return new Example();
     }
 
-    private Examples changeExampleDALtoExamples(ExampleDAL dal) {
-
-        return new Examples();
+    private Example changeExampleDALtoExamples(ExampleDAL dal) {
+        Example exm = new Example();
+        exm.setId(dal.getId());
+        exm.setDocTopicId(dal.getDocTopicId());
+        exm.setTytle(dal.getTitle());
+        exm.setBodyHTML(dal.getBodyHtml());
+        exm.setBodyMarkdown(dal.getBodyMarkdown());
+        return exm;
     }
 
-    private Examples changeTopicsDALtoTopics(TopicsDAL dal) {
+    private Example changeTopicsDALtoTopics(TopicsDAL dal) {
 
-        return new Examples();
+        return new Example();
     }
 }
 
-class Examples {
+class Example {
+    private long _id;
+    private long _docTopicId;
+    private String _title;
+    private String _bodyHTML;
+    private String _bodyMarkdown;
 
+
+    public long getId() {
+        return _id;
+    }
+
+    public void setId(long id) {
+        _id = id;
+    }
+
+    public long getDocTopicId() {
+        return _docTopicId;
+    }
+
+    public void setDocTopicId(long docTopicId) {
+        _docTopicId = docTopicId;
+    }
+
+    public String getTytle() {
+        return _title;
+    }
+
+    public void setTytle(String title) {
+        _title = title;
+    }
+
+    public String getBodyHTML() {
+        return _bodyHTML;
+    }
+
+    public void setBodyHTML(String bodyHTML) {
+        _bodyHTML = bodyHTML;
+    }
+
+    public String getBodyMarkdown() {
+        return _bodyMarkdown;
+    }
+
+    public void setBodyMarkdown(String bodyMarkdown) {
+        _bodyMarkdown = bodyMarkdown;
+    }
 }
 
 class Crud {
