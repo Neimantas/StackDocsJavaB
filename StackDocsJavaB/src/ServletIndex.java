@@ -18,6 +18,10 @@ public class ServletIndex extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Ar cia turi isikelti index.jsp failas
+
+
+
         response.setContentType("text/html");
 
         PrintWriter out = response.getWriter();
