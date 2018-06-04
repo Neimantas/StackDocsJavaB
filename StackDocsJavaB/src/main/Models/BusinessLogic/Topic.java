@@ -1,49 +1,40 @@
 package main.Models.BusinessLogic;
 
 public class Topic {
-	private int _id;
-	private int _docTagId;
+	private long _id;
+	private long _docTagId;
+	private String _title;
 
 	private String _introductionHtml;
     private String _syntaxHtml;
-
     private String _parametersHtml;
     private String _remarksHtml;
 
     private String _introductionMarkdown;
     private String _syntaxMarkdown;
-
     private String _parametersMarkdown;
     private String _remarksMarkdown;
 
 
-    public Topic(int id, int docTagId, String introductionHtml, String syntaxHtml, String parametersHtml, String remarksHtml, String introductionMarkdown, String syntaxMarkdown, String parametersMarkdown, String remarksMarkdown) {
-        _id = id;
-        _docTagId = docTagId;
-        _introductionHtml = introductionHtml;
-        _syntaxHtml = syntaxHtml;
-        _parametersHtml = parametersHtml;
-        _remarksHtml = remarksHtml;
-        _introductionMarkdown = introductionMarkdown;
-        _syntaxMarkdown = syntaxMarkdown;
-        _parametersMarkdown = parametersMarkdown;
-        _remarksMarkdown = remarksMarkdown;
-    }
-    public int getId() {
+    public long getId() {
         return _id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         _id = id;
     }
 
-    public int getDocTagId() {
+    public long getDocTagId() {
         return _docTagId;
     }
 
-    public void setDocTagId(int docTagId) {
+    public void setDocTagId(long docTagId) {
         _docTagId = docTagId;
     }
+
+    public String getTitle() { return _title; }
+
+    public void setTitle(String title) { _title = title; }
 
     public String getIntroductionHtml() {
         return _introductionHtml;
