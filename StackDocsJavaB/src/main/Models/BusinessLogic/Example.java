@@ -1,43 +1,35 @@
 package main.Models.BusinessLogic;
 
 public class Example {
-	private int _id;
-	private int _docTopicId;
-	private String _tytle;
-
+	private long _id;
+	private long _docTopicId;
+	private String _title;
 	private String _bodyHTML;
 	private String _bodyMarkdown;
 
-	public Example(int id, int docTopicId, String tytle, String bodyHTML, String bodyMarkdown) {
-		_id = id;
-		_docTopicId = docTopicId;
-		_tytle = tytle;
-		_bodyHTML = bodyHTML;
-		_bodyMarkdown = bodyMarkdown;
-	}
 
-	public int getId() {
+	public long getId() {
 		return _id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		_id = id;
 	}
 
-	public int getDocTopicId() {
+	public long getDocTopicId() {
 		return _docTopicId;
 	}
 
-	public void setDocTopicId(int docTopicId) {
+	public void setDocTopicId(long docTopicId) {
 		 _docTopicId = docTopicId;
 	}
 
-	public String getTytle() {
-		return _tytle;
+	public String getTitle() {
+		return _title;
 	}
 
-	public void setTytle(String tytle) {
-		_tytle = tytle;
+	public void setTitle(String title) {
+		_title = title;
 	}
 
 	public String getBodyHTML() {
