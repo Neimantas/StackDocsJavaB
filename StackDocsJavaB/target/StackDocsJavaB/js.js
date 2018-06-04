@@ -12,6 +12,8 @@ function funkcija_atgal() {
     // console.log("tekstas" + teksto_laukas)
     // console.log(" numeris" + puslapio_numeris)
 
+
+
 }
 
 function funkcija_pirmyn() {
@@ -19,4 +21,6 @@ function funkcija_pirmyn() {
 
 
 }
+
+
 
