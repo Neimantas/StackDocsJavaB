@@ -1,11 +1,18 @@
 package main.Services;
 
-import main.Models.DTO.HigherServiceDTO;
-import java.sql.SQLException;
+import main.Models.DTO.DocTagsDTO;
+import main.Models.DTO.ExampleDTO;
+import main.Models.DTO.TopicsDTO;
 
 public interface IHigherService {
-    HigherServiceDTO getByThemeTytle(String title) throws SQLException;
-    HigherServiceDTO getByTopicId(String topicId) throws SQLException;
-    HigherServiceDTO getByDocTagId(String doctagId);
-    HigherServiceDTO getByExampleId(String exampleId);
+    DocTagsDTO getDocTagById(String docTagId);
+    TopicsDTO getTopicById(String topicId);
+    ExampleDTO getExampleById(String exampleId);
+
+    DocTagsDTO getAllDocTags();
+    TopicsDTO getAllTopics();
+    ExampleDTO getAllEcamples();
+
+    TopicsDTO getTopicsByDocTagId(String docTagId);
+    ExampleDTO getExamplesByTopicsId(String topicId);
 }

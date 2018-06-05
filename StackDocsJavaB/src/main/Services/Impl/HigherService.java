@@ -4,11 +4,10 @@ import main.Models.DAL.DocTagsDAL;
 import main.Models.DAL.ExampleDAL;
 import main.Models.DAL.TopicsDAL;
 import main.Models.DTO.DBqueryDTO;
-import main.Models.DTO.HigherServiceDTO;
+import main.Models.DTO.DocTagsDTO;
+import main.Models.DTO.ExampleDTO;
+import main.Models.DTO.TopicsDTO;
 import main.Services.IHigherService;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,150 +15,335 @@ public class HigherService implements IHigherService {
 
     Crud crud = new Crud();
 
-
     @Override
-    public HigherServiceDTO getByThemeTytle(String title) throws SQLException {
+    public DocTagsDTO getDocTagById(String docTagId) {
+        DBqueryDTO dbDTO = crud.read("DocTags");
+        DocTagsDTO dtDTO = new DocTagsDTO();
 
-        DBqueryDTO dto = crud.read("Examples");
-        if (dto.isSuccess()) {
+        dtDTO.setSuccess(dbDTO.isSuccess());
+        dtDTO.setMessage(dbDTO.getMessage());
 
-            List<Example> list = new ArrayList<>();
-            ResultSet rs = dto.getData();
+        if (dbDTO.isSuccess()) {
 
-            while(rs.next()) {
-                if (rs.getString("Title") == title) {
-                    ExampleDAL dal = createExampleDALfromResultSet(rs);
-                    list.add(changeExampleDALtoExamples(dal));
+            List<DocTagsDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                if (columns.get(0) == docTagId) {
+                    list.add(createDocTagsDALfromResultSet(columns));
                 }
             }
 
-//            if (!examplesList.isEmpty()) {
-//                HigherServiceDTO hDTO = new HigherServiceDTO();
-//                hDTO.success = dto.isSuccess();
-//                hDTO.examplesList = examplesList;
-//                return hDTO;
-//            } else {
-//                HigherServiceDTO hDTO = new HigherServiceDTO();
-//                hDTO.success = dto.isSuccess();
-//                hDTO.message = "DB connection vas successfull, but cant find anything by title";
-//                return hDTO;
-//            }
+            if (!list.isEmpty()) {
+                dtDTO.setData(list);
+                return dtDTO;
+            } else {
+                dtDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+                return dtDTO;
+            }
+
         } else {
-            return null;
+            return dtDTO;
         }
     }
 
     @Override
-    public HigherServiceDTO getByTopicId(String topicId) throws SQLException {
-        DBqueryDTO dto = crud.read("Topics");
-        if (dto.isSuccess()) {
+    public TopicsDTO getTopicById(String topicId) {
+        DBqueryDTO dbDTO = crud.read("Topics");
+        TopicsDTO tDTO = new TopicsDTO();
 
-            List<TopicsDAL> examplesList = new ArrayList<>();
+        tDTO.setSuccess(dbDTO.isSuccess());
+        tDTO.setMessage(dbDTO.getMessage());
 
-            ResultSet rs = dto.getData();
+        if (dbDTO.isSuccess()) {
 
-            while(rs.next()) {
-                if (rs.getString("Id") == topicId) {
+            List<TopicsDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
 
-
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                if (columns.get(0) == topicId) {
+                    list.add(createTopicsDALfromResultSet(columns));
                 }
             }
 
-//            if (!examplesList.isEmpty()) {
-//                HigherServiceDTO hDTO = new HigherServiceDTO();
-//                hDTO.success = dto.isSuccess();
-//                hDTO.examplesList = examplesList;
-//                return hDTO;
-//            } else {
-//                HigherServiceDTO hDTO = new HigherServiceDTO();
-//                hDTO.success = dto.isSuccess();
-//                hDTO.message = "DB connection vas successfull, but cant find anything by title";
-//                return hDTO;
-//            }
+            if (!list.isEmpty()) {
+                tDTO.setData(list);
+                return tDTO;
+            } else {
+                tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+                return tDTO;
+            }
+
         } else {
-            return null;
+            return tDTO;
         }
     }
 
     @Override
-    public HigherServiceDTO getByDocTagId(String doctagId) {
-        return null;
+    public ExampleDTO getExampleById(String exampleId) {
+        DBqueryDTO dbDTO = crud.read("Examples");
+        ExampleDTO eDTO = new ExampleDTO();
+
+        eDTO.setSuccess(dbDTO.isSuccess());
+        eDTO.setMessage(dbDTO.getMessage());
+
+        if (dbDTO.isSuccess()) {
+
+            List<ExampleDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                if (columns.get(0) == exampleId) {
+                    list.add(createExampleDALfromResultSet(columns));
+                }
+            }
+
+            if (!list.isEmpty()) {
+                eDTO.setData(list);
+                return eDTO;
+            } else {
+                eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+                return eDTO;
+            }
+
+        } else {
+            return eDTO;
+        }
     }
 
     @Override
-    public HigherServiceDTO getByExampleId(String exampleId) {
-        return null;
+    public DocTagsDTO getAllDocTags() {
+        DBqueryDTO dbDTO = crud.read("DocTags");
+        DocTagsDTO dtDTO = new DocTagsDTO();
+
+        dtDTO.setSuccess(dbDTO.isSuccess());
+        dtDTO.setMessage(dbDTO.getMessage());
+
+        if (dbDTO.isSuccess()) {
+
+            List<DocTagsDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                list.add(createDocTagsDALfromResultSet(columns));
+            }
+
+            if (!list.isEmpty()) {
+                dtDTO.setData(list);
+                return dtDTO;
+            } else {
+                dtDTO.setMessage("DB connection vas successful, but cant find any DocTags");
+                return dtDTO;
+            }
+
+        } else {
+            return dtDTO;
+        }
     }
 
+    @Override
+    public TopicsDTO getAllTopics() {
+        DBqueryDTO dbDTO = crud.read("Topics");
+        TopicsDTO tDTO = new TopicsDTO();
 
-    private DocTagsDAL createDocTagsDALfromResultSet(ResultSet rs) throws SQLException {
+        tDTO.setSuccess(dbDTO.isSuccess());
+        tDTO.setMessage(dbDTO.getMessage());
+
+        if (dbDTO.isSuccess()) {
+
+            List<TopicsDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                list.add(createTopicsDALfromResultSet(columns));
+            }
+
+            if (!list.isEmpty()) {
+                tDTO.setData(list);
+                return tDTO;
+            } else {
+                tDTO.setMessage("DB connection vas successful, but cant find any Topics");
+                return tDTO;
+            }
+
+        } else {
+            return tDTO;
+        }
+    }
+
+    @Override
+    public ExampleDTO getAllEcamples() {
+        DBqueryDTO dbDTO = crud.read("Examples");
+        ExampleDTO eDTO = new ExampleDTO();
+
+        eDTO.setSuccess(dbDTO.isSuccess());
+        eDTO.setMessage(dbDTO.getMessage());
+
+        if (dbDTO.isSuccess()) {
+
+            List<ExampleDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                    list.add(createExampleDALfromResultSet(columns));
+            }
+
+            if (!list.isEmpty()) {
+                eDTO.setData(list);
+                return eDTO;
+            } else {
+                eDTO.setMessage("DB connection vas successful, but cant find any Examples");
+                return eDTO;
+            }
+
+        } else {
+            return eDTO;
+        }
+    }
+
+    @Override
+    public TopicsDTO getTopicsByDocTagId(String docTagId) {
+        DBqueryDTO dbDTO = crud.read("Topics");
+        TopicsDTO tDTO = new TopicsDTO();
+
+        tDTO.setSuccess(dbDTO.isSuccess());
+        tDTO.setMessage(dbDTO.getMessage());
+
+        if (dbDTO.isSuccess()) {
+
+            List<TopicsDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                if (columns.get(1) == docTagId) {
+                    list.add(createTopicsDALfromResultSet(columns));
+                }
+            }
+
+            if (!list.isEmpty()) {
+                tDTO.setData(list);
+                return tDTO;
+            } else {
+                tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+                return tDTO;
+            }
+
+        } else {
+            return tDTO;
+        }
+    }
+
+    @Override
+    public ExampleDTO getExamplesByTopicsId(String topicId) {
+        DBqueryDTO dbDTO = crud.read("Examples");
+        ExampleDTO eDTO = new ExampleDTO();
+
+        eDTO.setSuccess(dbDTO.isSuccess());
+        eDTO.setMessage(dbDTO.getMessage());
+
+        if (dbDTO.isSuccess()) {
+
+            List<ExampleDAL> list = new ArrayList<>();
+            List<List<Object>> data = dbDTO.getData();
+
+            for (int i = 0; i < data.size(); i++) {
+                List<Object> columns = data.get(i);
+                if (columns.get(1) == topicId) {
+                    list.add(createExampleDALfromResultSet(columns));
+                }
+            }
+
+            if (!list.isEmpty()) {
+                eDTO.setData(list);
+                return eDTO;
+            } else {
+                eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+                return eDTO;
+            }
+
+        } else {
+            return eDTO;
+        }
+    }
+
+    private DocTagsDAL createDocTagsDALfromResultSet(List<Object> col) {
 
         DocTagsDAL dal = new DocTagsDAL();
 
-        dal.setId(rs.getLong("Id"));
-        dal.setTag(rs.getString("Tag"));
-        dal.setTitle(rs.getString("Title"));
-        dal.setCreationDate(rs.getString("CreationDate"));
-        dal.setHelloWorldDocTopicId(rs.getLong("HelloWorldDocTopicId"));
-        dal.setTopicCount(rs.getLong("TopicCount"));
+        dal.setId((long) col.get(0));
+        dal.setTag((String) col.get(1));
+        dal.setTitle((String) col.get(2));
+        dal.setCreationDate((String) col.get(3));
+        dal.setHelloWorldDocTopicId((long) col.get(4));
+        dal.setTopicCount((long) col.get(5));
 
         return dal;
     }
 
-    private ExampleDAL createExampleDALfromResultSet(ResultSet rs) throws SQLException {
+    private ExampleDAL createExampleDALfromResultSet(List<Object> col) {
 
         ExampleDAL dal = new ExampleDAL();
 
-        dal.setId(rs.getLong("Id"));
-        dal.setDocTopicId(rs.getLong("DocTopicId"));
-        dal.setTitle(rs.getString("Title"));
-        dal.setCreationDate(rs.getString("CreationDate"));
-        dal.setLastEditDate(rs.getString("LastEditData"));
-        dal.setScore(rs.getLong("Score"));
-        dal.setContributorCount(rs.getLong("ContributorCount"));
-        dal.setBodyHtml(rs.getString("BodyHtml"));
-        dal.setBodyMarkdown(rs.getString("BodyMarkdown"));
-        dal.setPinned(rs.getBoolean("IsPinned"));
+        dal.setId((long) col.get(0));
+        dal.setDocTopicId((long) col.get(1));
+        dal.setTitle((String) col.get(2));
+        dal.setCreationDate((String) col.get(3));
+        dal.setLastEditDate((String) col.get(4));
+        dal.setScore((long) col.get(5));
+        dal.setContributorCount((long)col.get(6));
+        dal.setBodyHtml((String) col.get(7));
+        dal.setBodyMarkdown((String) col.get(8));
+        dal.setPinned((boolean) col.get(9));
 
         return dal;
     }
 
-    private TopicsDAL createTopicsDALfromResultSet(ResultSet rs) throws SQLException {
+    private TopicsDAL createTopicsDALfromResultSet(List<Object> col) {
 
         TopicsDAL dal = new TopicsDAL();
 
-        dal.setId(rs.getLong("Id"));
-        dal.setDocTagId(rs.getLong("DocTagId"));
-        dal.setHelloWorldTopic(rs.getBoolean("IsHelloWorldTopic"));
-        dal.setTitle(rs.getString("Title"));
-        dal.setCreationDate(rs.getString("CreationDate"));
-        dal.setViewCount(rs.getLong("ViewCount"));
-        dal.setLastEditDate(rs.getString("LastEditDate"));
-        dal.setLastEditUserId(rs.getLong("LastEditUserId"));
-        dal.setLastEditUserDisplayName(rs.getString("LastEditUserDisplayName"));
-        dal.setContributorCount(rs.getLong("ContributorCount"));
-        dal.setExampleCount(rs.getLong("ExampleCount"));
-        dal.setExampleScore(rs.getLong("ExampleScore"));
+        dal.setId((long) col.get(0));
+        dal.setDocTagId((long) col.get(1));
+        dal.setHelloWorldTopic((boolean) col.get(2));
+        dal.setTitle((String) col.get(3));
+        dal.setCreationDate((String) col.get(4));
+        dal.setViewCount((long) col.get(5));
+        dal.setLastEditDate((String) col.get(6));
+        dal.setLastEditUserId((long) col.get(7));
+        dal.setLastEditUserDisplayName((String) col.get(8));
+        dal.setContributorCount((long) col.get(9));
+        dal.setExampleCount((long) col.get(10));
+        dal.setExampleScore((long) col.get(11));
         //HTML
-        dal.setIntroductionHtml(rs.getString("IntroductionHtml"));
-        dal.setSyntaxHtml(rs.getString("SyntaxHtml"));
-        dal.setParametersHtml(rs.getString("ParametersHtml"));
-        dal.setRemarksHtml(rs.getString("RemarksHtml"));
+        dal.setIntroductionHtml((String) col.get(12));
+        dal.setSyntaxHtml((String) col.get(13));
+        dal.setParametersHtml((String) col.get(14));
+        dal.setRemarksHtml((String) col.get(15));
         //Markdown
-        dal.setIntroductionMarkdown(rs.getString("IntroductionMarkdown"));
-        dal.setSyntaxMarkdown(rs.getString("SyntaxMarkdown"));
-        dal.setParametersMarkdown(rs.getString("ParametersMarkdown"));
-        dal.setRemarksMarkdown(rs.getString("RemarksMarkdown"));
+        dal.setIntroductionMarkdown((String) col.get(16));
+        dal.setSyntaxMarkdown((String) col.get(17));
+        dal.setParametersMarkdown((String) col.get(18));
+        dal.setRemarksMarkdown((String) col.get(19));
         //
-        dal.setHelloWorldVersionsHtml(rs.getString("HelloWorldVersionsHtml"));
-        dal.setVersionsJson(rs.getString("VersionsJson"));
+        dal.setHelloWorldVersionsHtml((String) col.get(20));
+        dal.setVersionsJson((String) col.get(21));
 
         return dal;
     }
 
-    private Example changeDocTagsDALtoDocTags(DocTagsDAL dal) {
-
-        return new Example();
+    private DocTag changeDocTagsDALtoDocTags(DocTagsDAL dal) {
+        DocTag doc = new DocTag();
+        doc.setId(dal.getId());
+        doc.setTag(dal.getTag());
+        doc.setTitle(dal.getTitle());
+        return doc;
     }
 
     private Example changeExampleDALtoExamples(ExampleDAL dal) {
@@ -172,10 +356,119 @@ public class HigherService implements IHigherService {
         return exm;
     }
 
-    private Example changeTopicsDALtoTopics(TopicsDAL dal) {
-
-        return new Example();
+    private Topic changeTopicsDALtoTopics(TopicsDAL dal) {
+        Topic tpc = new Topic();
+        tpc.setId(dal.getId());
+        tpc.setDocTagId(dal.getDocTagId());
+        tpc.setIntroductionHtml(dal.getIntroductionHtml());
+        tpc.setSyntaxHtml(dal.getSyntaxHtml());
+        tpc.setParametersHtml(dal.getParametersHtml());
+        tpc.setRemarksHtml(dal.getRemarksHtml());
+        tpc.setIntroductionMarkdown(dal.getIntroductionMarkdown());
+        tpc.setSyntaxMarkdown(dal.getSyntaxMarkdown());
+        tpc.setParametersMarkdown(dal.getParametersMarkdown());
+        tpc.setRemarksMarkdown(dal.getRemarksMarkdown());
+        return tpc;
     }
+}
+
+class Topic {
+    private long _id;
+    private long _docTagId;
+
+    private String _introductionHtml;
+    private String _syntaxHtml;
+
+    private String _parametersHtml;
+    private String _remarksHtml;
+
+    private String _introductionMarkdown;
+    private String _syntaxMarkdown;
+
+    private String _parametersMarkdown;
+    private String _remarksMarkdown;
+
+
+    public long getId() {
+        return _id;
+    }
+
+    public void setId(long id) {
+        _id = id;
+    }
+
+    public long getDocTagId() {
+        return _docTagId;
+    }
+
+    public void setDocTagId(long docTagId) {
+        _docTagId = docTagId;
+    }
+
+    public String getIntroductionHtml() {
+        return _introductionHtml;
+    }
+
+    public void setIntroductionHtml(String introductionHtml) {
+        _introductionHtml = introductionHtml;
+    }
+
+    public String getSyntaxHtml() {
+        return _syntaxHtml;
+    }
+
+    public void setSyntaxHtml(String syntaxHtml) {
+        _syntaxHtml = syntaxHtml;
+    }
+
+    public String getParametersHtml() {
+        return _parametersHtml;
+    }
+
+    public void setParametersHtml(String parametersHtml) {
+        _parametersHtml = parametersHtml;
+    }
+
+    public String getRemarksHtml() {
+        return _remarksHtml;
+    }
+
+    public void setRemarksHtml(String remarksHtml) {
+        _remarksHtml = remarksHtml;
+    }
+
+    public String getIntroductionMarkdown() {
+        return _introductionMarkdown;
+    }
+
+    public void setIntroductionMarkdown(String introductionMarkdown) {
+        _introductionMarkdown = introductionMarkdown;
+    }
+
+    public String getSyntaxMarkdown() {
+        return _syntaxMarkdown;
+    }
+
+    public void setSyntaxMarkdown(String syntaxMarkdown) {
+        _syntaxMarkdown = syntaxMarkdown;
+    }
+
+    public String getParametersMarkdown() {
+        return _parametersMarkdown;
+    }
+
+    public void setParametersMarkdown(String parametersMarkdown) {
+        _parametersMarkdown = parametersMarkdown;
+    }
+
+    public String getRemarksMarkdown() {
+        return _remarksMarkdown;
+    }
+
+    public void setRemarksMarkdown(String remarksMarkdown) {
+        _remarksMarkdown = remarksMarkdown;
+    }
+
 }
 
 class Example {
@@ -224,6 +517,37 @@ class Example {
 
     public void setBodyMarkdown(String bodyMarkdown) {
         _bodyMarkdown = bodyMarkdown;
+    }
+}
+
+class DocTag {
+    private long _id;
+    private String _tag;
+    private String _title;
+
+
+    public long getId() {
+        return _id;
+    }
+
+    public void setId(long id) {
+        _id = id;
+    }
+
+    public String getTag() {
+        return _tag;
+    }
+
+    public void setTag(String tag) {
+        _tag = tag;
+    }
+
+    public String getTitle() {
+        return _title;
+    }
+
+    public void setTitle(String title) {
+        _title = title;
     }
 }
 
