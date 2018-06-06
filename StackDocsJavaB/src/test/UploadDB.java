@@ -29,12 +29,13 @@ public class UploadDB {
         System.out.println(rootArray.get(0).toString());
         rootArray.forEach(element -> {
             JsonObject jsonObject = element.getAsJsonObject();
+            int id = jsonObject.get("Id").getAsInt();
             String tag = jsonObject.get("Tag").getAsString();
             String title = jsonObject.get("Title").getAsString();
             String creationDate = jsonObject.get("CreationDate").getAsString();
             int helloWorldDocTopicId = jsonObject.get("HelloWorldDocTopicId").getAsInt();
             int topicCount = jsonObject.get("TopicCount").getAsInt();
-            String values = "null, '" + tag + "', '" + title + "', '" + creationDate + "', " +
+            String values = "" + id + ", '" + tag + "', '" + title + "', '" + creationDate + "', " +
                             helloWorldDocTopicId + ", " + topicCount;
             DBqueryDTO dto = crud.create("doctags", values);
             if (!dto.isSuccess()) {

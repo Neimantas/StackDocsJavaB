@@ -24,30 +24,28 @@
     <column id="12" parent="6" name="Id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
-      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="13" parent="6" name="Tag">
       <Position>2</Position>
-      <DataType>string|0s</DataType>
+      <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="14" parent="6" name="Title">
       <Position>3</Position>
-      <DataType>string|0s</DataType>
+      <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="15" parent="6" name="CreationDate">
       <Position>4</Position>
-      <DataType>string|0s</DataType>
+      <DataType>TEXT|0s</DataType>
     </column>
     <column id="16" parent="6" name="HelloWorldDocTopicId">
       <Position>5</Position>
-      <DataType>int|0s</DataType>
+      <DataType>INTEGER|0s</DataType>
     </column>
     <column id="17" parent="6" name="TopicCount">
       <Position>6</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>INTEGER|0s</DataType>
     </column>
     <key id="18" parent="6">
       <ColNames>Id</ColNames>
