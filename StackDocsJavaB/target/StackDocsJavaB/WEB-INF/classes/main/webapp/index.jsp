@@ -1,4 +1,4 @@
-
+<%@ page import="static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -18,6 +18,7 @@
 <!--„search“ ir dropdown (kalbų);-->
 
 <div class="container">
+
 
     <div class="py-5 text-center">
         <img src="IMG/logo.png" alt="" class="paveikslelis">
@@ -62,10 +63,18 @@
 
                 <div class="row">
 
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-8 mb-3">
 
                         <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
 
+                   
+
+                    </div>
+                    <div class="col-md-4 mb-3">
+
+
+
+                        <button type="button" class="btn btn-light">Paieška</button>
 
                     </div>
 
@@ -81,59 +90,58 @@
 
     <!--<div class="container">-->
 
-        <table class="table table-bordered shadow-lg p-3 mb-5 bg-white rounded">
+    <table class="table table-bordered shadow-lg p-3 mb-5 bg-white rounded">
 
-            <tbody>
+        <tbody>
 
-            <tr>
+        <tr>
 
-                <td id="isvedamas-tekstas">
+            <td id="isvedamas-tekstas">
 
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
-                    praesentium
-                    quidem repellendus sunt. Beatae commodi consequuntur dicta et facilis necessitatibus placeat quam
-                    quasi
-                    recusandae voluptatum.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur at autem cupiditate dolorum et
-                    exercitationem illum impedit laudantium libero maiores placeat quibusdam recusandae rem saepe,
-                    similique,
-                    sint sit unde voluptate.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, commodi cupiditate est
-                    eum
-                    facere itaque iure maxime molestias nemo non nulla odio perferendis placeat quam quas quidem quos
-                    rerum!
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
+                praesentium
+                quidem repellendus sunt. Beatae commodi consequuntur dicta et facilis necessitatibus placeat quam
+                quasi
+                recusandae voluptatum.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur at autem cupiditate dolorum et
+                exercitationem illum impedit laudantium libero maiores placeat quibusdam recusandae rem saepe,
+                similique,
+                sint sit unde voluptate.
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, commodi cupiditate est
+                eum
+                facere itaque iure maxime molestias nemo non nulla odio perferendis placeat quam quas quidem quos
+                rerum!
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            </tbody>
+        </tbody>
 
-        </table>
+    </table>
 
-        <nav aria-label="Puslapiu navigacija">
+    <nav aria-label="Puslapiu navigacija">
 
-            <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center">
 
-                <li class="page-item">
-                    <a class="page-link text-dark" id="mugtukas-atgal" href="#" tabindex="-1" onclick="funkcija_atgal()">Atgal</a>
-                </li>
+            <li class="page-item">
+                <a class="page-link text-dark" id="mugtukas-atgal" href="#" tabindex="-1" onclick="funkcija_atgal()">Atgal</a>
+            </li>
 
-                <!--KIEK BUS PUSLAPIU?-->
+            <!--KIEK BUS PUSLAPIU?-->
 
-                <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
-                <!--<li class="page-item"><a class="page-link text-dark" href="#">2</a></li>-->
-                <!--<li class="page-item"><a class="page-link text-dark" href="#">3</a></li>-->
-                <!--<li class="page-item"><a class="page-link text-dark" href="#">4</a></li>-->
-                <!--<li class="page-item"><a class="page-link text-dark" href="#">5</a></li>-->
+            <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
+            <!--<li class="page-item"><a class="page-link text-dark" href="#">2</a></li>-->
+            <!--<li class="page-item"><a class="page-link text-dark" href="#">3</a></li>-->
+            <!--<li class="page-item"><a class="page-link text-dark" href="#">4</a></li>-->
+            <!--<li class="page-item"><a class="page-link text-dark" href="#">5</a></li>-->
 
 
-                <li class="page-item">
-                    <a class="page-link text-dark" id="mygtukas-atgal" href="#" onclick="funkcija_pirmyn()">Pirmyn</a>
-                </li>
+            <li class="page-item">
+                <a class="page-link text-dark" id="mygtukas-atgal" href="#" onclick="funkcija_pirmyn()">Pirmyn</a>
+            </li>
 
-            </ul>
-        </nav>
-
+        </ul>
+    </nav>
 
 
     <!--</div>-->

@@ -11,25 +11,24 @@ public class ServletIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        //Ar cia turi isikelti index.jsp failas
 
 
 
-        response.setContentType("text/html");
+//        response.setContentType("text/html");
+//        PrintWriter out = response.getWriter();
+//        out.println("<html><body>");
+//        out.println("VEIKIA.");
+//        out.println("</body></html>");
 
-        PrintWriter out = response.getWriter();
+//        response.getWriter().print(request.getParameter("getValue1"));
 
-        out.println("<html><body>");
-        out.println("VEIKIA.");
-        out.println("</body></html>");
-
+//        PrintWriter out = response.getWriter();
+//        out.println("value 1 = " + request.getParameter("reikesme"));
+//        out.println("value 2 = " + request.getParameter("reiksme2"));
 
 
     }
