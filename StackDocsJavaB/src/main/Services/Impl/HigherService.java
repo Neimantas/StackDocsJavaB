@@ -306,7 +306,6 @@ public class HigherService implements IHigherService {
     }
 
     private TopicsDAL createTopicsDALfromList(List<Object> col) {
-    private TopicsDAL createTopicsDALfromList(List<Object> col) {
 
         TopicsDAL dal = new TopicsDAL();
 
