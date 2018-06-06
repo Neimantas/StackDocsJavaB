@@ -1,4 +1,4 @@
-package main.Models.BusinessLogic;
+package Models.BusinessLogic;
 
 public class Example {
 	private int _id;

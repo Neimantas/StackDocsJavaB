@@ -1,6 +1,6 @@
-package main.Services.Impl;
+package Services.Impl;
 
-import main.Services.IDataBase;
+import Services.IDataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,11 +1,11 @@
-package main.Models.DTO;
+package Models.DTO;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public class DBqueryDTO {
     private boolean success;
     private String message;
-    private ResultSet data;
+    private List<List<Object>> data;
 
     public boolean isSuccess() {
         return success;
@@ -23,11 +23,11 @@ public class DBqueryDTO {
         this.message = message;
     }
 
-    public ResultSet getData() {
+    public List<List<Object>> getData() {
         return data;
     }
 
-    public void setData(ResultSet data) {
+    public void setData(List<List<Object>> data) {
         this.data = data;
     }
 

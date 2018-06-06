@@ -1,4 +1,4 @@
-package main.Models.BusinessLogic;
+package Models.BusinessLogic;
 
 public class Topic {
 	private int _id;

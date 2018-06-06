@@ -1,4 +1,4 @@
-package main.Models;
+package Models;
 
 public class TestModel {
     public String Name;
