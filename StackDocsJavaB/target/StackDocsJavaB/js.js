@@ -4,6 +4,8 @@ var teksto_laukas = document.getElementById("isvedamas-tekstas");
 var mygtukas_atgal = document.getElementById("mugtukas-atgal");
 var mygtukas_pirmyn = document.getElementById("mygtukas-atgal");
 var puslapio_numeris = document.getElementById("puslapio-numeris");
+var kalba = document.getElementById("kalba");
+
 
 function funkcija_atgal() {
 
@@ -18,6 +20,13 @@ function funkcija_atgal() {
 
 function funkcija_pirmyn() {
     // console.log("mygtukas" + mygtukas_pirmyn + "veikia ")
+
+
+}
+
+
+function ykstaPaieska() {
+
 
 
 }
