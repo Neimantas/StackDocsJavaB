@@ -1,4 +1,4 @@
-package main.Models.DTO;
+package Models.DTO;
 
 public class TestDTO {
     public boolean Success;

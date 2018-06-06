@@ -1,13 +1,16 @@
-package main.Services.Impl;
+package Services.Impl;
 
-import main.Models.DBupdateModel;
-import main.Models.DTO.DBqueryDTO;
-import main.Services.ICrud;
-import main.Services.IDataBase;
+import Models.DBupdateModel;
+import Models.DTO.DBqueryDTO;
+import Services.IDataBase;
+import Services.ICrud;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Crud implements ICrud {
 
@@ -42,22 +45,36 @@ public class Crud implements ICrud {
         }
         return dto;
     }
-    /**
-     * Don't forget to close the connection after parsing the ResultSet
-     * db.closeConnection();
-     */
+
     @Override
-    public DBqueryDTO read(String table, Connection connection) {
+    public DBqueryDTO read(String table) {
         try {
             dto = new DBqueryDTO();
+            connection = db.getConnection();
             String query = "SELECT * FROM " + table;
             statement = connection.createStatement();
-            dto.setData(statement.executeQuery(query));
+            ResultSet rs = statement.executeQuery(query);
+            int colCount= rs.getMetaData().getColumnCount();
+            List<List<Object>> rows = new ArrayList<>();
+            while (rs.next()) {
+                List<Object> columns = new ArrayList<>();
+                for (int i = 1; i <= colCount; i++) {
+                    columns.add(rs.getObject(i));
+                }
+                rows.add(columns);
+            }
+            dto.setData(rows);
             dto.setSuccess(true);
         } catch (SQLException e) {
             dto.setSuccess(false);
             dto.setMessage(e.getMessage());
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                db.closeConnection();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
         }
         return dto;
     }
