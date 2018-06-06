@@ -13,10 +13,6 @@
 <body class="bg-light">
 
 
-<!--7.	Čia sukuriam front ent lentelę, su mygtukai pirmyn/atgal bei-->
-<!--dabartinio puslapio numeriu. Šitas template turi turėti mygtuką -->
-<!--„search“ ir dropdown (kalbų);-->
-
 <div class="container">
 
 
@@ -39,14 +35,29 @@
 
             <select class="custom-select d-block w-100" id="kalba" required>
 
-                <option value>
+                <option value="0">
 
                     "Pasirinkimas..."
 
                 </option>
-                <option>
+                <option value="1">
 
-                    "JAVA"
+                    Java
+
+                </option>
+                <option value="2">
+
+                    JavaScript
+
+                </option>
+                <option value="3">
+
+                    C#
+
+                </option>
+                <option value="4">
+
+                    .NET
 
                 </option>
 
@@ -67,14 +78,12 @@
 
                         <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
 
-                   
 
                     </div>
                     <div class="col-md-4 mb-3">
 
 
-
-                        <button type="button" class="btn btn-light">Paieška</button>
+                        <button type="submit" class="btn btn-light" onclick="ykstaPaieska();">Paieška</button>
 
                     </div>
 
