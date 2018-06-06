@@ -31,7 +31,7 @@ public class HigherService implements IHigherService {
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
                 if (columns.get(0) == docTagId) {
-                    list.add(createDocTagsDALfromResultSet(columns));
+                    list.add(createDocTagsDALfromList(columns));
                 }
             }
 
@@ -64,7 +64,7 @@ public class HigherService implements IHigherService {
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
                 if (columns.get(0) == topicId) {
-                    list.add(createTopicsDALfromResultSet(columns));
+                    list.add(createTopicsDALfromList(columns));
                 }
             }
 
@@ -97,7 +97,7 @@ public class HigherService implements IHigherService {
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
                 if (columns.get(0) == exampleId) {
-                    list.add(createExampleDALfromResultSet(columns));
+                    list.add(createExampleDALfromList(columns));
                 }
             }
 
@@ -129,7 +129,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                list.add(createDocTagsDALfromResultSet(columns));
+                list.add(createDocTagsDALfromList(columns));
             }
 
             if (!list.isEmpty()) {
@@ -160,7 +160,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                list.add(createTopicsDALfromResultSet(columns));
+                list.add(createTopicsDALfromList(columns));
             }
 
             if (!list.isEmpty()) {
@@ -191,7 +191,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                    list.add(createExampleDALfromResultSet(columns));
+                    list.add(createExampleDALfromList(columns));
             }
 
             if (!list.isEmpty()) {
@@ -223,7 +223,7 @@ public class HigherService implements IHigherService {
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
                 if (columns.get(1) == docTagId) {
-                    list.add(createTopicsDALfromResultSet(columns));
+                    list.add(createTopicsDALfromList(columns));
                 }
             }
 
@@ -256,7 +256,7 @@ public class HigherService implements IHigherService {
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
                 if (columns.get(1) == topicId) {
-                    list.add(createExampleDALfromResultSet(columns));
+                    list.add(createExampleDALfromList(columns));
                 }
             }
 
@@ -273,7 +273,7 @@ public class HigherService implements IHigherService {
         }
     }
 
-    private DocTagsDAL createDocTagsDALfromResultSet(List<Object> col) {
+    private DocTagsDAL createDocTagsDALfromList(List<Object> col) {
 
         DocTagsDAL dal = new DocTagsDAL();
 
@@ -287,7 +287,7 @@ public class HigherService implements IHigherService {
         return dal;
     }
 
-    private ExampleDAL createExampleDALfromResultSet(List<Object> col) {
+    private ExampleDAL createExampleDALfromList(List<Object> col) {
 
         ExampleDAL dal = new ExampleDAL();
 
@@ -300,12 +300,12 @@ public class HigherService implements IHigherService {
         dal.setContributorCount((long)col.get(6));
         dal.setBodyHtml((String) col.get(7));
         dal.setBodyMarkdown((String) col.get(8));
-        dal.setPinned((boolean) col.get(9));
+        dal.setPinned((int) col.get(9) == 1 ? true: false);
 
         return dal;
     }
 
-    private TopicsDAL createTopicsDALfromResultSet(List<Object> col) {
+    private TopicsDAL createTopicsDALfromList(List<Object> col) {
 
         TopicsDAL dal = new TopicsDAL();
 
