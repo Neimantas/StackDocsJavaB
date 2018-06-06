@@ -1,6 +1,6 @@
-package main.Services.Impl;
+package Services.Impl;
 
-import main.Services.ITest;
+import Services.ITest;
 
 public class Test implements ITest {
 }

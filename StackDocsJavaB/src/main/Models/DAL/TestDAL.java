@@ -1,4 +1,4 @@
-package main.Models.DAL;
+package Models.DAL;
 
 public class TestDAL {
 

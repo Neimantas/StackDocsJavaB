@@ -1,6 +1,6 @@
-package main.Models.DTO;
+package Models.DTO;
 
-import java.sql.ResultSet;
+import java.util.List;
 import java.util.List;
 
 public class DBqueryDTO {

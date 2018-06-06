@@ -1,6 +1,6 @@
-package main.Models.DTO;
+package Models.DTO;
 
-import main.Models.DAL.ExampleDAL;
+import Models.DAL.ExampleDAL;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package main.Services.Impl;
+package Services.Impl;
 
-import main.Models.DAL.DocTagsDAL;
-import main.Models.DAL.ExampleDAL;
-import main.Models.DAL.TopicsDAL;
-import main.Models.DTO.DBqueryDTO;
-import main.Models.DTO.DocTagsDTO;
-import main.Models.DTO.ExampleDTO;
-import main.Models.DTO.TopicsDTO;
-import main.Services.IHigherService;
+import Models.DAL.DocTagsDAL;
+import Models.DAL.ExampleDAL;
+import Models.DAL.TopicsDAL;
+import Models.DTO.DBqueryDTO;
+import Models.DTO.DocTagsDTO;
+import Models.DTO.ExampleDTO;
+import Models.DTO.TopicsDTO;
+import Services.IHigherService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -300,11 +300,12 @@ public class HigherService implements IHigherService {
         dal.setContributorCount((long)col.get(6));
         dal.setBodyHtml((String) col.get(7));
         dal.setBodyMarkdown((String) col.get(8));
-        dal.setPinned((int) col.get(9) == 1 ? true: false);
+        dal.setPinned((int) col.get(9) == 1? true: false);
 
         return dal;
     }
 
+    private TopicsDAL createTopicsDALfromList(List<Object> col) {
     private TopicsDAL createTopicsDALfromList(List<Object> col) {
 
         TopicsDAL dal = new TopicsDAL();

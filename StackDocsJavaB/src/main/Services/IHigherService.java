@@ -1,8 +1,8 @@
-package main.Services;
+package Services;
 
-import main.Models.DTO.DocTagsDTO;
-import main.Models.DTO.ExampleDTO;
-import main.Models.DTO.TopicsDTO;
+import Models.DTO.DocTagsDTO;
+import Models.DTO.ExampleDTO;
+import Models.DTO.TopicsDTO;
 
 public interface IHigherService {
     DocTagsDTO getDocTagById(String docTagId);
