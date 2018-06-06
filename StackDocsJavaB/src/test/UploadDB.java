@@ -54,25 +54,26 @@ public class UploadDB {
         System.out.println(rootArray.get(0).toString());
         rootArray.forEach(element -> {
             JsonObject jsonObject = element.getAsJsonObject();
+
             int id = jsonObject.get("Id").getAsInt();
             int docTagId = jsonObject.get("DocTagId").getAsInt();
             int isHelloWorldTopic = jsonObject.get("IsHelloWorldTopic").getAsBoolean() ? 1 : 0;
-            String title = jsonObject.get("Title").getAsString();
-            String creationDate = jsonObject.get("CreationDate").getAsString();
+            String title = jsonObject.get("Title").getAsString().replace("'", "''");
+            String creationDate = jsonObject.get("CreationDate").getAsString().replace("'", "''");
             int viewCount = jsonObject.get("ViewCount").getAsInt();
-            String lastEditDate = jsonObject.get("LastEditDate").getAsString();
-            int lastEditUserId = jsonObject.get("LastEditUserId").getAsInt();
+            String lastEditDate = jsonObject.has("LastEditDate") ? jsonObject.get("LastEditDate").getAsString().replace("'", "''") : "";
+            int lastEditUserId = jsonObject.has("LastEditUserId") ? jsonObject.get("LastEditUserId").getAsInt() : 0;
             int contributorCount = jsonObject.get("ContributorCount").getAsInt();
             int exampleCount = jsonObject.get("ExampleCount").getAsInt();
             int exampleScore = jsonObject.get("ExampleScore").getAsInt();
-            String syntaxHtml = jsonObject.get("SyntaxHtml").getAsString();
-            String parametersHtml = jsonObject.get("ParametersHtml").getAsString();
+            String syntaxHtml = jsonObject.get("SyntaxHtml").getAsString().replace("'", "''");
+            String parametersHtml = jsonObject.get("ParametersHtml").getAsString().replace("'", "''");
             String remarksHtml = jsonObject.get("RemarksHtml").getAsString().replace("'", "''");
-            String introductionMarkdown = jsonObject.get("IntroductionMarkdown").getAsString();
-            String syntaxMarkdown = jsonObject.get("SyntaxMarkdown").getAsString();
-            String parametersMarkdown = jsonObject.get("ParametersMarkdown").getAsString();
-            String remarksMarkdown = jsonObject.get("RemarksMarkdown").getAsString();
-            String helloWorldVersionsHtml = jsonObject.get("HelloWorldVersionsHtml").getAsString().replace("'", "''");
+            String introductionMarkdown = jsonObject.get("IntroductionMarkdown").getAsString().replace("'", "''");
+            String syntaxMarkdown = jsonObject.get("SyntaxMarkdown").getAsString().replace("'", "''");
+            String parametersMarkdown = jsonObject.get("ParametersMarkdown").getAsString().replace("'", "''");
+            String remarksMarkdown = jsonObject.get("RemarksMarkdown").getAsString().replace("'", "''");
+            String helloWorldVersionsHtml = jsonObject.has("HelloWorldVersionsHtml") ? jsonObject.get("HelloWorldVersionsHtml").getAsString().replace("'", "''") : "";
 
             String values = "" + id + ", " + docTagId + ", " + isHelloWorldTopic + ", '" + title + "', '" +
                     creationDate + "', " + viewCount + ", '" + lastEditDate + "', " + lastEditUserId +
@@ -86,5 +87,36 @@ public class UploadDB {
             }
         });
         System.out.println("DONE!!!!!!!");
+    }
+
+    @Test
+    public void JSONparseExamples() {
+        ICrud crud = new Crud();
+        JsonParser parser = new JsonParser();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("examples.json");
+        Reader reader = new InputStreamReader(inputStream);
+        JsonElement rootElement = parser.parse(reader);
+        JsonArray rootArray = rootElement.getAsJsonArray();
+        System.out.println(rootArray.get(0).toString());
+        rootArray.forEach(element -> {
+            JsonObject jsonObject = element.getAsJsonObject();
+            int id = jsonObject.get("Id").getAsInt();
+            int docTopicId = jsonObject.get("DocTopicId").getAsInt();
+            String title = jsonObject.get("Title").getAsString().replace("'", "''");
+            String creationDate = jsonObject.get("CreationDate").getAsString().replace("'", "''");
+            int score = jsonObject.get("Score").getAsInt();
+            int contributorCount = jsonObject.get("ContributorCount").getAsInt();
+            String bodyHtml = jsonObject.get("BodyHtml").getAsString().replace("'", "''");
+            String bodyMarkdown = jsonObject.get("BodyMarkdown").getAsString().replace("'", "''");
+            int isPinned = jsonObject.get("IsPinned").getAsBoolean() ? 1 : 0;
+
+            String values = "" + id + ", " + docTopicId + ", '" + title + "', '" + creationDate + "', " +
+                            score + ", " + contributorCount + ", '" + bodyHtml + "', '" + bodyMarkdown +
+                            "', " + isPinned;
+            DBqueryDTO dto = crud.create("examples", values);
+            if (!dto.isSuccess()) {
+                System.out.println("SHIT!");
+            }
+        });
     }
 }
