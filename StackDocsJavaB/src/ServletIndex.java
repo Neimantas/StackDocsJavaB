@@ -25,7 +25,7 @@ public class ServletIndex extends HttpServlet {
 //        out.println("VEIKIA.");
 //        out.println("</body></html>");
 
-//        response.getWriter().print(request.getParameter("getValue1"));
+        response.getWriter().print("labas");
 
 //        PrintWriter out = response.getWriter();
 //        out.println("value 1 = " + request.getParameter("reikesme"));
