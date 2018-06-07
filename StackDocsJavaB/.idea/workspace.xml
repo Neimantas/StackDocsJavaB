@@ -10,7 +10,24 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64eabab9-2329-4b7f-8cc6-af8a4b6be153" name="Default" comment="" />
+    <list default="true" id="64eabab9-2329-4b7f-8cc6-af8a4b6be153" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ServletIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ServletIndex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/ServletIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/ServletIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/main/webapp/js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/main/webapp/js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/js.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ServletIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ServletIndex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/webapp/WEB-INF/web.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/webapp/js.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/webapp/js.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,7 +41,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
@@ -36,17 +53,17 @@
       <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+            <state relative-caret-position="105">
+              <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServletIndex.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ServletIndex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ServletIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="26" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="26" />
+            <state relative-caret-position="405">
+              <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,8 +74,8 @@
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="85" column="89" selection-start-line="85" selection-start-column="77" selection-end-line="85" selection-end-column="89" />
+            <state relative-caret-position="268">
+              <caret line="109" column="92" selection-start-line="109" selection-start-column="92" selection-end-line="109" selection-end-column="92" />
             </state>
           </provider>
         </entry>
@@ -66,8 +83,11 @@
       <file leaf-file-name="js.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="285">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,6 +112,7 @@
       <find>page-link</find>
       <find>servle</find>
       <find>serv</find>
+      <find>kal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,11 +132,11 @@
         <option value="$PROJECT_DIR$/src/main/webapp/band.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/in.jsp" />
         <option value="$PROJECT_DIR$/src/Demo.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/js.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/ServletIndex.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js.js" />
       </list>
     </option>
   </component>
@@ -154,8 +175,8 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -180,6 +201,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="StackDocsJavaB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="StackDocsJavaB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="StackDocsJavaB" type="b2602c69:ProjectViewProjectNode" />
@@ -498,11 +527,15 @@
       <workItem from="1528187518612" duration="3516000" />
       <workItem from="1528272669982" duration="1678000" />
       <workItem from="1528281925876" duration="1312000" />
+      <workItem from="1528284694539" duration="510000" />
+      <workItem from="1528285217882" duration="2522000" />
+      <workItem from="1528317869734" duration="4530000" />
+      <workItem from="1528357997810" duration="37000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45149000" />
+    <option name="totallyTimeSpent" value="52748000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="824" extended-state="6" />
@@ -521,19 +554,19 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="9" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.328" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.328" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.64880955" visible="true" weight="0.15902779" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.64880955" visible="true" weight="0.15902779" />
       <window_info id="Web" order="7" sideWeight="0.35119048" side_tool="true" weight="0.25833333" />
       <window_info id="Learn" order="6" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -588,7 +621,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -834,10 +867,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="109" column="92" selection-start-line="109" selection-start-column="92" selection-end-line="109" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ServletIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="9" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
+        <state relative-caret-position="105">
+          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -845,30 +905,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="85" column="89" selection-start-line="85" selection-start-column="77" selection-end-line="85" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ServletIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
