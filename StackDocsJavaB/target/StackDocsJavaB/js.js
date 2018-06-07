@@ -16,7 +16,7 @@ function vykstaPaieska() {
     var kalba = document.getElementById("kalba").value;
     var paieskos_laukas = document.getElementById("paieskos-laukas").value;
 
-    url = "index.jsp?kalba=" + kalba + "&paieska=" + paieskos_laukas;
+    url = "index.jsp?kalba=" + kalba + "paieska=" + paieskos_laukas;
     location.href = url;
 
 
@@ -25,17 +25,16 @@ function vykstaPaieska() {
 
 function funkcija_pirmyn() {
 
-    var currentLocation = window.location;
+
     // kelintasAtgal++;
-    url = currentLocation + "&pirmyn=true";
+    url = "index.jsp?pirmyn=true";
     location.href = url;
 
 }
 
 function funkcija_atgal() {
 
-    var currentLocation = window.location;
     // kelintasAtgal++;
-    url = currentLocation + "&atgal=true";
+    url = "index.jsp?atgal=true";
     location.href = url;
 }

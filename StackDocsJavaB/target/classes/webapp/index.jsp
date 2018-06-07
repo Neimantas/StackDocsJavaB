@@ -1,8 +1,4 @@
 <%@ page import="static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java" %>
-<html>
-<body>
-<h2>Hello World!</h2>
-=======
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -132,6 +128,5 @@
 </div>
 
 
->>>>>>> F10
 </body>
 </html>
