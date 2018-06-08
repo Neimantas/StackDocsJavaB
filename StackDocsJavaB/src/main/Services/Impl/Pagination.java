@@ -9,42 +9,59 @@ import Models.DAL.TopicsDAL;
 import Models.DTO.TopicsDTO;
 import Services.IPagination;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pagination implements IPagination {
 
-    int currentPage = 1;
-    List<String> currentPages;
     HigherService hServ = new HigherService();
 
-
-    // cia tikriausiai tures grazint DTO
+    // can have a required parameter that, like topics Id from with is taken list of strings
     @Override
-    public List<String> nextTenPages() {
-        currentPage++;
+    public List<String> nextTenPages(String title) {
         TopicsDTO tDto = hServ.getAllTopics();
         if (tDto.isSuccess()) {
-            tDto.getData();
-
-
-            return null;
+            List<Topic> listTopics = new ArrayList<>();
+            List<TopicsDAL> listDAL = tDto.getData();
+            int counter = 0;
+            for (int i = 0; i < listDAL.size(); i++) {
+                if (counter > 0 && counter < 10 || title.equals(listDAL.get(i).getTitle())) {
+                    listTopics.add(changeTopicsDALtoTopic(listDAL.get(i)));
+                    counter++;
+                }
+            }
+            List<String> listOfThemes = new ArrayList<>();
+            for (int i = 0; i < listTopics.size(); i++) {
+                listOfThemes.add(listTopics.get(i).getTitle());
+            }
+            return listOfThemes;
         } else {
-
             return null;
         }
     }
 
     @Override
-    public List<String> previousTenPages() {
-        if (currentPage > 1) {
-            currentPage--;
+    public List<String> previousTenPages(String title) {
+        TopicsDTO tDto = hServ.getAllTopics();
+        if (tDto.isSuccess()) {
+            List<Topic> listTopics = new ArrayList<>();
+            List<TopicsDAL> listDAL = tDto.getData();
+            int counter = 10;
+            for (int i = 0; i < listDAL.size(); i++) {
+                if (counter < 10 && counter > 0 || title.equals(listDAL.get(i).getTitle())) {
+                    listTopics.add(changeTopicsDALtoTopic(listDAL.get(i)));
+                    counter--;
+                }
+            }
+            List<String> listOfThemes = new ArrayList<>();
+            for (int i = 0; i < listTopics.size(); i++) {
+                listOfThemes.add(listTopics.get(i).getTitle());
+            }
+            return listOfThemes;
+        } else {
+            return null;
         }
-        return null;
     }
-
-
-
-
 
     private DocTag changeDocTagsDALtoDocTag(DocTagsDAL dal) {
         DocTag dt = new DocTag();
