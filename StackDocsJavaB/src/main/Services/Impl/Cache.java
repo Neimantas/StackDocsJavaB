@@ -1,52 +1,60 @@
 package Services.Impl;
 
+import Services.CacheThread;
 import Services.ICache;
 
-import java.util.List;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cache implements ICache {
-    private int currentPage;
-    private List<String> listOfThemes;
-    private String valueOfSerchField;
-    private String chosenLanguage;
+
+    private Map<String, Object> cachedObjects = Collections.synchronizedMap(new HashMap<>());
+    private Map<String, CacheThread> cachedTreads = Collections.synchronizedMap(new HashMap<>());
+    private long timeToLive = 120;
+
+
+    //------------Singleton-----------
+    private static Cache instance = null;
+
+    private Cache() {}
+
+    public static Cache getInstance() {
+
+        if(instance == null) {
+            instance = new Cache();
+            return instance;
+        }
+        return instance;
+    }
+    //---------------------------------
+
 
     @Override
-    public void setCurrentPage(int page) {
-        currentPage = page;
+    public void put(String key, Object obj) {
+        if (cachedObjects.containsKey(key)) {
+            cachedTreads.get(key).addTime();
+        } else {
+            CacheThread t = new CacheThread(key);
+            t.start();
+            cachedObjects.put(key, obj);
+            cachedTreads.put(key, t);
+        }
     }
 
     @Override
-    public int getCurrentPage() {
-        return currentPage;
+    public Object get(String key) {
+        if (!cachedObjects.containsKey(key)) return null;
+        return cachedObjects.get(key);
     }
 
     @Override
-    public void setListOfThemes(List<String> list) {
-        listOfThemes = list;
+    public void remove(String key) {
+        cachedObjects.remove(key);
+        cachedTreads.remove(key);
     }
 
-    @Override
-    public List<String> getListOfThemes() {
-        return listOfThemes;
-    }
-
-    @Override
-    public void setValueOfSearchField(String value) {
-        valueOfSerchField = value;
-    }
-
-    @Override
-    public String getValueOfSearchField() {
-        return valueOfSerchField;
-    }
-
-    @Override
-    public void setLanguage(String language) {
-        chosenLanguage = language;
-    }
-
-    @Override
-    public String getLaguage() {
-        return chosenLanguage;
+    public long getTimeToLive() {
+        return timeToLive;
     }
 }
