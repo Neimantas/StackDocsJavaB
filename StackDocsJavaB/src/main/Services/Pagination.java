@@ -1,4 +1,4 @@
-package Services.Impl;
+package Services;
 
 import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Example;
@@ -8,49 +8,27 @@ import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
 import Models.DTO.TopicsDTO;
 import Services.IPagination;
+import Services.Impl.HigherService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pagination implements IPagination {
+public class Pagination {
 
-    HigherService hServ = new HigherService();
+    private int listSize = 10;
+    private HigherService hServ = new HigherService();
 
-    // can have a required parameter that, like topics Id from with is taken list of strings
-    @Override
-    public List<String> nextTenPages(String title) {
+    //gali buti pagerintas kad grazintu DTO, pvz PaginationDTO
+    public List<String> listOfThemes(int pageNumber) {
         TopicsDTO tDto = hServ.getAllTopics();
         if (tDto.isSuccess()) {
             List<Topic> listTopics = new ArrayList<>();
             List<TopicsDAL> listDAL = tDto.getData();
-            int counter = 0;
+            int counter = (pageNumber - 1) * listSize;
             for (int i = 0; i < listDAL.size(); i++) {
-                if (counter > 0 && counter < 10 || title.equals(listDAL.get(i).getTitle())) {
+                if (pageNumber * listSize > counter) {
                     listTopics.add(changeTopicsDALtoTopic(listDAL.get(i)));
                     counter++;
-                }
-            }
-            List<String> listOfThemes = new ArrayList<>();
-            for (int i = 0; i < listTopics.size(); i++) {
-                listOfThemes.add(listTopics.get(i).getTitle());
-            }
-            return listOfThemes;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public List<String> previousTenPages(String title) {
-        TopicsDTO tDto = hServ.getAllTopics();
-        if (tDto.isSuccess()) {
-            List<Topic> listTopics = new ArrayList<>();
-            List<TopicsDAL> listDAL = tDto.getData();
-            int counter = 10;
-            for (int i = 0; i < listDAL.size(); i++) {
-                if (counter < 10 && counter > 0 || title.equals(listDAL.get(i).getTitle())) {
-                    listTopics.add(changeTopicsDALtoTopic(listDAL.get(i)));
-                    counter--;
                 }
             }
             List<String> listOfThemes = new ArrayList<>();
