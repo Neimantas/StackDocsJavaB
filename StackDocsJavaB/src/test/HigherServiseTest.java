@@ -21,7 +21,8 @@ public class HigherServiseTest {
         HigherService hs = new HigherService();
         List<ExampleDAL> list = hs.getAllEcamples().getData();
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("Id: " + list.get(i).getId() + ", title: " + list.get(i).getTitle());
+//            System.out.println("Id: " + list.get(i).getId() + ", title: " + list.get(i).getTitle());
+            System.out.println("IsPinned: " + list.get(i).isPinned());
         }
     }
 

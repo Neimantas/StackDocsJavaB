@@ -294,13 +294,13 @@ public class HigherService implements IHigherService {
         dal.setDocTopicId(Long.parseLong(col.get(1).toString()));
         dal.setTitle((String) col.get(2));
         dal.setCreationDate((String) col.get(3));
+        System.out.println((String) col.get(3));
         dal.setLastEditDate((String) col.get(4));
         dal.setScore(Long.parseLong(col.get(5).toString()));
         dal.setContributorCount(Long.parseLong(col.get(6).toString()));
         dal.setBodyHtml((String) col.get(7));
         dal.setBodyMarkdown((String) col.get(8));
-
-        dal.setPinned((int) col.get(9) == 1? true: false);
+        dal.setPinned((int) col.get(8) == 1);
 
         return dal;
     }
@@ -311,7 +311,7 @@ public class HigherService implements IHigherService {
 
         dal.setId(Long.parseLong(col.get(0).toString()));
         dal.setDocTagId(Long.parseLong(col.get(1).toString()));
-        dal.setHelloWorldTopic((int) col.get(2) == 1? true: false);
+        dal.setHelloWorldTopic((int) col.get(2) == 1);
         dal.setTitle((String) col.get(3));
         dal.setCreationDate((String) col.get(4));
         dal.setViewCount(Long.parseLong(col.get(5).toString()));
