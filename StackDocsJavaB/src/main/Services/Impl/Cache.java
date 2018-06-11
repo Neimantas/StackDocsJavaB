@@ -1,8 +1,6 @@
 package Services.Impl;
 
-import Services.CacheThread;
 import Services.ICache;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +8,7 @@ import java.util.Map;
 public class Cache implements ICache {
 
     private Map<String, Object> cachedObjects = Collections.synchronizedMap(new HashMap<>());
-    private Map<String, CacheThread> cachedTreads = Collections.synchronizedMap(new HashMap<>());
+    private Map<String, Thread> cachedTreads = Collections.synchronizedMap(new HashMap<>());
     private long timeToLive = 120;
 
 
@@ -29,17 +27,24 @@ public class Cache implements ICache {
     }
     //---------------------------------
 
-
+    // perdaryti with normal threat and runnable, if contains the value then remove thread
     @Override
     public void put(String key, Object obj) {
-        if (cachedObjects.containsKey(key)) {
-            cachedTreads.get(key).addTime();
-        } else {
-            CacheThread t = new CacheThread(key);
-            t.start();
-            cachedObjects.put(key, obj);
-            cachedTreads.put(key, t);
-        }
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(timeToLive * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                remove(key);
+            }
+        });
+        t.setDaemon(true);
+        cachedObjects.put(key, obj);
+        cachedTreads.put(key, t);
+        t.start();
     }
 
     @Override
@@ -52,9 +57,5 @@ public class Cache implements ICache {
     public void remove(String key) {
         cachedObjects.remove(key);
         cachedTreads.remove(key);
-    }
-
-    public long getTimeToLive() {
-        return timeToLive;
     }
 }
