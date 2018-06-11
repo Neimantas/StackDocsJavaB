@@ -7,9 +7,7 @@ import Models.DAL.DocTagsDAL;
 import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
 import Models.DTO.TopicsDTO;
-import Services.IPagination;
 import Services.Impl.HigherService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,7 @@ public class Pagination {
     private HigherService hServ = new HigherService();
 
     //gali buti pagerintas kad grazintu DTO, pvz PaginationDTO
+    //reikia dar vieno kintamojo kuris butu ieskojimai, pvz pagal kalbas, ir dar vieno search field
     public List<String> listOfThemes(int pageNumber) {
         TopicsDTO tDto = hServ.getAllTopics();
         if (tDto.isSuccess()) {
