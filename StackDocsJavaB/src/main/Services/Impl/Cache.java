@@ -27,7 +27,7 @@ public class Cache implements ICache {
     }
     //---------------------------------
 
-    // perdaryti with normal threat and runnable, if contains the value then remove thread
+    
     @Override
     public void put(String key, Object obj) {
         Thread t = new Thread(new Runnable() {
