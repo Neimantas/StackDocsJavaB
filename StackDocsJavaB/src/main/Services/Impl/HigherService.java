@@ -277,12 +277,12 @@ public class HigherService implements IHigherService {
 
         DocTagsDAL dal = new DocTagsDAL();
 
-        dal.setId((long) col.get(0));
+        dal.setId(((int) col.get(0)));
         dal.setTag((String) col.get(1));
         dal.setTitle((String) col.get(2));
         dal.setCreationDate((String) col.get(3));
-        dal.setHelloWorldDocTopicId((long) col.get(4));
-        dal.setTopicCount((long) col.get(5));
+        dal.setHelloWorldDocTopicId((int) col.get(4));
+        dal.setTopicCount((int) col.get(5));
 
         return dal;
     }

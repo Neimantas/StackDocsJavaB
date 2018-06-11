@@ -75,7 +75,16 @@
         <tr>
 
             <td id="isvedamas-tekstas">
-
+                DATA --> ${data}
+                <%--ID ---> ${data.getId()} Tag --> ${data.getTag()} Title --> ${data.getTitle()}--%>
+                    <c:forEach items="${data}" var="topikas">
+                        ${topikas.getId()}<br>
+                        ${topikas.getTag()}<br>
+                        ${topikas.getTitle()}<br>
+                        <%--ID<c:out value = "${items.getId()}" />--%>
+                        <%--Tag<c:out value = "${items.getTag()}" />--%>
+                        <%--Title<c:out value = "${items.getTitle()}" />--%>
+                    </c:forEach>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
                 praesentium
                 quidem repellendus sunt. Beatae commodi consequuntur dicta et facilis necessitatibus placeat quam
