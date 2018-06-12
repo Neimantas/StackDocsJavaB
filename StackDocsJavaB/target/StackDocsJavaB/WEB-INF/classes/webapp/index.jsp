@@ -1,5 +1,10 @@
+<%@ taglib prefix="java" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <%@ page import="static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@page import="org.omg.CORBA.Request"%>--%>
+<%--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"--%>
+         <%--pageEncoding="ISO-8859-1"%>--%>
 
 
 <html>
@@ -75,16 +80,20 @@
         <tr>
 
             <td id="isvedamas-tekstas">
-                DATA --> ${data}
+                <%--DATA --> ${data}--%>
                 <%--ID ---> ${data.getId()} Tag --> ${data.getTag()} Title --> ${data.getTitle()}--%>
-                    <c:forEach items="${data}" var="topikas">
-                        ${topikas.getId()}<br>
-                        ${topikas.getTag()}<br>
-                        ${topikas.getTitle()}<br>
+
+                <%--<c:forEach var=“tempStudent” items=“${student_list}“>--%>
+
+                <%--${tempStudent} <br/>--%>
+
+                <%--</c:forEach>--%>
+                    <java:forEach var="topikas" items="${data}">
+                        ${topikas}<br/>
                         <%--ID<c:out value = "${items.getId()}" />--%>
                         <%--Tag<c:out value = "${items.getTag()}" />--%>
                         <%--Title<c:out value = "${items.getTitle()}" />--%>
-                    </c:forEach>
+                    </java:forEach>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
                 praesentium
                 quidem repellendus sunt. Beatae commodi consequuntur dicta et facilis necessitatibus placeat quam
