@@ -90,10 +90,10 @@
                 <%--</c:forEach>--%>
                     <java:forEach var="topikas" items="${data}">
                         ${topikas}<br/>
-                        <%--ID<c:out value = "${items.getId()}" />--%>
-                        <%--Tag<c:out value = "${items.getTag()}" />--%>
-                        <%--Title<c:out value = "${items.getTitle()}" />--%>
+                       
                     </java:forEach>
+
+
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
                 praesentium
                 quidem repellendus sunt. Beatae commodi consequuntur dicta et facilis necessitatibus placeat quam
