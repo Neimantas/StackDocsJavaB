@@ -88,8 +88,11 @@
                 <%--${tempStudent} <br/>--%>
 
                 <%--</c:forEach>--%>
-                    <java:forEach var="topikas" items="${data}">
-                        ${topikas}<br/>
+                    <java:forEach var="topic" items="${data}">
+        <tr onclick="GetTopicInfo(${topic.getId()})">
+            <td>${topic.getTitle()}</td>
+            <%--<td></td>--%>
+        </tr>
                        
                     </java:forEach>
 

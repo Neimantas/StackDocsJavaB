@@ -309,31 +309,31 @@ public class HigherService implements IHigherService {
 
         TopicsDAL dal = new TopicsDAL();
 
-        dal.setId((long) col.get(0));
-        dal.setDocTagId((long) col.get(1));
-        dal.setHelloWorldTopic((boolean) col.get(2));
+        dal.setId((int) col.get(0));
+        dal.setDocTagId((int) col.get(1));
+        dal.setHelloWorldTopic((int) col.get(2) == 1 ? true : false);
         dal.setTitle((String) col.get(3));
         dal.setCreationDate((String) col.get(4));
-        dal.setViewCount((long) col.get(5));
+        dal.setViewCount((int) col.get(5));
         dal.setLastEditDate((String) col.get(6));
-        dal.setLastEditUserId((long) col.get(7));
-        dal.setLastEditUserDisplayName((String) col.get(8));
-        dal.setContributorCount((long) col.get(9));
-        dal.setExampleCount((long) col.get(10));
-        dal.setExampleScore((long) col.get(11));
+        dal.setLastEditUserId((int) col.get(7));
+//        dal.setLastEditUserDisplayName((String) col.get(8));
+        dal.setContributorCount((int) col.get(8));
+        dal.setExampleCount((int) col.get(9));
+        dal.setExampleScore((int) col.get(10));
         //HTML
-        dal.setIntroductionHtml((String) col.get(12));
-        dal.setSyntaxHtml((String) col.get(13));
-        dal.setParametersHtml((String) col.get(14));
-        dal.setRemarksHtml((String) col.get(15));
+        dal.setIntroductionHtml((String) col.get(11));
+        dal.setSyntaxHtml((String) col.get(12));
+        dal.setParametersHtml((String) col.get(13));
+        dal.setRemarksHtml((String) col.get(14));
         //Markdown
-        dal.setIntroductionMarkdown((String) col.get(16));
-        dal.setSyntaxMarkdown((String) col.get(17));
-        dal.setParametersMarkdown((String) col.get(18));
-        dal.setRemarksMarkdown((String) col.get(19));
+        dal.setIntroductionMarkdown((String) col.get(15));
+        dal.setSyntaxMarkdown((String) col.get(16));
+        dal.setParametersMarkdown((String) col.get(17));
+        dal.setRemarksMarkdown((String) col.get(18));
         //
-        dal.setHelloWorldVersionsHtml((String) col.get(20));
-        dal.setVersionsJson((String) col.get(21));
+//        dal.setHelloWorldVersionsHtml((String) col.get(19));
+//        dal.setVersionsJson((String) col.get(20));
 
         return dal;
     }
