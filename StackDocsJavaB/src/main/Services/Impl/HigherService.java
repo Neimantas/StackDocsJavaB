@@ -299,8 +299,8 @@ public class HigherService implements IHigherService {
         dal.setScore(Long.parseLong(col.get(5).toString()));
         dal.setContributorCount(Long.parseLong(col.get(6).toString()));
         dal.setBodyHtml((String) col.get(7));
-        dal.setBodyMarkdown((String) col.get(8));
         dal.setPinned((int) col.get(8) == 1);
+        dal.setBodyMarkdown((String) col.get(9));
 
         return dal;
     }
@@ -316,24 +316,24 @@ public class HigherService implements IHigherService {
         dal.setCreationDate((String) col.get(4));
         dal.setViewCount(Long.parseLong(col.get(5).toString()));
         dal.setLastEditDate((String) col.get(6));
-        dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
-        dal.setLastEditUserDisplayName((String) col.get(8));
-        dal.setContributorCount(Long.parseLong(col.get(9).toString()));
-        dal.setExampleCount(Long.parseLong(col.get(10).toString()));
-        dal.setExampleScore(Long.parseLong(col.get(11).toString()));
+        dal.setContributorCount(Long.parseLong(col.get(7).toString()));
         //HTML
-        dal.setIntroductionHtml((String) col.get(12));
-        dal.setSyntaxHtml((String) col.get(13));
-        dal.setParametersHtml((String) col.get(14));
-        dal.setRemarksHtml((String) col.get(15));
-        //Markdown
-        dal.setIntroductionMarkdown((String) col.get(16));
-        dal.setSyntaxMarkdown((String) col.get(17));
-        dal.setParametersMarkdown((String) col.get(18));
-        dal.setRemarksMarkdown((String) col.get(19));
+        dal.setIntroductionHtml((String) col.get(8));
+        dal.setSyntaxHtml((String) col.get(9));
+        dal.setParametersHtml((String) col.get(10));
+        dal.setRemarksHtml((String) col.get(11));
+        dal.setHelloWorldVersionsHtml((String) col.get(12));
         //
-        dal.setHelloWorldVersionsHtml((String) col.get(20));
-        dal.setVersionsJson((String) col.get(21));
+        dal.setVersionsJson((String) col.get(13));
+        dal.setExampleCount(Long.parseLong(col.get(14).toString()));
+        dal.setExampleScore(Long.parseLong(col.get(15).toString()));
+        dal.setLastEditUserId(Long.parseLong(col.get(16).toString()));
+        dal.setLastEditUserDisplayName((String) col.get(17));
+        //Markdown
+        dal.setIntroductionMarkdown((String) col.get(18));
+        dal.setSyntaxMarkdown((String) col.get(19));
+        dal.setParametersMarkdown((String) col.get(20));
+        dal.setRemarksMarkdown((String) col.get(21));
 
         return dal;
     }
