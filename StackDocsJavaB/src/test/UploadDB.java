@@ -63,25 +63,28 @@ public class UploadDB {
             String creationDate = jsonObject.get("CreationDate").getAsString().replace("'", "''");
             int viewCount = jsonObject.get("ViewCount").getAsInt();
             String lastEditDate = jsonObject.has("LastEditDate") ? jsonObject.get("LastEditDate").getAsString().replace("'", "''") : "";
-            int lastEditUserId = jsonObject.has("LastEditUserId") ? jsonObject.get("LastEditUserId").getAsInt() : 0;
             int contributorCount = jsonObject.get("ContributorCount").getAsInt();
-            int exampleCount = jsonObject.get("ExampleCount").getAsInt();
-            int exampleScore = jsonObject.get("ExampleScore").getAsInt();
+            String introductionHtml= jsonObject.has("IntroductionHtml") ? jsonObject.get("IntroductionHtml").getAsString().replace("'", "''") : "";
             String syntaxHtml = jsonObject.get("SyntaxHtml").getAsString().replace("'", "''");
             String parametersHtml = jsonObject.get("ParametersHtml").getAsString().replace("'", "''");
             String remarksHtml = jsonObject.get("RemarksHtml").getAsString().replace("'", "''");
+            String helloWorldVersionsHtml = jsonObject.has("HelloWorldVersionsHtml") ? jsonObject.get("HelloWorldVersionsHtml").getAsString().replace("'", "''") : "";
+            String versionsJson = jsonObject.has("VersionsJson") ? jsonObject.get("VersionsJson").getAsString().replace("'", "''") : "";
+            int exampleCount = jsonObject.get("ExampleCount").getAsInt();
+            int exampleScore = jsonObject.get("ExampleScore").getAsInt();
+            int lastEditUserId = jsonObject.has("LastEditUserId") ? jsonObject.get("LastEditUserId").getAsInt() : 0;
+            String lastEditUserDisplayName = jsonObject.has("LastEditUserDisplayName") ? jsonObject.get("LastEditUserDisplayName").getAsString().replace("'", "''") : "";
             String introductionMarkdown = jsonObject.get("IntroductionMarkdown").getAsString().replace("'", "''");
             String syntaxMarkdown = jsonObject.get("SyntaxMarkdown").getAsString().replace("'", "''");
             String parametersMarkdown = jsonObject.get("ParametersMarkdown").getAsString().replace("'", "''");
             String remarksMarkdown = jsonObject.get("RemarksMarkdown").getAsString().replace("'", "''");
-            String helloWorldVersionsHtml = jsonObject.has("HelloWorldVersionsHtml") ? jsonObject.get("HelloWorldVersionsHtml").getAsString().replace("'", "''") : "";
 
             String values = "" + id + ", " + docTagId + ", " + isHelloWorldTopic + ", '" + title + "', '" +
-                    creationDate + "', " + viewCount + ", '" + lastEditDate + "', " + lastEditUserId +
-                    ", " + contributorCount + ", " + exampleCount + ", " + exampleScore + ", '" + syntaxHtml +
-                    "', '" + parametersHtml + "', '" + remarksHtml + "', '" + introductionMarkdown + "', '" +
-                    syntaxMarkdown + "', '" + parametersMarkdown + "', '" + remarksMarkdown + "', '" +
-                    helloWorldVersionsHtml + "'";
+                    creationDate + "', " + viewCount + ", '" + lastEditDate + "', " + contributorCount + ", '" +
+                    introductionHtml + "', '" + syntaxHtml + "', '" + parametersHtml + "', '" + remarksHtml + "', '" +
+                    helloWorldVersionsHtml + "', '" + versionsJson + "', " + exampleCount + ", " + exampleScore + ", " +
+                    lastEditUserId + ", '" + lastEditUserDisplayName + "', '" + introductionMarkdown + "', '" + syntaxMarkdown +
+                    "', '" + parametersMarkdown + "', '" + remarksMarkdown + "'";
             DBqueryDTO dto = crud.create("topics", values);
             if (!dto.isSuccess()) {
                 System.out.println("SHIT!");
@@ -105,15 +108,17 @@ public class UploadDB {
             int docTopicId = jsonObject.get("DocTopicId").getAsInt();
             String title = jsonObject.get("Title").getAsString().replace("'", "''");
             String creationDate = jsonObject.get("CreationDate").getAsString().replace("'", "''");
+            String lastEditDate = jsonObject.has("LastEditDate") ? jsonObject.get("LastEditDate").getAsString().replace("'", "''") : "";
             int score = jsonObject.get("Score").getAsInt();
             int contributorCount = jsonObject.get("ContributorCount").getAsInt();
             String bodyHtml = jsonObject.get("BodyHtml").getAsString().replace("'", "''");
-            String bodyMarkdown = jsonObject.get("BodyMarkdown").getAsString().replace("'", "''");
             int isPinned = jsonObject.get("IsPinned").getAsBoolean() ? 1 : 0;
+            String bodyMarkdown = jsonObject.get("BodyMarkdown").getAsString().replace("'", "''");
 
-            String values = "" + id + ", " + docTopicId + ", '" + title + "', '" + creationDate + "', " +
-                            score + ", " + contributorCount + ", '" + bodyHtml + "', '" + bodyMarkdown +
-                            "', " + isPinned;
+
+            String values = "" + id + ", " + docTopicId + ", '" + title + "', '" + creationDate + "', '" +
+                            lastEditDate + "', " + score + ", " + contributorCount + ", '" + bodyHtml + "', " +
+                            + isPinned + ", '" + bodyMarkdown + "'";
             DBqueryDTO dto = crud.create("examples", values);
             if (!dto.isSuccess()) {
                 System.out.println("SHIT!");
