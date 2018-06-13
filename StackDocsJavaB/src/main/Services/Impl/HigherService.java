@@ -178,7 +178,7 @@ public class HigherService implements IHigherService {
 
     @Override
     public ExampleDTO getAllEcamples() {
-        DBqueryDTO dbDTO = crud.read("Examples");
+        DBqueryDTO dbDTO = crud.read("examples");
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
@@ -277,12 +277,12 @@ public class HigherService implements IHigherService {
 
         DocTagsDAL dal = new DocTagsDAL();
 
-        dal.setId(((int) col.get(0)));
+        dal.setId(Long.parseLong(col.get(0).toString()));
         dal.setTag((String) col.get(1));
         dal.setTitle((String) col.get(2));
         dal.setCreationDate((String) col.get(3));
-        dal.setHelloWorldDocTopicId((int) col.get(4));
-        dal.setTopicCount((int) col.get(5));
+        dal.setHelloWorldDocTopicId(Long.parseLong(col.get(4).toString()));
+        dal.setTopicCount(Long.parseLong(col.get(5).toString()));
 
         return dal;
     }
@@ -290,17 +290,17 @@ public class HigherService implements IHigherService {
     private ExampleDAL createExampleDALfromList(List<Object> col) {
 
         ExampleDAL dal = new ExampleDAL();
-
-        dal.setId((long) col.get(0));
-        dal.setDocTopicId((long) col.get(1));
+        dal.setId(Long.parseLong(col.get(0).toString()));
+        dal.setDocTopicId(Long.parseLong(col.get(1).toString()));
         dal.setTitle((String) col.get(2));
         dal.setCreationDate((String) col.get(3));
+        System.out.println((String) col.get(3));
         dal.setLastEditDate((String) col.get(4));
-        dal.setScore((long) col.get(5));
-        dal.setContributorCount((long)col.get(6));
+        dal.setScore(Long.parseLong(col.get(5).toString()));
+        dal.setContributorCount(Long.parseLong(col.get(6).toString()));
         dal.setBodyHtml((String) col.get(7));
         dal.setBodyMarkdown((String) col.get(8));
-        dal.setPinned((int) col.get(9) == 1? true: false);
+        dal.setPinned((int) col.get(8) == 1);
 
         return dal;
     }
@@ -309,18 +309,18 @@ public class HigherService implements IHigherService {
 
         TopicsDAL dal = new TopicsDAL();
 
-        dal.setId((long) col.get(0));
-        dal.setDocTagId((long) col.get(1));
-        dal.setHelloWorldTopic((boolean) col.get(2));
+        dal.setId(Long.parseLong(col.get(0).toString()));
+        dal.setDocTagId(Long.parseLong(col.get(1).toString()));
+        dal.setHelloWorldTopic((int) col.get(2) == 1);
         dal.setTitle((String) col.get(3));
         dal.setCreationDate((String) col.get(4));
-        dal.setViewCount((long) col.get(5));
+        dal.setViewCount(Long.parseLong(col.get(5).toString()));
         dal.setLastEditDate((String) col.get(6));
-        dal.setLastEditUserId((long) col.get(7));
+        dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
         dal.setLastEditUserDisplayName((String) col.get(8));
-        dal.setContributorCount((long) col.get(9));
-        dal.setExampleCount((long) col.get(10));
-        dal.setExampleScore((long) col.get(11));
+        dal.setContributorCount(Long.parseLong(col.get(9).toString()));
+        dal.setExampleCount(Long.parseLong(col.get(10).toString()));
+        dal.setExampleScore(Long.parseLong(col.get(11).toString()));
         //HTML
         dal.setIntroductionHtml((String) col.get(12));
         dal.setSyntaxHtml((String) col.get(13));
