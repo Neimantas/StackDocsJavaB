@@ -51,15 +51,7 @@ public class Pagination {
     private Topic changeTopicsDALtoTopic(TopicsDAL dal) {
         Topic tp = new Topic();
         tp.setId(dal.getId());
-        tp.setDocTagId(dal.getDocTagId());
         tp.setTitle(dal.getTitle());
-        tp.setIntroductionHtml(dal.getIntroductionHtml());
-        tp.setSyntaxHtml(dal.getSyntaxHtml());
-        tp.setParametersHtml(dal.getParametersHtml());
-        tp.setRemarksHtml(dal.getRemarksHtml());
-        tp.setIntroductionMarkdown(dal.getIntroductionMarkdown());
-        tp.setParametersMarkdown(dal.getParametersMarkdown());
-        tp.setRemarksMarkdown(dal.getRemarksMarkdown());
         return tp;
     }
 
