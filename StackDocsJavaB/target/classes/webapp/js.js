@@ -16,10 +16,8 @@ function vykstaPaieska() {
     var kalba = document.getElementById("kalba").value;
     var paieskos_laukas = document.getElementById("paieskos-laukas").value;
 
-    url = "index.jsp?kalba=" + kalba + "paieska=" + paieskos_laukas;
+    url = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas;
     location.href = url;
-
-
 }
 
 
