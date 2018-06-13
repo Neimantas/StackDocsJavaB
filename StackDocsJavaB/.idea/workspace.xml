@@ -6,7 +6,19 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6f6885-bbe4-4a51-befc-193ce5a46c17" name="Default" comment="" />
+    <list default="true" id="2e6f6885-bbe4-4a51-befc-193ce5a46c17" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_jstl_1_2a.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_23_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/External/mydb.sqlite.db" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/External/mydb.sqlite.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Services/Impl/HigherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Services/Impl/HigherService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Models/BusinessLogic/DocTag.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Models/BusinessLogic/DocTag.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/HigherServiseTest.class" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,11 +66,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="93" column="35" lean-forward="true" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
+            <state relative-caret-position="214">
+              <caret line="86" column="40" lean-forward="true" selection-start-line="86" selection-start-column="40" selection-end-line="86" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -66,15 +78,22 @@
       <file leaf-file-name="ServletIndex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Controllers/ServletIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+            <state relative-caret-position="231">
+              <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="js.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="js.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="HigherService.java" pinned="false" current-in-tab="false">
@@ -111,8 +130,8 @@
         <option value="$PROJECT_DIR$/src/test/Testing.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/Services/Impl/HigherService.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/Controllers/ServletIndex.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
       </list>
     </option>
   </component>
@@ -177,7 +196,7 @@
               <item name="StackDocsJavaB" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="External" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="StackDocsJavaB" type="b2602c69:ProjectViewProjectNode" />
@@ -192,21 +211,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="Services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="StackDocsJavaB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StackDocsJavaB" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
-              <item name="Impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="StackDocsJavaB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="StackDocsJavaB" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -393,11 +397,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34808000" />
+    <option name="totallyTimeSpent" value="36041000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="13" y="22" width="1440" height="824" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="15" side_tool="true" />
@@ -418,9 +421,9 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="12" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4181568" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4181568" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.3298292" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.74886876" visible="true" weight="0.1788269" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.74886876" visible="true" weight="0.1788269" />
       <window_info id="Web" order="6" sideWeight="0.25113124" side_tool="true" weight="0.174375" />
       <window_info id="Learn" order="16" />
       <window_info anchor="right" id="Theme Preview" order="8" />
@@ -437,6 +440,7 @@
       <window_info anchor="bottom" id="Event Log" order="15" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="14" weight="0.3298292" />
       <window_info anchor="bottom" id="Application Servers" order="8" weight="0.3298292" />
+      <window_info anchor="right" x="0" y="0" width="310" height="624" id="Documentation" side_tool="true" weight="0.3297568" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Dependency Viewer" order="7" weight="0.3298292" />
       <window_info anchor="right" id="Maven Projects" order="5" />
@@ -617,20 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="93" column="35" lean-forward="true" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Controllers/ServletIndex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24">
-          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -639,7 +629,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Controllers/ServletIndex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="86" column="40" lean-forward="true" selection-start-line="86" selection-start-column="40" selection-end-line="86" selection-end-column="40" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
@@ -652,6 +663,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -700,6 +712,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
