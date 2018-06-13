@@ -6,19 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6f6885-bbe4-4a51-befc-193ce5a46c17" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Controllers/ServletIndex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Controllers/ServletIndex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Services/Impl/HigherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Services/Impl/HigherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Controllers/ServletIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Controllers/ServletIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Services/Impl/HigherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Services/Impl/HigherService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/webapp/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/ServletIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/ServletIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Services/Impl/HigherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Services/Impl/HigherService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/webapp/index.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="2e6f6885-bbe4-4a51-befc-193ce5a46c17" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,8 +57,8 @@
       <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="92" column="40" lean-forward="true" selection-start-line="92" selection-start-column="40" selection-end-line="92" selection-end-column="40" />
+            <state relative-caret-position="439">
+              <caret line="93" column="35" lean-forward="true" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -78,62 +66,22 @@
       <file leaf-file-name="ServletIndex.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Controllers/ServletIndex.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="31" column="56" lean-forward="true" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+            <state relative-caret-position="24">
+              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TopicsDAL.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Models/DAL/TopicsDAL.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Services/Impl/DataBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
-            </state>
-          </provider>
+      <file leaf-file-name="js.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="HigherService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Services/Impl/HigherService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4575">
-              <caret line="314" column="18" selection-start-line="314" selection-start-column="18" selection-end-line="314" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Topic.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Models/BusinessLogic/Topic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" selection-start-line="45" selection-end-line="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="web.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="161">
+              <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -445,7 +393,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34671000" />
+    <option name="totallyTimeSpent" value="34808000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="13" y="22" width="1440" height="824" extended-state="0" />
@@ -464,7 +412,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3298292" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3287483" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
@@ -477,14 +425,40 @@
       <window_info id="Learn" order="16" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.4181568" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.74886876" visible="true" weight="0.1788269" />
+      <window_info id="Learn" order="16" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="15" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="14" weight="0.3298292" />
+      <window_info anchor="bottom" id="Application Servers" order="8" weight="0.3298292" />
+      <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Dependency Viewer" order="7" weight="0.3298292" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info id="Web" order="6" sideWeight="0.25113124" side_tool="true" weight="0.174375" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Database" order="6" weight="0.226875" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="12" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Database Console" order="13" weight="0.3298292" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3061761" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3298292" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info id="Designer" order="2" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +582,6 @@
     <entry file="file://$PROJECT_DIR$/src/test/Testing.java" />
     <entry file="file://$PROJECT_DIR$/src/test/UploadDB.java" />
     <entry file="das://90677e82-0895-4272-ba9b-b650a6722601/schema/main/table/examples" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -632,8 +605,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Services/Impl/HigherService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4575">
-          <caret line="314" column="18" selection-start-line="314" selection-start-column="18" selection-end-line="314" selection-end-column="18" />
+        <state relative-caret-position="161">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -646,15 +619,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="92" column="40" lean-forward="true" selection-start-line="92" selection-start-column="40" selection-end-line="92" selection-end-column="40" />
+        <state relative-caret-position="439">
+          <caret line="93" column="35" lean-forward="true" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Controllers/ServletIndex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="31" column="56" lean-forward="true" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+        <state relative-caret-position="24">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -664,6 +637,9 @@
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
