@@ -20,12 +20,12 @@ public class Testing {
 
     public static void main(String[] args) throws Throwable {
 
-//        ICrud crud = new Crud();
-//        DBqueryDTO dto;
-        IHigherService higher = new HigherService();
-        DocTagsDTO dto = higher.getAllDocTags();
-        DocTagsDAL dal = dto.getData().get(0);
-        DocTag docTag = new DocTag();
+        ICrud crud = new Crud();
+        DBqueryDTO dto;
+//        IHigherService higher = new HigherService();
+//        DocTagsDTO dto = higher.getAllDocTags();
+//        DocTagsDAL dal = dto.getData().get(0);
+//        DocTag docTag = new DocTag();
 //        docTag.id = dal.getId();
 //        docTag.tag = dal.getTag();
 //        docTag.title = dal.getTitle();
@@ -33,7 +33,7 @@ public class Testing {
 //        System.out.println(docTag.title);
 //        db = new DataBase();
 //        connection = db.getConnection();
-//        DBupdateModel update = new DBupdateModel();
+//        DBQueryModel update = new DBQueryModel();
 //        update.setTable("person");
 //        update.setUpValue("Blorg");
 //        update.setUpWhat("name");
@@ -42,12 +42,12 @@ public class Testing {
 //        crud.create("person", "10, 'test'");
 //        dto = crud.create("person", "4, 'Johny'");
 //        dto = crud.create("person", "2, 'yui'");
-//        dto = crud.read("person");
-//        List<List<Object>> rows = dto.getData();
-//        for(int i = 0; i < rows.size(); i++) {
-//            List<Object> columns = rows.get(i);
-//            System.out.println((int) columns.get(0));
-//            System.out.println((String) columns.get(1));
-//        }
+        dto = crud.read("person");
+        List<List<Object>> rows = dto.getData();
+        for(int i = 0; i < rows.size(); i++) {
+            List<Object> columns = rows.get(i);
+            System.out.println((int) columns.get(0));
+            System.out.println((String) columns.get(1));
+        }
     }
 }

@@ -1,6 +1,6 @@
 package Services.Impl;
 
-import Models.DBupdateModel;
+import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Services.IDataBase;
 import Services.ICrud;
@@ -80,10 +80,10 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO update(DBupdateModel update) {
+    public DBqueryDTO update(DBQueryModel update) {
         try {
-            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpWhat() + "' = '"
-                            + update.getUpValue() + "' WHERE " + update.getUpWhere() + " = " + update.getUpWhereValue();
+            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
+                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue();
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();

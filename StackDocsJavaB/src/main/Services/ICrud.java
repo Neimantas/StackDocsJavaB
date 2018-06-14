@@ -1,11 +1,11 @@
 package Services;
 
-import Models.DBupdateModel;
+import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 
 public interface ICrud {
     DBqueryDTO create(String table, String values);
     DBqueryDTO read(String table);
-    DBqueryDTO update(DBupdateModel update);
+    DBqueryDTO update(DBQueryModel update);
     DBqueryDTO delete(String table, String id);
 }
