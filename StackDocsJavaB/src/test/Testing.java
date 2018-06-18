@@ -19,13 +19,14 @@ public class Testing {
     private static Connection connection;
 
     public static void main(String[] args) throws Throwable {
-
+        TestRunner testRunner = new TestRunner();
+        testRunner.AssertAll();
 //        ICrud crud = new Crud();
 //        DBqueryDTO dto;
-        IHigherService higher = new HigherService();
-        DocTagsDTO dto = higher.getAllDocTags();
-        DocTagsDAL dal = dto.getData().get(0);
-        DocTag docTag = new DocTag();
+//        IHigherService higher = new HigherService();
+//        DocTagsDTO dto = higher.getAllDocTags();
+//        DocTagsDAL dal = dto.getData().get(0);
+//        DocTag docTag = new DocTag();
 //        docTag.id = dal.getId();
 //        docTag.tag = dal.getTag();
 //        docTag.title = dal.getTitle();

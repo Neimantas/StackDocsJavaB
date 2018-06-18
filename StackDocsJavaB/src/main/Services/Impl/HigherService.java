@@ -30,7 +30,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0) == docTagId) {
+                if (columns.get(0).toString().equals(docTagId)) {
                     list.add(createDocTagsDALfromList(columns));
                 }
             }
@@ -63,7 +63,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0) == topicId) {
+                if (columns.get(0).toString().equals(topicId)) {
                     list.add(createTopicsDALfromList(columns));
                 }
             }
@@ -96,7 +96,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0) == exampleId) {
+                if (columns.get(0).toString().equals(exampleId)) {
                     list.add(createExampleDALfromList(columns));
                 }
             }
@@ -222,7 +222,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(1) == docTagId) {
+                if (columns.get(1).toString().equals(docTagId)) {
                     list.add(createTopicsDALfromList(columns));
                 }
             }
@@ -255,7 +255,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(1) == topicId) {
+                if (columns.get(1).toString().equals(topicId)) {
                     list.add(createExampleDALfromList(columns));
                 }
             }
