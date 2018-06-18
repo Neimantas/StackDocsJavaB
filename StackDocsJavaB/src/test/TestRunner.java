@@ -11,6 +11,7 @@ public class TestRunner {
         System.out.println(AssertDocTagsCollection());
         System.out.println(AssertDocTagsIds());
         System.out.println(AssertDocTagsIds2());
+        System.out.println(AssertDocTagsIds3());
         System.out.println(AssertDropDownCollection());
     }
 
@@ -29,7 +30,7 @@ public class TestRunner {
     }
 
     private boolean AssertDocTagsIds() {
-        int[] ids = {3,4,5,8};
+        int[] ids = {3, 4, 5, 8};
         int counter = 0;
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
@@ -48,17 +49,27 @@ public class TestRunner {
     }
 
     private boolean AssertDocTagsIds2() {
-        int[] ids = {3,4,5,8};
+        int[] ids = {3, 4, 5, 8};
         IHigherService higher = new HigherService();
         List<DocTagsDTO> dtoArr = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
-            if(higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
+            if (higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
                 dtoArr.add(higher.getDocTagById("" + ids[i]));
 //                System.out.println(dtoArr.get(i).getData().get(0).getId());
             }
         }
 
         if (dtoArr.size() == ids.length) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean AssertDocTagsIds3() {
+        String[] ids = {"3", "4", "5", "8"};
+        IHigherService higher = new HigherService();
+
+        if (higher.getDocTagById(ids).getData().size() == ids.length) {
             return true;
         }
         return false;

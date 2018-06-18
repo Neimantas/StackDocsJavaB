@@ -7,18 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6f6885-bbe4-4a51-befc-193ce5a46c17" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_jstl_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javax_servlet_jstl_1_2a.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_23_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Services/IHigherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Services/IHigherService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Services/Impl/HigherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Services/Impl/HigherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Testing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Controllers/ServletIndex.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Controllers/ServletIndex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/External/mydb.sqlite.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Models/BusinessLogic/DocTag.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Models/BusinessLogic/DocTag.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Services/Impl/HigherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/StackDocsJavaB/WEB-INF/classes/Services/Impl/HigherService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Services/Impl/HigherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Services/Impl/HigherService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/TestRunner.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,8 +61,8 @@
       <file leaf-file-name="HigherService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/Services/Impl/HigherService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
+            <state relative-caret-position="-2985">
+              <caret line="142" column="29" lean-forward="true" selection-start-line="142" selection-start-column="29" selection-end-line="142" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,11 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DocTag.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/Models/BusinessLogic/DocTag.java">
+      <file leaf-file-name="IHigherService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Services/IHigherService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+            <state relative-caret-position="238">
+              <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -148,8 +139,8 @@
       <file leaf-file-name="TestRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/TestRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+            <state relative-caret-position="211">
+              <caret line="72" column="9" lean-forward="true" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -199,6 +190,7 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/test/Testing.java" />
+        <option value="$PROJECT_DIR$/src/main/Services/IHigherService.java" />
         <option value="$PROJECT_DIR$/src/main/Services/Impl/HigherService.java" />
         <option value="$PROJECT_DIR$/src/test/TestRunner.java" />
       </list>
@@ -499,7 +491,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37649000" />
+    <option name="totallyTimeSpent" value="38975000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -561,6 +553,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3061761" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32908705" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="Designer" order="2" />
     </layout>
@@ -761,13 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/Services/IHigherService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://90677e82-0895-4272-ba9b-b650a6722601/schema/main/table/doctags">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -920,10 +906,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Services/IHigherService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="57" lean-forward="true" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Services/Impl/HigherService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="254" lean-forward="true" selection-start-line="254" selection-end-line="254" />
+        <state relative-caret-position="-2985">
+          <caret line="142" column="29" lean-forward="true" selection-start-line="142" selection-start-column="29" selection-end-line="142" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -932,8 +925,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/TestRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+        <state relative-caret-position="211">
+          <caret line="72" column="9" lean-forward="true" selection-start-line="72" selection-start-column="9" selection-end-line="72" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -16,7 +16,7 @@ public class HigherService implements IHigherService {
     Crud crud = new Crud();
 
     @Override
-    public DocTagsDTO getDocTagById(String docTagId) {
+    public DocTagsDTO getDocTagById(String... docTagIds) {
         DBqueryDTO dbDTO = crud.read("DocTags");
         DocTagsDTO dtDTO = new DocTagsDTO();
 
@@ -30,8 +30,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0).toString().equals(docTagId)) {
-                    list.add(createDocTagsDALfromList(columns));
+                for (int j = 0; j < docTagIds.length; j++) {
+                    if (columns.get(0).toString().equals(docTagIds[j])) {
+                        list.add(createDocTagsDALfromList(columns));
+                    }
                 }
             }
 
@@ -43,13 +45,12 @@ public class HigherService implements IHigherService {
                 return dtDTO;
             }
 
-        } else {
-            return dtDTO;
         }
+        return dtDTO;
     }
 
     @Override
-    public TopicsDTO getTopicById(String topicId) {
+    public TopicsDTO getTopicById(String... topicIds) {
         DBqueryDTO dbDTO = crud.read("Topics");
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -63,8 +64,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0).toString().equals(topicId)) {
-                    list.add(createTopicsDALfromList(columns));
+                for (int j = 0; j < topicIds.length; j++) {
+                    if (columns.get(0).toString().equals(topicIds[j])) {
+                        list.add(createTopicsDALfromList(columns));
+                    }
                 }
             }
 
@@ -76,13 +79,12 @@ public class HigherService implements IHigherService {
                 return tDTO;
             }
 
-        } else {
-            return tDTO;
         }
+        return tDTO;
     }
 
     @Override
-    public ExampleDTO getExampleById(String exampleId) {
+    public ExampleDTO getExampleById(String... exampleIds) {
         DBqueryDTO dbDTO = crud.read("Examples");
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -96,8 +98,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0).toString().equals(exampleId)) {
-                    list.add(createExampleDALfromList(columns));
+                for (int j = 0; j < exampleIds.length; j++) {
+                    if (columns.get(0).toString().equals(exampleIds[j])) {
+                        list.add(createExampleDALfromList(columns));
+                    }
                 }
             }
 
@@ -109,9 +113,8 @@ public class HigherService implements IHigherService {
                 return eDTO;
             }
 
-        } else {
-            return eDTO;
         }
+        return eDTO;
     }
 
     @Override
@@ -139,10 +142,8 @@ public class HigherService implements IHigherService {
                 dtDTO.setMessage("DB connection vas successful, but cant find any DocTags");
                 return dtDTO;
             }
-
-        } else {
-            return dtDTO;
         }
+        return dtDTO;
     }
 
     @Override
@@ -171,9 +172,8 @@ public class HigherService implements IHigherService {
                 return tDTO;
             }
 
-        } else {
-            return tDTO;
         }
+        return tDTO;
     }
 
     @Override
@@ -202,13 +202,12 @@ public class HigherService implements IHigherService {
                 return eDTO;
             }
 
-        } else {
-            return eDTO;
         }
+        return eDTO;
     }
 
     @Override
-    public TopicsDTO getTopicsByDocTagId(String docTagId) {
+    public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
         DBqueryDTO dbDTO = crud.read("Topics");
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -222,8 +221,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(1).toString().equals(docTagId)) {
-                    list.add(createTopicsDALfromList(columns));
+                for (int j = 0; j < docTagIds.length; j++) {
+                    if (columns.get(1).toString().equals(docTagIds[j])) {
+                        list.add(createTopicsDALfromList(columns));
+                    }
                 }
             }
 
@@ -235,13 +236,12 @@ public class HigherService implements IHigherService {
                 return tDTO;
             }
 
-        } else {
-            return tDTO;
         }
+        return tDTO;
     }
 
     @Override
-    public ExampleDTO getExamplesByTopicsId(String topicId) {
+    public ExampleDTO getExamplesByTopicsId(String... topicIds) {
         DBqueryDTO dbDTO = crud.read("Examples");
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -255,8 +255,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(1).toString().equals(topicId)) {
-                    list.add(createExampleDALfromList(columns));
+                for (int j = 0; j < topicIds.length; j++) {
+                    if (columns.get(1).toString().equals(topicIds[j])) {
+                        list.add(createExampleDALfromList(columns));
+                    }
                 }
             }
 
@@ -268,9 +270,8 @@ public class HigherService implements IHigherService {
                 return eDTO;
             }
 
-        } else {
-            return eDTO;
         }
+        return eDTO;
     }
 
     private DocTagsDAL createDocTagsDALfromList(List<Object> col) {
