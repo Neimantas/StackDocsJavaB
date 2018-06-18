@@ -14,8 +14,6 @@ public class Pagination {
     private int listSize = 10;
     private IHigherService hs = new HigherService();
 
-    //gali buti pagerintas kad grazintu DTO, pvz PaginationDTO
-    //reikia dar vieno kintamojo kuris butu ieskojimai, pvz pagal kalbas, ir dar vieno search field
     public List<Topic> listOfThemes(int pageNumber, String docTagid, String searchQuery) {
         TopicsDTO topicsDTO = hs.getAllTopics();
         DocTagsDTO docTagsDTO = hs.getAllDocTags();
@@ -38,9 +36,8 @@ public class Pagination {
                 }
             }
             return topics;
-        } else {
-            return null;
         }
+        return null;
     }
 
     private List<TopicsDAL> searchValues(List<TopicsDAL> listT, List<DocTagsDAL> listD, String docTagId, String searchQuery) {
@@ -63,7 +60,7 @@ public class Pagination {
             String[] queries = searchQuery.split(" ");
             for (int i = 0; i < listT.size(); i++) {
                 for (int j = 0; j < queries.length; j++) {
-                    if (hs.getDocTagById("" + listT.get(i).getDocTagId()).getData().get(0).getTitle().equals(queries[j]) || listT.get(i).getTitle().equals(queries[j])) {
+                    if (isTopicsDalGetDocTagIdContainsQuery(listD, listT.get(i), queries[j])/*hs.getDocTagById("" + listT.get(i).getDocTagId()).getData().get(0).getTitle().equals(queries[j])*/ || listT.get(i).getTitle().equals(queries[j])) {
                         tempT.add(listT.get(i));
                     }
                 }
@@ -72,4 +69,14 @@ public class Pagination {
         }
         return listT;
     }
+
+    private boolean isTopicsDalGetDocTagIdContainsQuery(List<DocTagsDAL> listD, TopicsDAL topicsDAL, String query) {
+        for (int i = 0; i < listD.size(); i++) {
+            if (topicsDAL.getDocTagId() == listD.get(i).getId() && topicsDAL.getTitle().contains(query)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
