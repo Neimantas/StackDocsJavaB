@@ -1,19 +1,13 @@
 package Services;
 
-import Models.BusinessLogic.DocTag;
-import Models.BusinessLogic.Example;
 import Models.BusinessLogic.Topic;
 import Models.DAL.DocTagsDAL;
-import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
 import Services.Impl.HigherService;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Pagination {
 
@@ -50,32 +44,32 @@ public class Pagination {
     }
 
     private List<TopicsDAL> searchValues(List<TopicsDAL> listT, List<DocTagsDAL> listD, String docTagId, String searchQuery) {
-        List<TopicsDAL> tempT = new ArrayList<>();
+        if (docTagId == null && searchQuery == null) return listT;
+
         //If docTags exist, reducing list to chosen language by docTagId
         if (docTagId != null) {
+            List<TopicsDAL> tempT = new ArrayList<>();
             for (int i = 0; i < listT.size(); i++) {
                 if (listT.get(i).getDocTagId() == Long.parseLong(docTagId)) {
                     tempT.add(listT.get(i));
                 }
             }
-        } else {
-            tempT = listT;
+            listT = tempT; // might work like that might new another temp list
         }
+
         //If searchQuery exists, searching if list of Topics contains query's
-        List<TopicsDAL> newTemp = new ArrayList<>();
         if (searchQuery != null) {
-            String[] querys = searchQuery.split(" ");
-            for (int i = 0; i < tempT.size(); i++) {
-                for (int j = 0; j < querys.length; j++) {
-                    if (hs.getDocTagById("" + tempT.get(i).getDocTagId()).getData().get(0).getTitle().equals(querys[j]) || tempT.get(i).getTitle().equals(querys[j])) {
-                        newTemp.add(tempT.get(i));
+            List<TopicsDAL> tempT = new ArrayList<>();
+            String[] queries = searchQuery.split(" ");
+            for (int i = 0; i < listT.size(); i++) {
+                for (int j = 0; j < queries.length; j++) {
+                    if (hs.getDocTagById("" + listT.get(i).getDocTagId()).getData().get(0).getTitle().equals(queries[j]) || listT.get(i).getTitle().equals(queries[j])) {
+                        tempT.add(listT.get(i));
                     }
                 }
             }
-        } else {
-            newTemp = tempT;
+            listT = tempT;
         }
-
-        return newTemp;
+        return listT;
     }
 }
