@@ -1,12 +1,15 @@
 import Models.DTO.DocTagsDTO;
+import Services.IDataBase;
 import Services.IHigherService;
+import Services.Impl.DataBase;
 import Services.Impl.HigherService;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestRunner {
-    public void AssertAll() {
+    public void AssertAll() throws SQLException {
         System.out.println(AssertDbConnection());
         System.out.println(AssertDocTagsCollection());
         System.out.println(AssertDocTagsIds());
@@ -15,10 +18,9 @@ public class TestRunner {
         System.out.println(AssertDropDownCollection());
     }
 
-    private boolean AssertDbConnection() {
-        //some logic which checks db connection
-
-        return false;
+    private boolean AssertDbConnection() throws SQLException {
+        IDataBase db = new DataBase();
+        return db.getConnection() != null;
     }
 
     private boolean AssertDocTagsCollection() {
@@ -76,12 +78,10 @@ public class TestRunner {
     }
 
     private boolean AssertDropDownCollection() {
-
 //        DropDown dropDown = new DropDown();
 //        if (dropDown.getList().size() == dropDown.getSize()) {
 //            return true;
 //        }
-
         return false;
     }
 }

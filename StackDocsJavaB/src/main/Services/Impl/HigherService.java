@@ -44,7 +44,6 @@ public class HigherService implements IHigherService {
                 dtDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return dtDTO;
             }
-
         }
         return dtDTO;
     }
@@ -78,7 +77,6 @@ public class HigherService implements IHigherService {
                 tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return tDTO;
             }
-
         }
         return tDTO;
     }
@@ -112,7 +110,6 @@ public class HigherService implements IHigherService {
                 eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return eDTO;
             }
-
         }
         return eDTO;
     }
@@ -171,7 +168,6 @@ public class HigherService implements IHigherService {
                 tDTO.setMessage("DB connection vas successful, but cant find any Topics");
                 return tDTO;
             }
-
         }
         return tDTO;
     }
@@ -201,7 +197,6 @@ public class HigherService implements IHigherService {
                 eDTO.setMessage("DB connection vas successful, but cant find any Examples");
                 return eDTO;
             }
-
         }
         return eDTO;
     }
@@ -235,7 +230,6 @@ public class HigherService implements IHigherService {
                 tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return tDTO;
             }
-
         }
         return tDTO;
     }
@@ -269,7 +263,6 @@ public class HigherService implements IHigherService {
                 eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return eDTO;
             }
-
         }
         return eDTO;
     }
