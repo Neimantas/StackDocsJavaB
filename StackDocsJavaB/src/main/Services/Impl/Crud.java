@@ -24,11 +24,11 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO create(String table, String values) {
+    public DBqueryDTO create(DBQueryModel create) {
         try {
             dto = new DBqueryDTO();
             connection = db.getConnection();
-            String query = "INSERT INTO " + table + " VALUES(" + values + ")";
+            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
             statement = connection.createStatement();
             statement.executeUpdate(query);
             dto.setSuccess(true);
@@ -113,9 +113,10 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO delete(String table, String id) {
+    public DBqueryDTO delete(DBQueryModel delete) {
         try {
-            String query = "DELETE FROM " + table + " WHERE id = " + id;
+            String query = "DELETE FROM " + delete.getTable() + " WHERE " + delete.getWhere() +  " = " +
+                            delete.getWhereValue() + " LIMIT 1";
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();

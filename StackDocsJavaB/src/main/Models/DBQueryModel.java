@@ -7,7 +7,8 @@ public class DBQueryModel {
     private String updateWhat;
     private String updateValue;
     private int quantity = 10;
-    private boolean single;
+    private boolean single = false;
+    private String createValues;
 
     public int getQuantity() {
         return quantity;
@@ -63,5 +64,13 @@ public class DBQueryModel {
 
     public void setSingle(boolean single) {
         this.single = single;
+    }
+
+    public String getCreateValues() {
+        return createValues;
+    }
+
+    public void setCreateValues(String createValues) {
+        this.createValues = createValues;
     }
 }
