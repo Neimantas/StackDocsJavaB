@@ -60,7 +60,7 @@ public class Pagination {
             String[] queries = searchQuery.split(" ");
             for (int i = 0; i < listT.size(); i++) {
                 for (int j = 0; j < queries.length; j++) {
-                    if (isTopicsDalGetDocTagIdContainsQuery(listD, listT.get(i), queries[j])/*hs.getDocTagById("" + listT.get(i).getDocTagId()).getData().get(0).getTitle().equals(queries[j])*/ || listT.get(i).getTitle().equals(queries[j])) {
+                    if (isTopicsDalGetDocTagIdContainsQuery(listD, listT.get(i), queries[j])/*hs.getDocTagById("" + listT.get(i).getDocTagId()).getData().get(0).getTitle().equals(queries[j])*/ || listT.get(i).getTitle().contains(queries[j])) {
                         tempT.add(listT.get(i));
                     }
                 }
