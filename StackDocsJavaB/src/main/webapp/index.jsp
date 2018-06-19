@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<%@page import="org.omg.CORBA.Request"%>--%>
 <%--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"--%>
-         <%--pageEncoding="ISO-8859-1"%>--%>
+<%--pageEncoding="ISO-8859-1"%>--%>
 
 
 <html>
@@ -77,39 +77,16 @@
 
         <tbody>
 
-        <tr>
 
-            <td id="isvedamas-tekstas">
-                <%--DATA --> ${data}--%>
-                <%--ID ---> ${data.getId()} Tag --> ${data.getTag()} Title --> ${data.getTitle()}--%>
+        <java:forEach var="topic" items="${data}">
+            <tr onclick="GetTopicInfo(${topic.getId()});">
+                <td>${topic.getId()}</td>
+                <td>${topic.getTitle()}</td>
 
-                <%--<c:forEach var=“tempStudent” items=“${student_list}“>--%>
+            </tr>
 
-                <%--${tempStudent} <br/>--%>
+        </java:forEach>
 
-                <%--</c:forEach>--%>
-                    <java:forEach var="topikas" items="${data}">
-                        ${topikas}<br/>
-                       
-                    </java:forEach>
-
-
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut ducimus eveniet minima non
-                praesentium
-                quidem repellendus sunt. Beatae commodi consequuntur dicta et facilis necessitatibus placeat quam
-                quasi
-                recusandae voluptatum.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur at autem cupiditate dolorum et
-                exercitationem illum impedit laudantium libero maiores placeat quibusdam recusandae rem saepe,
-                similique,
-                sint sit unde voluptate.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, commodi cupiditate est
-                eum
-                facere itaque iure maxime molestias nemo non nulla odio perferendis placeat quam quas quidem quos
-                rerum!
-
-            </td>
-        </tr>
 
         </tbody>
 
