@@ -3,6 +3,7 @@ package Services.Impl;
 import Models.DAL.DocTagsDAL;
 import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
+import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.ExampleDTO;
@@ -17,7 +18,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
-        DBqueryDTO dbDTO = crud.read("DocTags");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("DocTags");
+        DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
         dtDTO.setSuccess(dbDTO.isSuccess());
@@ -50,7 +53,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
-        DBqueryDTO dbDTO = crud.read("Topics");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Topics");
+        DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
@@ -83,7 +88,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
-        DBqueryDTO dbDTO = crud.read("Examples");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Examples");
+        DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
@@ -116,7 +123,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public DocTagsDTO getAllDocTags() {
-        DBqueryDTO dbDTO = crud.read("DocTags");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("DocTags");
+        DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
         dtDTO.setSuccess(dbDTO.isSuccess());
@@ -145,7 +154,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public TopicsDTO getAllTopics() {
-        DBqueryDTO dbDTO = crud.read("Topics");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Topics");
+        DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
@@ -174,7 +185,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public ExampleDTO getAllEcamples() {
-        DBqueryDTO dbDTO = crud.read("examples");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Examples");
+        DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
@@ -203,7 +216,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
-        DBqueryDTO dbDTO = crud.read("Topics");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Topics");
+        DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
@@ -236,7 +251,9 @@ public class HigherService implements IHigherService {
 
     @Override
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
-        DBqueryDTO dbDTO = crud.read("Examples");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Examples");
+        DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
