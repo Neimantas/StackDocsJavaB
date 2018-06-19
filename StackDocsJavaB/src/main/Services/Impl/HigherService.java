@@ -293,8 +293,13 @@ public class HigherService implements IHigherService {
         dal.setScore(Long.parseLong(col.get(5).toString()));
         dal.setContributorCount(Long.parseLong(col.get(6).toString()));
         dal.setBodyHtml((String) col.get(7));
+<<<<<<< HEAD
         dal.setPinned((int) col.get(8) == 1);
         dal.setBodyMarkdown((String) col.get(9));
+=======
+        dal.setBodyMarkdown((String) col.get(8));
+        dal.setPinned((int) col.get(8) == 1);
+>>>>>>> 90c8355925a73689e58794e90cf753879510b887
 
         return dal;
     }
@@ -310,7 +315,15 @@ public class HigherService implements IHigherService {
         dal.setCreationDate((String) col.get(4));
         dal.setViewCount(Long.parseLong(col.get(5).toString()));
         dal.setLastEditDate((String) col.get(6));
+<<<<<<< HEAD
         dal.setContributorCount(Long.parseLong(col.get(7).toString()));
+=======
+        dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
+        dal.setLastEditUserDisplayName((String) col.get(8));
+        dal.setContributorCount(Long.parseLong(col.get(9).toString()));
+        dal.setExampleCount(Long.parseLong(col.get(10).toString()));
+        dal.setExampleScore(Long.parseLong(col.get(11).toString()));
+>>>>>>> 90c8355925a73689e58794e90cf753879510b887
         //HTML
         dal.setIntroductionHtml((String) col.get(8));
         dal.setSyntaxHtml((String) col.get(9));
