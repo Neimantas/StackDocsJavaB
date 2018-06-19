@@ -1,8 +1,8 @@
 package Controllers;
 
-import Models.BusinessLogic.Topic;
-import Models.DAL.TopicsDAL;
-import Models.DTO.TopicsDTO;
+import Models.BusinessLogic.DocTag;
+import Models.DAL.DocTagsDAL;
+import Models.DTO.DocTagsDTO;
 import Services.IHigherService;
 import Services.Impl.HigherService;
 
@@ -31,18 +31,22 @@ public class ServletIndex extends HttpServlet {
             response.sendRedirect("http://localhost:8080/index.jsp");
         } else {
             IHigherService higher = new HigherService();
-            TopicsDTO dto = higher.getAllTopics();
-            if (dto.isSuccess()) {
-                List<TopicsDAL> dalList = dto.getData();
-                List<Topic> topicsList = new ArrayList<>();
+            DocTagsDTO dto = higher.getAllDocTags();
+            if (dto.isSuccess()){
+                List<DocTagsDAL> dalList = dto.getData();
+                List<DocTag> tagList = new ArrayList<>();
                 dalList.forEach(dal -> {
-                    Topic topic = new Topic();
-                    topic.setId(dal.getId());
-                    topic.setTitle(dal.getTitle());
-                    topicsList.add(topic);
+                    DocTag docTag = new DocTag();
+                    docTag.setId(dal.getId());
+                    docTag.setTag(dal.getTag());
+                    docTag.setTitle(dal.getTitle());
+                    tagList.add(docTag);
                 });
-
-                request.setAttribute("data", topicsList);
+//            ArrayList<String> tagList = new ArrayList<>();
+//            tagList.add("Jonas");
+//            tagList.add("Petras");
+//            tagList.add("Jonas");
+                request.setAttribute("data", tagList);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 //            request.setAttribute("name", "Krabas Kebabas");

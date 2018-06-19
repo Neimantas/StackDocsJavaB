@@ -8,5 +8,12 @@
         <welcome-file>servletindex</welcome-file>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <resource-ref>
+        <description>StackDoc SQLite DB</description>
+        <res-ref-name>jdbc/mydb.sqlite</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 </web-app>
 
