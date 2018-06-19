@@ -78,10 +78,10 @@ public class TestRunner {
     }
 
     private boolean AssertDropDownCollection() {
-//        DropDown dropDown = new DropDown();
-//        if (dropDown.getList().size() == dropDown.getSize()) {
-//            return true;
-//        }
+        DropDown dropDown = new DropDown();
+        if (dropDown.getList().size() == dropDown.getSize()) {
+            return true;
+        }
         return false;
     }
 }
