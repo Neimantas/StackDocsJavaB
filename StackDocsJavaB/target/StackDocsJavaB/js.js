@@ -21,6 +21,15 @@ function vykstaPaieska() {
 }
 
 
+function GetTopicInfo(skaicius){
+
+
+    url = "/topicsservlet?topicId="+skaicius;
+    location.href = url;
+
+}
+
+
 function funkcija_pirmyn() {
 
 

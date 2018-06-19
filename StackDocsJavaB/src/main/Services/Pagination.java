@@ -44,7 +44,7 @@ public class Pagination {
         DocTag dt = new DocTag();
         dt.setId(dal.getId());
         dt.setTag(dal.getTag());
-        dt.setTitle(dal.getTitle());
+        //dt.setTitle(dal.getTitle());
         return dt;
     }
 

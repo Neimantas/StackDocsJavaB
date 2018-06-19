@@ -17,12 +17,16 @@ import java.util.List;
 
 @WebServlet(name = "ServletIndex", urlPatterns = {"/servletindex"})
 public class ServletIndex extends HttpServlet {
+
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println(request.getParameterMap().size());
+
+
         if (request.getParameterMap().size() == 0) {
             response.sendRedirect("http://localhost:8080/index.jsp");
         } else {
