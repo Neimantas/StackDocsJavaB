@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    <Resource name="jdbc/yourdb"
+    <Resource name="jdbc/mydb.sqlite"
               auth="Container"
               type="javax.sql.DataSource"
+              username=""
+              password=""
               driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:src/main/External/mydb.sqlite.db"
-              factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory">
+              url="jdbc:sqlite:src/main/External/mydb.sqlite.db">
+              <!--factory="org.apache.tomcat.jdbc.pool.DataSourceFactory">-->
     </Resource>
 </Context>

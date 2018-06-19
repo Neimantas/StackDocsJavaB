@@ -2,6 +2,7 @@
 
 import Models.BusinessLogic.DocTag;
 import Models.DAL.DocTagsDAL;
+import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
 import Services.ICrud;
@@ -11,6 +12,7 @@ import Services.Impl.Crud;
 import Services.Impl.HigherService;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,12 +44,22 @@ public class Testing {
 //        crud.create("person", "10, 'test'");
 //        dto = crud.create("person", "4, 'Johny'");
 //        dto = crud.create("person", "2, 'yui'");
-        dto = crud.read("person");
-        List<List<Object>> rows = dto.getData();
-        for(int i = 0; i < rows.size(); i++) {
-            List<Object> columns = rows.get(i);
-            System.out.println((int) columns.get(0));
-            System.out.println((String) columns.get(1));
+        DBQueryModel query = new DBQueryModel();
+        query.setTable("doctags");
+        query.setWhere("id");
+        query.setWhereValue("3");
+        query.setSingle(false);
+        dto = crud.read(query);
+        if (dto.isSuccess()) {
+            List<List<Object>> rows = dto.getData();
+            for(int i = 0; i < rows.size(); i++) {
+                List<Object> columns = rows.get(i);
+                System.out.println((int) columns.get(0));
+                System.out.println((String) columns.get(1));
+            }
+        } else {
+            System.out.println(dto.getMessage());
         }
+
     }
 }

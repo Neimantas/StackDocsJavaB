@@ -7,6 +7,7 @@ public class DBQueryModel {
     private String updateWhat;
     private String updateValue;
     private int quantity = 10;
+    private boolean single;
 
     public int getQuantity() {
         return quantity;
@@ -54,5 +55,13 @@ public class DBQueryModel {
 
     public void setUpdateValue(String updateValue) {
         this.updateValue = updateValue;
+    }
+
+    public boolean isSingle() {
+        return single;
+    }
+
+    public void setSingle(boolean single) {
+        this.single = single;
     }
 }

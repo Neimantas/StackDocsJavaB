@@ -47,14 +47,23 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO read(String table) {
+    public DBqueryDTO read(DBQueryModel dbQuery) {
         try {
+            String query = "";
+            if (dbQuery.getWhere() == null) {
+                query = "SELECT * FROM " + dbQuery.getTable();
+            } else if (dbQuery.isSingle()) {
+                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " = " +
+                        dbQuery.getWhereValue();
+            } else {
+                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " >= " +
+                        dbQuery.getWhereValue() + " LIMIT " + dbQuery.getQuantity();
+            }
             dto = new DBqueryDTO();
             connection = db.getConnection();
-            String query = "SELECT * FROM " + table;
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            int colCount= rs.getMetaData().getColumnCount();
+            ResultSet rs  = statement.executeQuery(query);
+            int colCount = rs.getMetaData().getColumnCount();
             List<List<Object>> rows = new ArrayList<>();
             while (rs.next()) {
                 List<Object> columns = new ArrayList<>();
