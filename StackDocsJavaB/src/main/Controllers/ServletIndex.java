@@ -39,7 +39,6 @@ public class ServletIndex extends HttpServlet {
                     DocTag docTag = new DocTag();
                     docTag.setId(dal.getId());
                     docTag.setTag(dal.getTag());
-                    docTag.setTitle(dal.getTitle());
                     tagList.add(docTag);
                 });
 //            ArrayList<String> tagList = new ArrayList<>();

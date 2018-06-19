@@ -19,6 +19,7 @@ StackDocsJavaB/.idea/**/dataSources.local.xml
 StackDocsJavaB/.idea/**/sqlDataSources.xml
 StackDocsJavaB/.idea/**/dynamic.xml
 StackDocsJavaB/.idea/**/uiDesigner.xml
+StackDocsJavaB/target/
 
 # Gradle:
 .idea/**/gradle.xml

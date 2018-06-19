@@ -84,9 +84,6 @@
                 <td>${topic.getTitle()}</td>
 
             </tr>
-                    <java:forEach var="topic" items="${data}">
-                        ${topic.getTitle()}<br/>
-
         </java:forEach>
 
 
