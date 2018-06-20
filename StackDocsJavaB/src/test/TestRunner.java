@@ -15,6 +15,7 @@ public class TestRunner {
         System.out.println(AssertDocTagsIds());
         System.out.println(AssertDocTagsIds2());
         System.out.println(AssertDocTagsIds3());
+        System.out.println(AssertTenTopicsById());
         System.out.println(AssertDropDownCollection());
     }
 
@@ -72,6 +73,16 @@ public class TestRunner {
         IHigherService higher = new HigherService();
 
         if (higher.getDocTagById(ids).getData().size() == ids.length) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean AssertTenTopicsById() {
+
+        IHigherService higher = new HigherService();
+
+        if (higher.getTenTopicsById(true, "3").getData().size() == 10) {
             return true;
         }
         return false;

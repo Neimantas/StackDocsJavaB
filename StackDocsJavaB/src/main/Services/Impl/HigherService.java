@@ -8,47 +8,48 @@ import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.ExampleDTO;
 import Models.DTO.TopicsDTO;
+import Services.ICrud;
 import Services.IHigherService;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HigherService implements IHigherService {
 
-    Crud crud = new Crud();
+    ICrud crud = new Crud();
+
 
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
-        DBQueryModel model = new DBQueryModel();
-        model.setTable("DocTags");
-        DBqueryDTO dbDTO = crud.read(model);
-        DocTagsDTO dtDTO = new DocTagsDTO();
+        DocTagsDTO docTagsDTO = new DocTagsDTO();
+        List<DocTagsDAL> list = new ArrayList<>();
 
-        dtDTO.setSuccess(dbDTO.isSuccess());
-        dtDTO.setMessage(dbDTO.getMessage());
-
-        if (dbDTO.isSuccess()) {
-
-            List<DocTagsDAL> list = new ArrayList<>();
-            List<List<Object>> data = dbDTO.getData();
-
-            for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                for (int j = 0; j < docTagIds.length; j++) {
-                    if (columns.get(0).toString().equals(docTagIds[j])) {
-                        list.add(createDocTagsDALfromList(columns));
-                    }
-                }
-            }
-
-            if (!list.isEmpty()) {
-                dtDTO.setData(list);
-                return dtDTO;
-            } else {
-                dtDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-                return dtDTO;
+        for (int i = 0; i < docTagIds.length; i++) {
+            // Paruosiam modeli
+            DBQueryModel model = new DBQueryModel();
+            model.setTable("DocTags");
+            model.setWhere("id");
+            model.setWhereValue(docTagIds[i]);
+            model.setSingle(true);
+            // Pernesam zinutes
+            DBqueryDTO dBqueryDTO = crud.read(model);
+            docTagsDTO.setSuccess(dBqueryDTO.isSuccess());
+            docTagsDTO.setMessage(dBqueryDTO.getMessage());
+            // Tikrinam
+            if (dBqueryDTO.isSuccess()) {
+                // mano pirmasis narys, nes tik viena id is duombazes
+                List<Object> dataById = dBqueryDTO.getData().get(0);
+                list.add(createDocTagsDALfromList(dataById));
             }
         }
-        return dtDTO;
+        if (!list.isEmpty()) {
+            docTagsDTO.setData(list);
+            return docTagsDTO;
+        } else if(list.isEmpty()) {
+            docTagsDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+            return docTagsDTO;
+        } else {
+            return docTagsDTO;
+        }
     }
 
     @Override
@@ -200,7 +201,7 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                    list.add(createExampleDALfromList(columns));
+                list.add(createExampleDALfromList(columns));
             }
 
             if (!list.isEmpty()) {
@@ -284,6 +285,61 @@ public class HigherService implements IHigherService {
         return eDTO;
     }
 
+    @Override
+    public TopicsDTO getTenTopicsById(Boolean after, String id) {
+        TopicsDTO topicsDTO = new TopicsDTO();
+        List<TopicsDAL> list = new ArrayList<>();
+
+        if (after) {
+            DBQueryModel model = new DBQueryModel();
+            model.setTable("Topics");
+            model.setWhere("id");
+            model.setWhereValue(id);
+            // Pernesam zinutes
+            DBqueryDTO dBqueryDTO = crud.read(model);
+            topicsDTO.setSuccess(dBqueryDTO.isSuccess());
+            topicsDTO.setMessage(dBqueryDTO.getMessage());
+
+            // Tikrinam
+            if (dBqueryDTO.isSuccess()) {
+                // mano pirmasis narys, nes tik viena id is duombazes
+                List<List<Object>> data = dBqueryDTO.getData();
+                for (int i = 0; i < data.size(); i++) {
+                    list.add(createTopicsDALfromList(data.get(i)));
+                }
+            }
+        }
+        if (!after) {
+            DBQueryModel model = new DBQueryModel();
+            model.setTable("Topics");
+            model.setWhere("id");
+            model.setWhereValue(id);
+            model.setAfter(false);
+
+            DBqueryDTO dBqueryDTO = crud.read(model);
+            topicsDTO.setSuccess(dBqueryDTO.isSuccess());
+            topicsDTO.setMessage(dBqueryDTO.getMessage());
+
+            // Tikrinam
+            if (dBqueryDTO.isSuccess()) {
+                // mano pirmasis narys, nes tik viena id is duombazes
+                List<List<Object>> data = dBqueryDTO.getData();
+                for (int i = 0; i < data.size(); i++) {
+                    list.add(createTopicsDALfromList(data.get(i)));
+                }
+            }
+        }
+        if (!list.isEmpty()) {
+            topicsDTO.setData(list);
+            return topicsDTO;
+        } else if(list.isEmpty()) {
+            topicsDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+            return topicsDTO;
+        } else {
+            return topicsDTO;
+        }
+    }
+
     private DocTagsDAL createDocTagsDALfromList(List<Object> col) {
 
         DocTagsDAL dal = new DocTagsDAL();
@@ -330,11 +386,6 @@ public class HigherService implements IHigherService {
         dal.setViewCount(Long.parseLong(col.get(5).toString()));
         dal.setLastEditDate((String) col.get(6));
         dal.setContributorCount(Long.parseLong(col.get(7).toString()));
-        dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
-        dal.setLastEditUserDisplayName((String) col.get(8));
-        dal.setContributorCount(Long.parseLong(col.get(9).toString()));
-        dal.setExampleCount(Long.parseLong(col.get(10).toString()));
-        dal.setExampleScore(Long.parseLong(col.get(11).toString()));
         //HTML
         dal.setIntroductionHtml((String) col.get(8));
         dal.setSyntaxHtml((String) col.get(9));

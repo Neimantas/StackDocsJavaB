@@ -8,6 +8,16 @@ public class DBQueryModel {
     private String updateValue;
     private int quantity = 10;
     private boolean single = false;
+    private boolean after = true;
+
+    public boolean isAfter() {
+        return after;
+    }
+
+    public void setAfter(boolean after) {
+        this.after = after;
+    }
+
     private String createValues;
 
     public int getQuantity() {

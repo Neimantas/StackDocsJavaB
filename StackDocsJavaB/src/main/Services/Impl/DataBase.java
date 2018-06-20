@@ -16,22 +16,25 @@ public class DataBase implements IDataBase {
 
     @Override
     public Connection getConnection() throws SQLException {
+//        try {
+//            System.setProperty(Context.INITIAL_CONTEXT_FACTORY,
+//                    "org.apache.naming.java.javaURLContextFactory");
+//            Class.forName("org.sqlite.JDBC");
+//            Context initContext = new InitialContext();
+//            Context envContext  = (Context) initContext.lookup("java:comp/env");
+//            DataSource ds = (DataSource)envContext.lookup("jdbc/mydb.sqlite");
+//            connection = ds.getConnection();
+//        } catch (ClassNotFoundException e) {
+//            System.out.println(e.getMessage());
+//        } catch (NamingException e) {
+//            System.out.println(e.getMessage());
+//        }
         try {
-            System.setProperty(Context.INITIAL_CONTEXT_FACTORY,
-                    "org.apache.naming.java.javaURLContextFactory");
             Class.forName("org.sqlite.JDBC");
-            Context initContext = new InitialContext();
-            Context envContext  = (Context) initContext.lookup("java:comp/env");
-            DataSource ds = (DataSource)envContext.lookup("jdbc/mydb.sqlite");
-            connection = ds.getConnection();
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
-        } catch (NamingException e) {
-            System.out.println(e.getMessage());
         }
-
-//        connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
-//        connection = DriverManager.getConnection("jdbc:sqlite:mydb.sqlite.db");
+        connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
         return connection;
     }
 
