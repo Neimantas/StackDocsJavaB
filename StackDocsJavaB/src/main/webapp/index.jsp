@@ -80,12 +80,10 @@
 
         <java:forEach var="topic" items="${data}">
             <tr onclick="GetTopicInfo(${topic.getId()});">
+            <tr>
                 <td>${topic.getId()}</td>
-                <td>${topic.getTitle()}</td>
-
+                <td>${topic.getTag()}</td>
             </tr>
-                    <java:forEach var="topic" items="${data}">
-                        ${topic.getTitle()}<br/>
 
         </java:forEach>
 

@@ -1,47 +1,48 @@
-// var paieska = document.getElementById("paieskos-laukas");
-// var kalbos_pasirinkimas = document.getElementById("kalba");
-// var teksto_laukas = document.getElementById("isvedamas-tekstas");
-// var mygtukas_atgal = document.getElementById("mugtukas-atgal");
-// var mygtukas_pirmyn = document.getElementById("mygtukas-atgal");
-// var puslapio_numeris = document.getElementById("puslapio-numeris");
-// var kalba = document.getElementById("kalba");
-
-// var kelintasPirmyn = 0;
-// var kelintasAtgal=0;
-
 
 function vykstaPaieska() {
-
-
     var kalba = document.getElementById("kalba").value;
     var paieskos_laukas = document.getElementById("paieskos-laukas").value;
-
-    url = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas;
+    var url = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas;
     location.href = url;
 }
 
 
 function GetTopicInfo(skaicius){
-
-
-    url = "/topicsservlet?topicId="+skaicius;
-    location.href = url;
-
+    location.href = "/topicsservlet?topicId=" + skaicius;
 }
 
 
 function funkcija_pirmyn() {
-
-
-    // kelintasAtgal++;
-    url = "index.jsp?pirmyn=true";
+    // Need to check whether there actually is a list to move through
+    var kalba = GetParam("kalba");
+    var paieskos_laukas = GetParam("paieska");
+    var puslapis = parseInt(GetParam("puslapis"));
+    if (puslapis === -1) {
+        puslapis = 1;
+    }
+    puslapis += 1;
+    var url = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&puslapis=" + puslapis;
     location.href = url;
 
 }
 
 function funkcija_atgal() {
+    var kalba = document.getElementById("kalba").value;
+    var paieskos_laukas = document.getElementById("paieskos-laukas").value;
+    var puslapis = parseInt(GetParam("puslapis"));
+    var url;
+    if (puslapis > 1) {
+        puslapis -= 1;
+        url = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&puslapis=" + puslapis;
+        location.href = url;
+    }
+}
 
-    // kelintasAtgal++;
-    url = "index.jsp?atgal=true";
-    location.href = url;
+function GetParam(parameter) {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has(parameter)) {
+        return urlParams.get(parameter);
+    } else {
+        return -1;
+    }
 }

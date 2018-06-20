@@ -6,7 +6,7 @@
               username=""
               password=""
               driverClassName="org.sqlite.JDBC"
-              url="jdbc:sqlite:src/main/External/mydb.sqlite.db">
-              <!--factory="org.apache.tomcat.jdbc.pool.DataSourceFactory">-->
+              url="jdbc:sqlite:src/main/External/mydb.sqlite.db"
+              factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory">
     </Resource>
 </Context>

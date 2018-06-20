@@ -29,9 +29,12 @@ public class DataBase implements IDataBase {
 //        } catch (NamingException e) {
 //            System.out.println(e.getMessage());
 //        }
-
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e){
+            System.out.println(e.getMessage());
+        }
         connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
-//        connection = DriverManager.getConnection("jdbc:sqlite:mydb.sqlite.db");
         return connection;
     }
 

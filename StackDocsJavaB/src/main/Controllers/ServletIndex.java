@@ -1,10 +1,15 @@
 package Controllers;
 
 import Models.BusinessLogic.DocTag;
+import Models.BusinessLogic.Topic;
 import Models.DAL.DocTagsDAL;
+import Models.DAL.TopicsDAL;
 import Models.DTO.DocTagsDTO;
+import Models.DTO.TopicsDTO;
+import Services.DropDown;
 import Services.IHigherService;
 import Services.Impl.HigherService;
+import Services.Pagination;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,39 +25,47 @@ public class ServletIndex extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameterMap().size());
-
-
-        if (request.getParameterMap().size() == 0) {
-            response.sendRedirect("http://localhost:8080/index.jsp");
+        int paramSize = request.getParameterMap().size();
+        String language = request.getParameter("kalba");
+        String search = request.getParameter("paieska");
+        String page = request.getParameter("puslapis");
+        int pageNum = page != null ? Integer.parseInt(page) : 1;
+        System.out.println(paramSize);
+        System.out.println(language + " || " + search + " || " + page);
+        if (paramSize > 0) {
+            Pagination pagination = new Pagination();
+            List<Topic> dataList = pagination.listOfThemes(pageNum, language, search);
+            request.setAttribute("data", dataList);
         } else {
-            IHigherService higher = new HigherService();
-            DocTagsDTO dto = higher.getAllDocTags();
-            if (dto.isSuccess()){
-                List<DocTagsDAL> dalList = dto.getData();
-                List<DocTag> tagList = new ArrayList<>();
-                dalList.forEach(dal -> {
-                    DocTag docTag = new DocTag();
-                    docTag.setId(dal.getId());
-                    docTag.setTag(dal.getTag());
-                    docTag.setTitle(dal.getTitle());
-                    tagList.add(docTag);
-                });
-//            ArrayList<String> tagList = new ArrayList<>();
-//            tagList.add("Jonas");
-//            tagList.add("Petras");
-//            tagList.add("Jonas");
-                request.setAttribute("data", tagList);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-//            request.setAttribute("name", "Krabas Kebabas");
-//            request.getRequestDispatcher("index.jsp").forward(request, response);
+            DropDown dropDown = new DropDown();
+            List<DocTag> dataList = dropDown.getList();
+            request.setAttribute("data", dataList);
         }
-
-//        response.getWriter().print(request.getParameter("kalba") + " -> kalba");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+//        response.sendRedirect("http://localhost:8080/index.jsp");
     }
 }
+
+
+//            IHigherService higher = new HigherService();
+//            TopicsDTO dto = higher.getAllTopics();
+//
+//            if (dto.isSuccess()){
+//                List<TopicsDAL> dalList = dto.getData();
+//                List<Topic> topicList = new ArrayList<>();
+//                dalList.forEach(dal -> {
+//                    Topic topic = new Topic();
+//                    topic.setId(dal.getId());
+//                    topic.setTitle(dal.getTitle());
+//                    topic.setDocTagTitle();
+//                    topicList.add(topic);
+//                });
+//                request.setAttribute("data", topicList);
+//                request.getRequestDispatcher("index.jsp").forward(request, response);
+//            } else {
+//                response.sendRedirect("http://localhost:8080/index.jsp");
+//            }
