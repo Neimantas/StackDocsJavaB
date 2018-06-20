@@ -16,5 +16,11 @@ public class ServletJSP extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        request.setAttribute("data", tagList);
         request.getRequestDispatcher("topicsservlet.jsp").forward(request, response);
+        String topicID = request.getParameter("topicId");
+
+//        if( topicID ==null){
+//            response.sendRedirect( "http://localhost:8080/index.jsp");
+//        }else {
     }
 }
+

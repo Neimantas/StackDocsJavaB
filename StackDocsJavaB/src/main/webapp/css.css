@@ -8986,3 +8986,17 @@ a.text-dark:hover, a.text-dark:focus {
     weight: auto ;
 
 }
+.header{
+    width: 99%;
+    display: inline-block;
+    /*margin: 1px;*/
+    /*border:1px solid black;*/
+    text-align: center;
+}
+.container2{
+    width: 99%;
+    display: inline-block;
+    /*margin: 1px;*/
+    /*border:1px solid black;*/
+    text-align: left;
+}
