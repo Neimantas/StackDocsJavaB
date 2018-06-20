@@ -27,11 +27,28 @@ public class ServletIndex extends HttpServlet {
         System.out.println(request.getParameterMap().size());
 
 
+        IHigherService higher = new HigherService();
+        DocTagsDTO dto = higher.getAllDocTags();
+
+
         if (request.getParameterMap().size() == 0) {
-            response.sendRedirect("http://localhost:8080/index.jsp");
+
+            if (dto.isSuccess()){
+                List<DocTagsDAL> dalList = dto.getData();
+                List<DocTag> tagList = new ArrayList<>();
+                dalList.forEach(dal -> {
+                    DocTag docTag = new DocTag();
+                    docTag.setId(dal.getId());
+                    docTag.setTag(dal.getTag());
+                    tagList.add(docTag);
+                });
+                request.setAttribute("data", tagList);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+
         } else {
-            IHigherService higher = new HigherService();
-            DocTagsDTO dto = higher.getAllDocTags();
+
+
             if (dto.isSuccess()){
                 List<DocTagsDAL> dalList = dto.getData();
                 List<DocTag> tagList = new ArrayList<>();

@@ -34,21 +34,41 @@
                 <span class="text-muted">Pasirinkite kalbą</span>
             </h4>
             <select class="custom-select d-block w-100" id="kalba" required>
+
+
+
                 <option value="0">
                     "Pasirinkimas..."
                 </option>
-                <option value="1">
-                    Java
-                </option>
-                <option value="2">
-                    .NET
-                </option>
-                <option value="3">
-                    C#
-                </option>
-                <option value="4">
-                    JavaScript
-                </option>
+                <!--<option value="1">-->
+                    <!--Java-->
+                <!--</option>-->
+                <!--<option value="2">-->
+                    <!--.NET-->
+                <!--</option>-->
+                <!--<option value="3">-->
+                    <!--C#-->
+                <!--</option>-->
+                <!--<option value="4">-->
+                    <!--JavaScript-->
+                <!--</option>-->
+
+
+                <java:forEach var="topic" items="${data}">
+
+                    <option value="${topic.getId()}">
+                            ${topic.getTag()}
+                    </option>
+
+                    <%--<tr onclick="GetTopicInfo(${topic.getId()});">--%>
+                        <%--<td>${topic.getId()}</td>--%>
+                        <%--<td>${topic.getTag()}</td>--%>
+
+                    <%--</tr>--%>
+
+
+                </java:forEach>
+
             </select>
 
             <button type="submit" class="btn btn-light" onclick="vykstaPaieska();">Paieška</button>

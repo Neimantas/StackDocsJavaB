@@ -1,4 +1,6 @@
+import Models.BusinessLogic.DocTag;
 import Models.DTO.DocTagsDTO;
+import Services.DropDown;
 import Services.IDataBase;
 import Services.IHigherService;
 import Services.Impl.DataBase;
@@ -10,10 +12,10 @@ import java.util.List;
 
 public class TestRunner {
     public void AssertAll() throws SQLException {
-        System.out.println(AssertDbConnection());
-        System.out.println(AssertDocTagsCollection());
-        System.out.println(AssertDocTagsIds());
-        System.out.println(AssertDocTagsIds2());
+//        System.out.println(AssertDbConnection());
+//        System.out.println(AssertDocTagsCollection());
+//        System.out.println(AssertDocTagsIds());
+//        System.out.println(AssertDocTagsIds2());
         System.out.println(AssertDocTagsIds3());
         System.out.println(AssertDropDownCollection());
     }
@@ -78,10 +80,14 @@ public class TestRunner {
     }
 
     private boolean AssertDropDownCollection() {
-//        DropDown dropDown = new DropDown();
-//        if (dropDown.getList().size() == dropDown.getSize()) {
-//            return true;
-//        }
+
+        DropDown dropDown = new DropDown();
+
+//        System.out.println(dropDown.getList().size());
+//        System.out.println(dropDown.getSize());
+        if (dropDown.getList().size() == dropDown.getSize() && dropDown.getList().get(0) instanceof DocTag) {
+            return true;
+        }
         return false;
     }
 }
