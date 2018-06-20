@@ -1,10 +1,13 @@
+import Models.BusinessLogic.DocTag;
 import Models.DTO.DocTagsDTO;
 import Services.IDataBase;
 import Services.IHigherService;
+import Services.Impl.Cache;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
 
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class TestRunner {
         System.out.println(AssertDocTagsIds3());
         System.out.println(AssertTenTopicsById());
         System.out.println(AssertDropDownCollection());
+        System.out.println(CheckCache());
+        System.out.println(CheckCache2());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -93,6 +98,32 @@ public class TestRunner {
 //        if (dropDown.getList().size() == dropDown.getSize()) {
 //            return true;
 //        }
+        return false;
+    }
+
+    private boolean CheckCache() {
+        Cache cache = Cache.getInstance();
+        DocTag docTag = new DocTag();
+        docTag.setId(1);
+        cache.put("test", docTag);
+        DocTag newDocTag = (DocTag)cache.get("test");
+        if (newDocTag.getId() == docTag.getId()) {
+            return true;
+        }
+        return false;
+    }
+    private boolean CheckCache2() {
+        Cache cache = Cache.getInstance();
+        List<DocTag> list = new ArrayList<>();
+        DocTag docTag = new DocTag();
+        docTag.setId(1);
+        list.add(docTag);
+        cache.put("test", list);
+        AbstractList newList = (AbstractList)cache.get("test");
+        DocTag newDocTag = (DocTag) newList.get(0);
+        if (newDocTag.getId() == docTag.getId()) {
+            return true;
+        }
         return false;
     }
 }
