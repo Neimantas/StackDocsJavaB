@@ -3,6 +3,7 @@ package Services;
 import Models.BusinessLogic.Topic;
 import Models.DAL.DocTagsDAL;
 import Models.DAL.TopicsDAL;
+import Models.DBQueryModel;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
 import Services.Impl.HigherService;
@@ -77,6 +78,28 @@ public class Pagination {
             }
         }
         return false;
+    }
+
+    public List<Topic> listOfThemes2(String topicId, String docTagId, String searchQuery, boolean after) {
+        //beja jeigu po desimt eiluciu is duombazes negalima padaryt tai reikia pagal id..
+        //ask for one tausand ? and then search for it ?
+        //Where doc tag id == ir man duombaze duoda!!!!!!!
+        //Url Settings
+
+        if (docTagId.matches("[0-9]+") && docTagId != null) {
+            DBQueryModel model = new DBQueryModel();
+            model.setTable("Topics");
+            model.setWhere("DocTagId");
+            model.setWhereValue(docTagId);
+            model.setQuantity(1000);
+            
+        }
+
+        if (searchQuery != null || !searchQuery.trim().equals("")) {
+
+        }
+
+        return null;
     }
 
 }

@@ -120,8 +120,12 @@ public class TestRunner {
         list.add(docTag);
         cache.put("test", list);
         AbstractList newList = (AbstractList)cache.get("test");
+        List<DocTag> newest = new ArrayList<>();
+        for (Object item: newList) {
+            newest.add((DocTag) item);
+        }
         DocTag newDocTag = (DocTag) newList.get(0);
-        if (newDocTag.getId() == docTag.getId()) {
+        if (newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId())  {
             return true;
         }
         return false;
