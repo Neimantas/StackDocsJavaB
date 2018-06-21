@@ -1,8 +1,10 @@
+import Models.DBQueryModel;
 import Models.DTO.DocTagsDTO;
 import Services.IDataBase;
 import Services.IHigherService;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
+import Services.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class TestRunner {
         System.out.println(AssertDocTagsIds2());
         System.out.println(AssertDocTagsIds3());
         System.out.println(AssertDropDownCollection());
+        System.out.println(AssertQueryBuilder());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -84,4 +87,18 @@ public class TestRunner {
 //        }
         return false;
     }
+
+    private boolean AssertQueryBuilder(){
+        QueryBuilder qb = new QueryBuilder();
+        DBQueryModel queryModel = new DBQueryModel();
+        queryModel.table = "topics";
+        queryModel.where = "id";
+        queryModel.whereValue = new String[] {"10", "14", "18"};
+        qb.buildQuery(queryModel);
+        String expected = "SELECT * FROM topics WHERE 1 = 1 AND id IN ('10','14','18')";
+        System.out.println(qb.getQuery());
+        System.out.println(expected);
+        return qb.getQuery().equals(expected);
+    }
+
 }

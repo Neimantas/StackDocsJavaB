@@ -19,7 +19,7 @@ public class HigherService implements IHigherService {
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("DocTags");
+        model.table = "DocTags";
         DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
@@ -54,7 +54,7 @@ public class HigherService implements IHigherService {
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Topics");
+        model.table = "Topics";
         DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -89,7 +89,7 @@ public class HigherService implements IHigherService {
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Examples");
+        model.table = "Examples";
         DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -124,7 +124,7 @@ public class HigherService implements IHigherService {
     @Override
     public DocTagsDTO getAllDocTags() {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("DocTags");
+        model.table = "DocTags";
         DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
@@ -155,7 +155,7 @@ public class HigherService implements IHigherService {
     @Override
     public TopicsDTO getAllTopics() {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Topics");
+        model.table = "Topics";
         DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -186,7 +186,7 @@ public class HigherService implements IHigherService {
     @Override
     public ExampleDTO getAllEcamples() {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Examples");
+        model.table = "Examples";
         DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -217,7 +217,7 @@ public class HigherService implements IHigherService {
     @Override
     public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Topics");
+        model.table = "Topics";
         DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -252,7 +252,7 @@ public class HigherService implements IHigherService {
     @Override
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Examples");
+        model.table = "Examples";
         DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -331,10 +331,6 @@ public class HigherService implements IHigherService {
         dal.setLastEditDate((String) col.get(6));
         dal.setContributorCount(Long.parseLong(col.get(7).toString()));
         dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
-        dal.setLastEditUserDisplayName((String) col.get(8));
-        dal.setContributorCount(Long.parseLong(col.get(9).toString()));
-        dal.setExampleCount(Long.parseLong(col.get(10).toString()));
-        dal.setExampleScore(Long.parseLong(col.get(11).toString()));
         //HTML
         dal.setIntroductionHtml((String) col.get(8));
         dal.setSyntaxHtml((String) col.get(9));
