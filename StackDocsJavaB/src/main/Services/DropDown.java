@@ -1,13 +1,11 @@
 package Services;
 
-
 import Models.BusinessLogic.DocTag;
 import Models.DAL.DocTagsDAL;
 import Models.DTO.DocTagsDTO;
 import Services.Impl.Cache;
 import Services.Impl.HigherService;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +48,6 @@ public class DropDown {
                 }
             }
 
-
             DocTag docTag = new DocTag();
 
             for (int i = 0; i < dtoList.size(); i++) {
@@ -65,8 +62,6 @@ public class DropDown {
 
                 drop.add(docTag);
 
-//                cache.put(getDropDown+i, docTag);
-
             }
 
             cache.put(getDropDown, drop);
@@ -74,7 +69,6 @@ public class DropDown {
             return drop;
 
         }
-
 
     }
 
