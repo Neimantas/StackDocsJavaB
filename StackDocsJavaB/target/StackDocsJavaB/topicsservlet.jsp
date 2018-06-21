@@ -5,7 +5,7 @@
   Time: 1:13 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%--set atrribute--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="header">
-    <h2>Title</h2>
+    <h2>${topic.getId()}</h2>
 </div>
 
 <div class="container2">
@@ -26,19 +26,19 @@
         <ul>
             <li>
                 <h3>Introduction</h3>
-                <p>Info is DB</p>
+                <p>${data}</p>
             </li>
             <li>
                 <h3>SyntaxHtml</h3>
-                <p>Info is DB</p>
+                <p>${data}</p>
             </li>
             <li>
                 <h3>ParametersHtml</h3>
-                <p>Info is DB</p>
+                <p>${data}</p>
             </li>
             <li>
                 <h3>RemarksHtml</h3>
-                <p>Info is DB</p>
+                <p>${data}</p>
             </li>
         </ul>
     </div>

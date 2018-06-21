@@ -1,6 +1,6 @@
 package Services.Impl;
 
-import Models.DBupdateModel;
+import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Services.IDataBase;
 import Services.ICrud;
@@ -24,11 +24,11 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO create(String table, String values) {
+    public DBqueryDTO create(DBQueryModel create) {
         try {
             dto = new DBqueryDTO();
             connection = db.getConnection();
-            String query = "INSERT INTO " + table + " VALUES(" + values + ")";
+            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
             statement = connection.createStatement();
             statement.executeUpdate(query);
             dto.setSuccess(true);
@@ -47,14 +47,23 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO read(String table) {
+    public DBqueryDTO read(DBQueryModel dbQuery) {
         try {
+            String query = "";
+            if (dbQuery.getWhere() == null) {
+                query = "SELECT * FROM " + dbQuery.getTable();
+            } else if (dbQuery.isSingle()) {
+                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " = " +
+                        dbQuery.getWhereValue();
+            } else {
+                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " >= " +
+                        dbQuery.getWhereValue() + " LIMIT " + dbQuery.getQuantity();
+            }
             dto = new DBqueryDTO();
             connection = db.getConnection();
-            String query = "SELECT * FROM " + table;
             statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
-            int colCount= rs.getMetaData().getColumnCount();
+            ResultSet rs  = statement.executeQuery(query);
+            int colCount = rs.getMetaData().getColumnCount();
             List<List<Object>> rows = new ArrayList<>();
             while (rs.next()) {
                 List<Object> columns = new ArrayList<>();
@@ -80,10 +89,10 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO update(DBupdateModel update) {
+    public DBqueryDTO update(DBQueryModel update) {
         try {
-            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpWhat() + "' = '"
-                            + update.getUpValue() + "' WHERE " + update.getUpWhere() + " = " + update.getUpWhereValue();
+            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
+                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue();
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
@@ -104,9 +113,10 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO delete(String table, String id) {
+    public DBqueryDTO delete(DBQueryModel delete) {
         try {
-            String query = "DELETE FROM " + table + " WHERE id = " + id;
+            String query = "DELETE FROM " + delete.getTable() + " WHERE " + delete.getWhere() +  " = " +
+                            delete.getWhereValue() + " LIMIT 1";
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();

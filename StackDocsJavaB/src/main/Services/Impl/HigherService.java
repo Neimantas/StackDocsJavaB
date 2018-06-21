@@ -3,6 +3,7 @@ package Services.Impl;
 import Models.DAL.DocTagsDAL;
 import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
+import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.ExampleDTO;
@@ -16,8 +17,10 @@ public class HigherService implements IHigherService {
     Crud crud = new Crud();
 
     @Override
-    public DocTagsDTO getDocTagById(String docTagId) {
-        DBqueryDTO dbDTO = crud.read("DocTags");
+    public DocTagsDTO getDocTagById(String... docTagIds) {
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("DocTags");
+        DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
         dtDTO.setSuccess(dbDTO.isSuccess());
@@ -30,8 +33,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0) == docTagId) {
-                    list.add(createDocTagsDALfromList(columns));
+                for (int j = 0; j < docTagIds.length; j++) {
+                    if (columns.get(0).toString().equals(docTagIds[j])) {
+                        list.add(createDocTagsDALfromList(columns));
+                    }
                 }
             }
 
@@ -42,15 +47,15 @@ public class HigherService implements IHigherService {
                 dtDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return dtDTO;
             }
-
-        } else {
-            return dtDTO;
         }
+        return dtDTO;
     }
 
     @Override
-    public TopicsDTO getTopicById(String topicId) {
-        DBqueryDTO dbDTO = crud.read("Topics");
+    public TopicsDTO getTopicById(String... topicIds) {
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Topics");
+        DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
@@ -63,8 +68,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0) == topicId) {
-                    list.add(createTopicsDALfromList(columns));
+                for (int j = 0; j < topicIds.length; j++) {
+                    if (columns.get(0).toString().equals(topicIds[j])) {
+                        list.add(createTopicsDALfromList(columns));
+                    }
                 }
             }
 
@@ -75,15 +82,15 @@ public class HigherService implements IHigherService {
                 tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return tDTO;
             }
-
-        } else {
-            return tDTO;
         }
+        return tDTO;
     }
 
     @Override
-    public ExampleDTO getExampleById(String exampleId) {
-        DBqueryDTO dbDTO = crud.read("Examples");
+    public ExampleDTO getExampleById(String... exampleIds) {
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Examples");
+        DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
@@ -96,8 +103,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(0) == exampleId) {
-                    list.add(createExampleDALfromList(columns));
+                for (int j = 0; j < exampleIds.length; j++) {
+                    if (columns.get(0).toString().equals(exampleIds[j])) {
+                        list.add(createExampleDALfromList(columns));
+                    }
                 }
             }
 
@@ -108,15 +117,15 @@ public class HigherService implements IHigherService {
                 eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return eDTO;
             }
-
-        } else {
-            return eDTO;
         }
+        return eDTO;
     }
 
     @Override
     public DocTagsDTO getAllDocTags() {
-        DBqueryDTO dbDTO = crud.read("DocTags");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("DocTags");
+        DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
         dtDTO.setSuccess(dbDTO.isSuccess());
@@ -139,15 +148,15 @@ public class HigherService implements IHigherService {
                 dtDTO.setMessage("DB connection vas successful, but cant find any DocTags");
                 return dtDTO;
             }
-
-        } else {
-            return dtDTO;
         }
+        return dtDTO;
     }
 
     @Override
     public TopicsDTO getAllTopics() {
-        DBqueryDTO dbDTO = crud.read("Topics");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Topics");
+        DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
@@ -170,15 +179,15 @@ public class HigherService implements IHigherService {
                 tDTO.setMessage("DB connection vas successful, but cant find any Topics");
                 return tDTO;
             }
-
-        } else {
-            return tDTO;
         }
+        return tDTO;
     }
 
     @Override
     public ExampleDTO getAllEcamples() {
-        DBqueryDTO dbDTO = crud.read("examples");
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Examples");
+        DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
@@ -201,15 +210,15 @@ public class HigherService implements IHigherService {
                 eDTO.setMessage("DB connection vas successful, but cant find any Examples");
                 return eDTO;
             }
-
-        } else {
-            return eDTO;
         }
+        return eDTO;
     }
 
     @Override
-    public TopicsDTO getTopicsByDocTagId(String docTagId) {
-        DBqueryDTO dbDTO = crud.read("Topics");
+    public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Topics");
+        DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
@@ -222,8 +231,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(1) == docTagId) {
-                    list.add(createTopicsDALfromList(columns));
+                for (int j = 0; j < docTagIds.length; j++) {
+                    if (columns.get(1).toString().equals(docTagIds[j])) {
+                        list.add(createTopicsDALfromList(columns));
+                    }
                 }
             }
 
@@ -234,15 +245,15 @@ public class HigherService implements IHigherService {
                 tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return tDTO;
             }
-
-        } else {
-            return tDTO;
         }
+        return tDTO;
     }
 
     @Override
-    public ExampleDTO getExamplesByTopicsId(String topicId) {
-        DBqueryDTO dbDTO = crud.read("Examples");
+    public ExampleDTO getExamplesByTopicsId(String... topicIds) {
+        DBQueryModel model = new DBQueryModel();
+        model.setTable("Examples");
+        DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
         eDTO.setSuccess(dbDTO.isSuccess());
@@ -255,8 +266,10 @@ public class HigherService implements IHigherService {
 
             for (int i = 0; i < data.size(); i++) {
                 List<Object> columns = data.get(i);
-                if (columns.get(1) == topicId) {
-                    list.add(createExampleDALfromList(columns));
+                for (int j = 0; j < topicIds.length; j++) {
+                    if (columns.get(1).toString().equals(topicIds[j])) {
+                        list.add(createExampleDALfromList(columns));
+                    }
                 }
             }
 
@@ -267,10 +280,8 @@ public class HigherService implements IHigherService {
                 eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
                 return eDTO;
             }
-
-        } else {
-            return eDTO;
         }
+        return eDTO;
     }
 
     private DocTagsDAL createDocTagsDALfromList(List<Object> col) {
@@ -290,6 +301,7 @@ public class HigherService implements IHigherService {
     private ExampleDAL createExampleDALfromList(List<Object> col) {
 
         ExampleDAL dal = new ExampleDAL();
+
         dal.setId(Long.parseLong(col.get(0).toString()));
         dal.setDocTopicId(Long.parseLong(col.get(1).toString()));
         dal.setTitle((String) col.get(2));
@@ -301,6 +313,8 @@ public class HigherService implements IHigherService {
         dal.setBodyHtml((String) col.get(7));
         dal.setPinned((int) col.get(8) == 1);
         dal.setBodyMarkdown((String) col.get(9));
+        dal.setBodyMarkdown((String) col.get(8));
+        dal.setPinned((int) col.get(8) == 1);
 
         return dal;
     }
@@ -308,7 +322,6 @@ public class HigherService implements IHigherService {
     private TopicsDAL createTopicsDALfromList(List<Object> col) {
 
         TopicsDAL dal = new TopicsDAL();
-
         dal.setId(Long.parseLong(col.get(0).toString()));
         dal.setDocTagId(Long.parseLong(col.get(1).toString()));
         dal.setHelloWorldTopic((int) col.get(2) == 1);
@@ -317,6 +330,11 @@ public class HigherService implements IHigherService {
         dal.setViewCount(Long.parseLong(col.get(5).toString()));
         dal.setLastEditDate((String) col.get(6));
         dal.setContributorCount(Long.parseLong(col.get(7).toString()));
+        dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
+        dal.setLastEditUserDisplayName((String) col.get(8));
+        dal.setContributorCount(Long.parseLong(col.get(9).toString()));
+        dal.setExampleCount(Long.parseLong(col.get(10).toString()));
+        dal.setExampleScore(Long.parseLong(col.get(11).toString()));
         //HTML
         dal.setIntroductionHtml((String) col.get(8));
         dal.setSyntaxHtml((String) col.get(9));

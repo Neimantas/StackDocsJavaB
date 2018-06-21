@@ -6,19 +6,20 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff:
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
-.idea/workspace.xml
+StackDocsJavaB/.idea/**/workspace.xml
+StackDocsJavaB/.idea/**/tasks.xml
+StackDocsJavaB/.idea/dictionaries
+StackDocsJavaB/.idea/workspace.xml
 
 # Sensitive or high-churn files:
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.xml
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
+StackDocsJavaB/.idea/**/dataSources/
+StackDocsJavaB/.idea/**/dataSources.ids
+StackDocsJavaB/.idea/**/dataSources.xml
+StackDocsJavaB/.idea/**/dataSources.local.xml
+StackDocsJavaB/.idea/**/sqlDataSources.xml
+StackDocsJavaB/.idea/**/dynamic.xml
+StackDocsJavaB/.idea/**/uiDesigner.xml
+StackDocsJavaB/target/
 
 # Gradle:
 .idea/**/gradle.xml
@@ -39,13 +40,13 @@ cmake-build-debug/
 /out/
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+StackDocsJavaB/.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+StackDocsJavaB/.idea/replstate.xml
 
 # Ruby plugin and RubyMine
 /.rakeTasks
@@ -69,3 +70,4 @@ fabric.properties
 
 
 # End of https://www.gitignore.io/api/intellij
+StackDocsJavaB/.idea/workspace.xml
