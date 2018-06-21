@@ -31,7 +31,6 @@ public class DataBase implements IDataBase {
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
-
         connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
         return connection;
     }

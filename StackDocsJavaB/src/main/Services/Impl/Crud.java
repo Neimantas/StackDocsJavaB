@@ -4,6 +4,7 @@ import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Services.IDataBase;
 import Services.ICrud;
+import Services.QueryBuilder;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -28,7 +29,8 @@ public class Crud implements ICrud {
         try {
             dto = new DBqueryDTO();
             connection = db.getConnection();
-            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
+//            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
+            String query = "";
             statement = connection.createStatement();
             statement.executeUpdate(query);
             dto.setSuccess(true);
@@ -49,16 +51,21 @@ public class Crud implements ICrud {
     @Override
     public DBqueryDTO read(DBQueryModel dbQuery) {
         try {
-            String query = "";
-            if (dbQuery.getWhere() == null) {
-                query = "SELECT * FROM " + dbQuery.getTable();
-            } else if (dbQuery.isSingle()) {
-                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " = " +
-                        dbQuery.getWhereValue();
-            } else {
-                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " >= " +
-                        dbQuery.getWhereValue() + " LIMIT " + dbQuery.getQuantity();
-            }
+//            String query;
+//            if (dbQuery.getWhere() == null) {
+//                query = "SELECT * FROM " + dbQuery.getTable();
+//            } else if (dbQuery.isSingle()) {
+//                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " = " +
+//                        dbQuery.getWhereValue();
+//            } else if (dbQuery.isAfter()){
+//                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " >= " +
+//                        dbQuery.getWhereValue() + " LIMIT " + dbQuery.getQuantity();
+//            } else {
+//                query = "";
+//            }
+            QueryBuilder qb = new QueryBuilder();
+            qb.buildQuery(dbQuery);
+            String query = qb.getQuery();
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
@@ -91,8 +98,9 @@ public class Crud implements ICrud {
     @Override
     public DBqueryDTO update(DBQueryModel update) {
         try {
-            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
-                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue();
+//            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
+//                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue();
+            String query = "";
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
@@ -115,8 +123,9 @@ public class Crud implements ICrud {
     @Override
     public DBqueryDTO delete(DBQueryModel delete) {
         try {
-            String query = "DELETE FROM " + delete.getTable() + " WHERE " + delete.getWhere() +  " = " +
-                            delete.getWhereValue() + " LIMIT 1";
+//            String query = "DELETE FROM " + delete.getTable() + " WHERE " + delete.getWhere() +  " = " +
+//                            delete.getWhereValue() + " LIMIT 1";
+            String query = "";
             dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
