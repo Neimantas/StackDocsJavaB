@@ -45,6 +45,24 @@ public class ServletIndex extends HttpServlet {
             List<DocTag> dataList = dropDown.getList();
             request.setAttribute("data", dataList);
         }
+        if (request.getParameterMap().size() == 0) {
+
+            if (dto.isSuccess()){
+                List<DocTagsDAL> dalList = dto.getData();
+                List<DocTag> tagList = new ArrayList<>();
+                dalList.forEach(dal -> {
+                    DocTag docTag = new DocTag();
+                    docTag.setId(dal.getId());
+                    docTag.setTag(dal.getTag());
+                    tagList.add(docTag);
+                });
+                request.setAttribute("data", tagList);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+
+        } else {
+
+
         request.getRequestDispatcher("index.jsp").forward(request, response);
 //        response.sendRedirect("http://localhost:8080/index.jsp");
     }

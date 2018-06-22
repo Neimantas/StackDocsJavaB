@@ -1,8 +1,11 @@
+import Models.DBQueryModel;
 import Models.DTO.DocTagsDTO;
+import Services.DropDown;
 import Services.IDataBase;
 import Services.IHigherService;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
+import Services.QueryBuilder;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,12 +13,13 @@ import java.util.List;
 
 public class TestRunner {
     public void AssertAll() throws SQLException {
-        System.out.println(AssertDbConnection());
-        System.out.println(AssertDocTagsCollection());
-        System.out.println(AssertDocTagsIds());
-        System.out.println(AssertDocTagsIds2());
+//        System.out.println(AssertDbConnection());
+//        System.out.println(AssertDocTagsCollection());
+//        System.out.println(AssertDocTagsIds());
+//        System.out.println(AssertDocTagsIds2());
         System.out.println(AssertDocTagsIds3());
         System.out.println(AssertDropDownCollection());
+        System.out.println(AssertQueryBuilder());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -78,10 +82,28 @@ public class TestRunner {
     }
 
     private boolean AssertDropDownCollection() {
-//        DropDown dropDown = new DropDown();
-//        if (dropDown.getList().size() == dropDown.getSize()) {
-//            return true;
-//        }
+
+        DropDown dropDown = new DropDown();
+
+//        System.out.println(dropDown.getList().size());
+//        System.out.println(dropDown.getSize());
+        if (dropDown.getList().size() == dropDown.getSize() && dropDown.getList().get(0) instanceof DocTag) {
+            return true;
+        }
         return false;
     }
+
+    private boolean AssertQueryBuilder(){
+        QueryBuilder qb = new QueryBuilder();
+        DBQueryModel queryModel = new DBQueryModel();
+        queryModel.table = "topics";
+        queryModel.where = "id";
+        queryModel.whereValue = new String[] {"10", "14", "18"};
+        qb.buildQuery(queryModel);
+        String expected = "SELECT * FROM topics WHERE 1 = 1 AND id IN ('10','14','18')";
+        System.out.println(qb.getQuery());
+        System.out.println(expected);
+        return qb.getQuery().equals(expected);
+    }
+
 }

@@ -1,12 +1,7 @@
 package Services.Impl;
 
 import Services.IDataBase;
-import org.omg.CosNaming.NamingContext;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,6 +27,8 @@ public class DataBase implements IDataBase {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e){
+            System.out.println(e.getMessage());
+        }
             System.out.println(e.getMessage());
         }
         connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
