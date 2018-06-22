@@ -83,13 +83,13 @@ public class TestRunner {
 
     private boolean AssertDropDownCollection() {
 
-        DropDown dropDown = new DropDown();
+//        DropDown dropDown = new DropDown();
 
 //        System.out.println(dropDown.getList().size());
 //        System.out.println(dropDown.getSize());
-        if (dropDown.getList().size() == dropDown.getSize() && dropDown.getList().get(0) instanceof DocTag) {
-            return true;
-        }
+//        if (dropDown.getList().size() == dropDown.getSize() && dropDown.getList().get(0) instanceof DocTag) {
+//            return true;
+//        }
         return false;
     }
 
@@ -101,8 +101,8 @@ public class TestRunner {
         queryModel.whereValue = new String[] {"10", "14", "18"};
         qb.buildQuery(queryModel);
         String expected = "SELECT * FROM topics WHERE 1 = 1 AND id IN ('10','14','18')";
-        System.out.println(qb.getQuery());
-        System.out.println(expected);
+//        System.out.println(qb.getQuery());
+//        System.out.println(expected);
         return qb.getQuery().equals(expected);
     }
 

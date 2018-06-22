@@ -330,13 +330,12 @@ public class HigherService implements IHigherService {
         dal.setViewCount(Long.parseLong(col.get(5).toString()));
         dal.setLastEditDate((String) col.get(6));
         dal.setContributorCount(Long.parseLong(col.get(7).toString()));
-        dal.setLastEditUserId(Long.parseLong(col.get(7).toString()));
         //HTML
-        dal.setIntroductionHtml((String) col.get(8));
-        dal.setSyntaxHtml((String) col.get(9));
-        dal.setParametersHtml((String) col.get(10));
-        dal.setRemarksHtml((String) col.get(11));
-        dal.setHelloWorldVersionsHtml((String) col.get(12));
+        dal.setIntroductionHtml(col.get(8).toString());
+        dal.setSyntaxHtml(col.get(9).toString());
+        dal.setParametersHtml(col.get(10).toString());
+        dal.setRemarksHtml(col.get(11).toString());
+        dal.setHelloWorldVersionsHtml(col.get(12).toString());
         //
         dal.setVersionsJson((String) col.get(13));
         dal.setExampleCount(Long.parseLong(col.get(14).toString()));

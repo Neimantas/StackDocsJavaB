@@ -54,10 +54,10 @@
                 <!--</option>-->
 
 
-                <java:forEach var="topic" items="${data}">
+                <java:forEach var="tags" items="${doctags}">
 
-                    <option value="${topic.getId()}">
-                            ${topic.getTag()}
+                    <option value="${tags.getId()}">
+                            ${tags.getTag()}
                     </option>
 
                     <%--<tr onclick="GetTopicInfo(${topic.getId()});">--%>
@@ -101,7 +101,7 @@
         <java:forEach var="topic" items="${data}">
             <tr onclick="GetTopicInfo(${topic.getId()});">
                 <td>${topic.getId()}</td>
-                <td>${topic.getTag()}</td>
+                <td>${topic.getTitle()}</td>
 
             </tr>
         </java:forEach>
