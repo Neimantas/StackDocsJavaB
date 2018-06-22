@@ -99,15 +99,15 @@
             <!--<li class="page-item">-->
             <!--<a class="page-link text-dark" id="mugtukas-atgal" href="#" tabindex="-1" onclick="funkcija_atgal()">Atgal</a>-->
             <!--</li>-->
-
+            <%--${if(getParam("puslapis") < 1 ? 1 : getParam("puslapis"))}--%>
             <!--KIEK BUS PUSLAPIU?-->
-            <li class="page-item" id="mugtukas-atgal"><a class="page-link text-dark"
-                                                         onclick="funkcija_atgal()">Atgal</a>
+            <li class="page-item" id="next"><a class="page-link text-dark"
+                                                         onclick="changePage(this.id)">Atgal</a>
             </li>
             <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
 
-            <li class="page-item" id="mygtukas-pirmyn"><a class="page-link text-dark"
-                                                          onclick="funkcija_pirmyn()">Pirmyn</a></li>
+            <li class="page-item" id="previous"><a class="page-link text-dark"
+                                                          onclick="changePage(this.id)">Pirmyn</a></li>
 
             <!--<li class="page-item">-->
             <!--<a class="page-link text-dark" id="mygtukas-pirmyn" href="#" onclick="funkcija_pirmyn()">Pirmyn</a>-->
