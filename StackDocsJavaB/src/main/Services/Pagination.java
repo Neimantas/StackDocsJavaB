@@ -14,46 +14,40 @@ import java.util.List;
 
 public class Pagination {
 
-    private int listSize = 10;
     private IHigherService hs = new HigherService();
     private ICache cache = Cache.getInstance();
-    private List<String[]> topicsAndDoctagsIds = new ArrayList<>();
-    private final String LIST_PLACEMENT_IN_CACHE = "topicsAndDoctagsIds";
+    private List<String[]> topicsAndDocTagsIds = new ArrayList<>();
     private String[] collectedIds = new String[10];
     private List<Topic> topicsList = new ArrayList<>();
     private boolean allConnectionsWithDataBaseIsSuccess;
 
     public List<Topic> getList(String topicId, String docTagId, String searchQuery, Boolean after) {
-
-        getListOfTopicsAndDocTagsIdsFromDataBaseOrCache();
+        getListOftopicsAndDocTagsIdsFromDataBaseOrCache();
         reduceListByDocTagIdAndSearchQuery(docTagId, searchQuery);
         collectTopicsIds(topicId, after);
         makeListFromColletedIds();
-
         if (!allConnectionsWithDataBaseIsSuccess) {
             return null;
         }
         return topicsList;
     }
 
-
     private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
-        //Reduce topicsAndDoctagsIds by docTagId
+        //Reduce topicsAndDocTagsIds by docTagId
         if (docTagId.matches("[0-9]+")) {
             List<String[]> tempList = new ArrayList<>();
-            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
-                if (topicsAndDoctagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDoctagsIds.get(i));
+            for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
+                if (topicsAndDocTagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDocTagsIds.get(i));
             }
-            topicsAndDoctagsIds = tempList;
+            topicsAndDocTagsIds = tempList;
         }
-
-        //Reduce topicsAndDoctagsIds by queries
+        //Reduce topicsAndDocTagsIds by queries
         if (searchQuery != null || !normalizeText(searchQuery).equals("")) {
             String[] queries = searchQuery.trim().split(" ");
             //Take all list of topic ids
-            String[] idsOfTopic = new String[topicsAndDoctagsIds.size()];
-            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
-                idsOfTopic[i] = topicsAndDoctagsIds.get(i)[0];
+            String[] idsOfTopic = new String[topicsAndDocTagsIds.size()];
+            for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
+                idsOfTopic[i] = topicsAndDocTagsIds.get(i)[0];
             }
             TopicsDTO topicsDTO = hs.getTopicById(idsOfTopic);
             allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
@@ -71,21 +65,22 @@ public class Pagination {
                         }
                     }
                 }
-                topicsAndDoctagsIds = tempList;
+                topicsAndDocTagsIds = tempList;
             }
         }
     }
 
     private void collectTopicsIds(String topicId, Boolean after) {
         int counter = 0;
+        int listSize = 10;
         if (after) {
-            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
-                if (counter == 0 && topicsAndDoctagsIds.get(i)[0].equals(topicId)) {
-                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i + 10)[0];
+            for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
+                if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
+                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i + 10)[0];
                     counter++;
                 }
                 if (counter > 0 && counter < listSize) {
-                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i + 10)[0];
+                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i + 10)[0];
                     counter++;
                 }
                 if (counter == 10) {
@@ -94,13 +89,13 @@ public class Pagination {
             }
         }
         if (!after) {
-            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
-                if (counter == 0 && topicsAndDoctagsIds.get(i)[0].equals(topicId)) {
-                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i - 10)[0];
+            for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
+                if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
+                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i - 10)[0];
                     counter++;
                 }
                 if (counter > 0 && counter < listSize) {
-                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i - 10)[0];
+                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i - 10)[0];
                     counter++;
                 }
                 if (counter == 10) {
@@ -128,27 +123,25 @@ public class Pagination {
         return topic;
     }
 
-
-    private void getListOfTopicsAndDocTagsIdsFromDataBaseOrCache() {
+    private void getListOftopicsAndDocTagsIdsFromDataBaseOrCache() {
+        String LIST_PLACEMENT_IN_CACHE = "topicsAndDocTagsIds";
         if (cache.get(LIST_PLACEMENT_IN_CACHE) == null) {
             TopicsDTO tdto = hs.getAllTopics();
             allConnectionsWithDataBaseIsSuccess = tdto.isSuccess();
             if (tdto.isSuccess()) {
                 for (int i = 0; i < tdto.getData().size(); i++) {
                     String[] arr = {"" + tdto.getData().get(i).getId(), "" + tdto.getData().get(i).getDocTagId()};
-                    topicsAndDoctagsIds.add(arr);
-                    cache.put(LIST_PLACEMENT_IN_CACHE, topicsAndDoctagsIds);
+                    topicsAndDocTagsIds.add(arr);
+                    cache.put(LIST_PLACEMENT_IN_CACHE, topicsAndDocTagsIds);
                 }
             }
         } else {
             Object obj = cache.get(LIST_PLACEMENT_IN_CACHE);
-            topicsAndDoctagsIds = (List<String[]>) obj;
+            topicsAndDocTagsIds = (List<String[]>) obj;
         }
     }
 
     private String normalizeText(String text) {
-        return text.trim().toLowerCase();
+        return text != null? text.trim().toLowerCase(): null;
     }
-
-
 }
