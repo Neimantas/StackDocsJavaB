@@ -34,7 +34,7 @@ public class Pagination {
 
     private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
         //Reduce topicsAndDocTagsIds by docTagId
-        if (docTagId.matches("[0-9]+")) {
+        if (docTagId != null) {
             List<String[]> tempList = new ArrayList<>();
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (topicsAndDocTagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDocTagsIds.get(i));

@@ -28,10 +28,10 @@ public class HigherService implements IHigherService {
         for (int i = 0; i < docTagIds.length; i++) {
             // Paruosiam modeli
             DBQueryModel model = new DBQueryModel();
-            model.setTable("DocTags");
-            model.setWhere("id");
-            model.setWhereValue(docTagIds[i]);
-            model.setSingle(true);
+            model.table = "DocTags";
+            model.where = "id";
+            model.whereValue = new String[]{docTagIds[i]};
+            model.single = true;
             // Pernesam zinutes
             DBqueryDTO dBqueryDTO = crud.read(model);
             docTagsDTO.setSuccess(dBqueryDTO.isSuccess());
@@ -57,7 +57,7 @@ public class HigherService implements IHigherService {
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Topics");
+        model.table = "Topics";
         DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -92,7 +92,7 @@ public class HigherService implements IHigherService {
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Examples");
+        model.table = "Examples";
         DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -127,7 +127,7 @@ public class HigherService implements IHigherService {
     @Override
     public DocTagsDTO getAllDocTags() {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("DocTags");
+        model.table = "DocTags";
         DBqueryDTO dbDTO = crud.read(model);
         DocTagsDTO dtDTO = new DocTagsDTO();
 
@@ -158,7 +158,7 @@ public class HigherService implements IHigherService {
     @Override
     public TopicsDTO getAllTopics() {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Topics");
+        model.table = "Topics";
         DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
 
@@ -189,7 +189,7 @@ public class HigherService implements IHigherService {
     @Override
     public ExampleDTO getAllEcamples() {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Examples");
+        model.table = "Examples";
         DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -221,10 +221,9 @@ public class HigherService implements IHigherService {
     public TopicsDTO getTopicsByDocTagId(String docTagId) {
         //model
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Topics");
-        model.setWhere("DocTagId");
-        model.setWhereValue(docTagId);
-        model.setQuantity(1000);
+        model.table = "Topics";
+        model.where = "DocTagId";
+        model.whereValue = new String[]{docTagId};
         //Get data, set messages
         DBqueryDTO dbDTO = crud.read(model);
         TopicsDTO tDTO = new TopicsDTO();
@@ -254,7 +253,7 @@ public class HigherService implements IHigherService {
     @Override
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
-        model.setTable("Examples");
+        model.table = "Examples";
         DBqueryDTO dbDTO = crud.read(model);
         ExampleDTO eDTO = new ExampleDTO();
 
@@ -294,9 +293,9 @@ public class HigherService implements IHigherService {
 
         if (after) {
             DBQueryModel model = new DBQueryModel();
-            model.setTable("Topics");
-            model.setWhere("id");
-            model.setWhereValue(id);
+            model.table = "Topics";
+            model.where = "id";
+            model.whereValue = new String[]{id};
             // Pernesam zinutes
             DBqueryDTO dBqueryDTO = crud.read(model);
             topicsDTO.setSuccess(dBqueryDTO.isSuccess());
@@ -313,10 +312,10 @@ public class HigherService implements IHigherService {
         }
         if (!after) {
             DBQueryModel model = new DBQueryModel();
-            model.setTable("Topics");
-            model.setWhere("id");
-            model.setWhereValue(id);
-            model.setAfter(false);
+            model.table = "Topics";
+            model.where = "id";
+            model.whereValue = new String[]{id};
+            model.after = false;
 
             DBqueryDTO dBqueryDTO = crud.read(model);
             topicsDTO.setSuccess(dBqueryDTO.isSuccess());

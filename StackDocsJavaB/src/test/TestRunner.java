@@ -5,6 +5,7 @@ import Services.IHigherService;
 import Services.Impl.Cache;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
+import Services.Pagination;
 
 import java.sql.SQLException;
 import java.util.AbstractList;
@@ -22,6 +23,7 @@ public class TestRunner {
         System.out.println(AssertDropDownCollection());
         System.out.println(CheckCache());
         System.out.println(CheckCache2());
+        System.out.println(AssertListFromPagination());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -126,6 +128,14 @@ public class TestRunner {
         }
         DocTag newDocTag = (DocTag) newList.get(0);
         if (newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId())  {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean AssertListFromPagination() {
+        Pagination pg = new Pagination();
+        if (pg.getList("2", null, "", true).size() == 10) {
             return true;
         }
         return false;
