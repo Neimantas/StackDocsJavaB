@@ -6,7 +6,9 @@ import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
+import Services.Impl.Cache;
 import Services.Impl.HigherService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,92 +16,139 @@ public class Pagination {
 
     private int listSize = 10;
     private IHigherService hs = new HigherService();
+    private ICache cache = Cache.getInstance();
+    private List<String[]> topicsAndDoctagsIds = new ArrayList<>();
+    private final String LIST_PLACEMENT_IN_CACHE = "topicsAndDoctagsIds";
+    private String[] collectedIds = new String[10];
+    private List<Topic> topicsList = new ArrayList<>();
+    private boolean allConnectionsWithDataBaseIsSuccess;
 
-    public List<Topic> listOfThemes(int pageNumber, String docTagid, String searchQuery) {
-        TopicsDTO topicsDTO = hs.getAllTopics();
-        DocTagsDTO docTagsDTO = hs.getAllDocTags();
-        if (topicsDTO.isSuccess() && docTagsDTO.isSuccess()) {
-            List<DocTagsDAL> listD = docTagsDTO.getData();
-            List<TopicsDAL> listT = searchValues(topicsDTO.getData(), listD, docTagid, searchQuery);
-            List<Topic> topics = new ArrayList<>();
-            int counter = (pageNumber - 1) * listSize;
-            for (int i = 0; i < listT.size(); i++) {
-                if (pageNumber * listSize > counter) {
-                    Topic dt = new Topic();
-                    dt.setId(listT.get(counter).getId());
-                    dt.setTitle(listT.get(counter).getTitle());
-                    for (int j = 0; j < listD.size(); j++) {
-                        if (listT.get(counter).getDocTagId() == listD.get(j).getId())
-                            dt.setDocTagTitle(listD.get(j).getTitle());
+    public List<Topic> getList(String topicId, String docTagId, String searchQuery, Boolean after) {
+
+        getListOfTopicsAndDocTagsIdsFromDataBaseOrCache();
+        reduceListByDocTagIdAndSearchQuery(docTagId, searchQuery);
+        collectTopicsIds(topicId, after);
+        makeListFromColletedIds();
+
+        if (!allConnectionsWithDataBaseIsSuccess) {
+            return null;
+        }
+        return topicsList;
+    }
+
+
+    private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
+        //Reduce topicsAndDoctagsIds by docTagId
+        if (docTagId.matches("[0-9]+")) {
+            List<String[]> tempList = new ArrayList<>();
+            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
+                if (topicsAndDoctagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDoctagsIds.get(i));
+            }
+            topicsAndDoctagsIds = tempList;
+        }
+
+        //Reduce topicsAndDoctagsIds by queries
+        if (searchQuery != null || !normalizeText(searchQuery).equals("")) {
+            String[] queries = searchQuery.trim().split(" ");
+            //Take all list of topic ids
+            String[] idsOfTopic = new String[topicsAndDoctagsIds.size()];
+            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
+                idsOfTopic[i] = topicsAndDoctagsIds.get(i)[0];
+            }
+            TopicsDTO topicsDTO = hs.getTopicById(idsOfTopic);
+            allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
+            if (topicsDTO.isSuccess()) {
+                List<String[]> tempList = new ArrayList<>();
+                for (int i = 0; i < topicsDTO.getData().size(); i++) {
+                    for (int j = 0; j < queries.length; j++) {
+                        if (topicsDTO.getData().get(i).getTitle().contains(normalizeText((queries[j])))
+                                && topicsDTO.getData().get(i).getIntroductionMarkdown().contains(normalizeText((queries[j])))
+                                && topicsDTO.getData().get(i).getParametersMarkdown().contains(normalizeText((queries[j])))
+                                && topicsDTO.getData().get(i).getRemarksMarkdown().contains(normalizeText((queries[j])))
+                                && topicsDTO.getData().get(i).getSyntaxMarkdown().contains(normalizeText((queries[j])))) {
+                            String[] arr = {"" + topicsDTO.getData().get(i).getId(), "" + topicsDTO.getData().get(i).getDocTagId()};
+                            tempList.add(arr);
+                        }
                     }
-                    topics.add(dt);
+                }
+                topicsAndDoctagsIds = tempList;
+            }
+        }
+    }
+
+    private void collectTopicsIds(String topicId, Boolean after) {
+        int counter = 0;
+        if (after) {
+            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
+                if (counter == 0 && topicsAndDoctagsIds.get(i)[0].equals(topicId)) {
+                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i + 10)[0];
                     counter++;
                 }
-            }
-            return topics;
-        }
-        return null;
-    }
-
-    private List<TopicsDAL> searchValues(List<TopicsDAL> listT, List<DocTagsDAL> listD, String docTagId, String searchQuery) {
-        if (docTagId == null && searchQuery == null) return listT;
-
-        //If docTags exist, reducing list to chosen language by docTagId
-        if (docTagId != null) {
-            List<TopicsDAL> tempT = new ArrayList<>();
-            for (int i = 0; i < listT.size(); i++) {
-                if (listT.get(i).getDocTagId() == Long.parseLong(docTagId)) {
-                    tempT.add(listT.get(i));
+                if (counter > 0 && counter < listSize) {
+                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i + 10)[0];
+                    counter++;
+                }
+                if (counter == 10) {
+                    break;
                 }
             }
-            listT = tempT; // might work like that might new another temp list
         }
-
-        //If searchQuery exists, searching if list of Topics contains query's
-        if (searchQuery != null) {
-            List<TopicsDAL> tempT = new ArrayList<>();
-            String[] queries = searchQuery.split(" ");
-            for (int i = 0; i < listT.size(); i++) {
-                for (int j = 0; j < queries.length; j++) {
-                    if (isTopicsDalGetDocTagIdContainsQuery(listD, listT.get(i), queries[j])/*hs.getDocTagById("" + listT.get(i).getDocTagId()).getData().get(0).getTitle().equals(queries[j])*/ || listT.get(i).getTitle().contains(queries[j])) {
-                        tempT.add(listT.get(i));
-                    }
+        if (!after) {
+            for (int i = 0; i < topicsAndDoctagsIds.size(); i++) {
+                if (counter == 0 && topicsAndDoctagsIds.get(i)[0].equals(topicId)) {
+                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i - 10)[0];
+                    counter++;
+                }
+                if (counter > 0 && counter < listSize) {
+                    collectedIds[counter] = "" + topicsAndDoctagsIds.get(i - 10)[0];
+                    counter++;
+                }
+                if (counter == 10) {
+                    break;
                 }
             }
-            listT = tempT;
         }
-        return listT;
     }
 
-    private boolean isTopicsDalGetDocTagIdContainsQuery(List<DocTagsDAL> listD, TopicsDAL topicsDAL, String query) {
-        for (int i = 0; i < listD.size(); i++) {
-            if (topicsDAL.getDocTagId() == listD.get(i).getId() && topicsDAL.getTitle().contains(query)) {
-                return true;
+    private void makeListFromColletedIds() {
+        TopicsDTO topicsDTO = hs.getTopicById(collectedIds);
+        allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
+        if (topicsDTO.isSuccess()) {
+            for (int i = 0; i < topicsDTO.getData().size(); i++) {
+                topicsList.add(makeTopicFromTopicsDal(topicsDTO.getData().get(i)));
             }
         }
-        return false;
     }
 
-    public List<Topic> listOfThemes2(String topicId, String docTagId, String searchQuery, boolean after) {
-        //beja jeigu po desimt eiluciu is duombazes negalima padaryt tai reikia pagal id..
-        //ask for one tausand ? and then search for it ?
-        //Where doc tag id == ir man duombaze duoda!!!!!!!
-        //Url Settings
-
-        if (docTagId.matches("[0-9]+") && docTagId != null) {
-            DBQueryModel model = new DBQueryModel();
-            model.setTable("Topics");
-            model.setWhere("DocTagId");
-            model.setWhereValue(docTagId);
-            model.setQuantity(1000);
-            
-        }
-
-        if (searchQuery != null || !searchQuery.trim().equals("")) {
-
-        }
-
-        return null;
+    private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
+        Topic topic = new Topic();
+        topic.setId(dal.getId());
+        topic.setTitle(dal.getTitle());
+        //topic.setDocTagTitle(hs.getDocTagById("" + dal.getDocTagId()).getData().get(0).getTag());
+        return topic;
     }
+
+
+    private void getListOfTopicsAndDocTagsIdsFromDataBaseOrCache() {
+        if (cache.get(LIST_PLACEMENT_IN_CACHE) == null) {
+            TopicsDTO tdto = hs.getAllTopics();
+            allConnectionsWithDataBaseIsSuccess = tdto.isSuccess();
+            if (tdto.isSuccess()) {
+                for (int i = 0; i < tdto.getData().size(); i++) {
+                    String[] arr = {"" + tdto.getData().get(i).getId(), "" + tdto.getData().get(i).getDocTagId()};
+                    topicsAndDoctagsIds.add(arr);
+                    cache.put(LIST_PLACEMENT_IN_CACHE, topicsAndDoctagsIds);
+                }
+            }
+        } else {
+            Object obj = cache.get(LIST_PLACEMENT_IN_CACHE);
+            topicsAndDoctagsIds = (List<String[]>) obj;
+        }
+    }
+
+    private String normalizeText(String text) {
+        return text.trim().toLowerCase();
+    }
+
 
 }

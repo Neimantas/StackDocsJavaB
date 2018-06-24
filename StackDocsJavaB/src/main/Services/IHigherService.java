@@ -13,7 +13,7 @@ public interface IHigherService {
     TopicsDTO getAllTopics();
     ExampleDTO getAllEcamples();
 
-    TopicsDTO getTopicsByDocTagId(String... docTagIds);
+    TopicsDTO getTopicsByDocTagId(String docTagId);
     ExampleDTO getExamplesByTopicsId(String... topicIds);
 
     TopicsDTO getTenTopicsById(Boolean after, String id);
