@@ -2,8 +2,10 @@ package Controllers;
 
 import Models.BusinessLogic.Topic;
 import Models.DAL.DocTagsDAL;
+import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
 import Models.DTO.DocTagsDTO;
+import Models.DTO.ExampleDTO;
 import Models.DTO.TopicsDTO;
 import Services.IHigherService;
 import Services.Impl.HigherService;
@@ -23,31 +25,31 @@ public class ServletJSP extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        request.setAttribute("data", tagList);
-        request.getRequestDispatcher("topicsservlet.jsp").forward(request, response);
-        String topicID = request.getParameter("topicId");
 
-        if( topicID ==null){
-            response.sendRedirect( "http://localhost:8080/index.jsp");
-        }else {
+        String topicID = request.getParameter("topicId");
+        System.out.println(topicID);
+        if (topicID == null) {
+            response.sendRedirect("http://localhost:8080/index.jsp");
+        } else {
             IHigherService higher = new HigherService();
             TopicsDTO dto = higher.getTopicById(topicID);
             TopicsDAL topic = new TopicsDAL();
-
+            ExampleDTO exDto = higher.getExamplesByTopicsId(topicID);
+            ExampleDAL example = new ExampleDAL();
             if (dto.isSuccess()) {
                 topic = dto.getData().get(0);
                 request.setAttribute("data", topic);
-
                 request.getRequestDispatcher("topicsservlet.jsp").forward(request, response);
+            }
+            if (exDto.isSuccess()) {
+                example = exDto.getData().get(0);
+                request.setAttribute("exData", example);
+
             } else {
-                response.sendRedirect( "http://localhost:8080/index.jsp");
+                response.sendRedirect("http://localhost:8080/index.jsp");
             }
 
 
-//            if (dto.isSuccess()){
-//                List<TopicsDAL> dalList = dto.getData();
-//
-//            }
         }
     }
 }

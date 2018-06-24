@@ -1,6 +1,7 @@
 package Models.DAL;
 
-public class ExampleDAL {
+public class
+ExampleDAL {
     long Id;
     long DocTopicId;
     String Title;
