@@ -37,7 +37,9 @@ public class Cache implements ICache {
 
     @Override
     public Object get(String key) {
-
+        if (!cachedObjects.containsKey(key)) {
+            return null;
+        }
         if (System.currentTimeMillis() > cachedLiveTime.get(key)) {
             remove(key);
             return null;

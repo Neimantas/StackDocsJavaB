@@ -41,10 +41,10 @@ public class ServletJSP extends HttpServlet {
                 request.setAttribute("data", topic);
                 request.getRequestDispatcher("topicsservlet.jsp").forward(request, response);
             }
-            if (exDto.isSuccess()) {
+             if (exDto.isSuccess()) {
                 example = exDto.getData().get(0);
                 request.setAttribute("exData", example);
-
+                request.getRequestDispatcher("topicsservlet.jsp").forward(request, response);
             } else {
                 response.sendRedirect("http://localhost:8080/index.jsp");
             }
