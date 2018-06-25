@@ -73,6 +73,17 @@ public class Pagination {
     private void collectTopicsIds(String topicId, Boolean after) {
         int counter = 0;
         int listSize = 10;
+        if (topicId == null && after) {
+            for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
+                if (counter >= 0 && counter < listSize) {
+                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i)[0];
+                    counter++;
+                }
+                if (counter == 10) {
+                    break;
+                }
+            }
+        }
         if (after) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
