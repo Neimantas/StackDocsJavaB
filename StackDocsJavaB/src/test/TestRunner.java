@@ -1,8 +1,13 @@
 import Models.BusinessLogic.DocTag;
+import Models.BusinessLogic.Topic;
+import Models.DBQueryModel;
+import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
+import Models.URLSettingsModel;
 import Services.IDataBase;
 import Services.IHigherService;
 import Services.Impl.Cache;
+import Services.Impl.Crud;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
 import Services.Pagination;
@@ -23,7 +28,8 @@ public class TestRunner {
         System.out.println(AssertDropDownCollection());
         System.out.println(CheckCache());
         System.out.println(CheckCache2());
-        System.out.println(AssertListFromPagination());
+        System.out.println("Pagination: " + AssertListFromPagination());
+        System.out.println("Crud: " + AssertTenTopicsFromDataBase());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -135,9 +141,27 @@ public class TestRunner {
 
     private boolean AssertListFromPagination() {
         Pagination pg = new Pagination();
-        if (pg.getList("2", null, "", true).size() == 10) {
+        URLSettingsModel model = new URLSettingsModel();
+        model.docTagId = "5";
+        model.searchQuery = "to";
+        List<Topic> list = pg.getList(model);
+        for (Topic item : list) {
+            System.out.println("testinam test: title - " + item.getTitle() + ", id - " + item.getId());
+        }
+        if (pg.getList(model).size() == 10) {
             return true;
         }
+        return false;
+    }
+
+    private boolean AssertTenTopicsFromDataBase() {
+        Crud cd = new Crud();
+        DBQueryModel query = new DBQueryModel();
+        query.table = "Topics";
+        query.where = "id";
+        query.whereValue = new String[] {"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"};
+        DBqueryDTO dto = cd.read(query);
+
         return false;
     }
 }
