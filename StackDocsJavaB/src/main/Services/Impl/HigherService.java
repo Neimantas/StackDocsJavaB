@@ -370,8 +370,6 @@ public class HigherService implements IHigherService {
         dal.setBodyHtml((String) col.get(7));
         dal.setPinned((int) col.get(8) == 1);
         dal.setBodyMarkdown((String) col.get(9));
-        dal.setBodyMarkdown((String) col.get(8));
-        dal.setPinned((int) col.get(8) == 1);
 
         return dal;
     }

@@ -45,3 +45,4 @@ function funkcija_atgal() {
     url = "index.jsp?atgal=true";
     location.href = url;
 }
+
