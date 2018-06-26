@@ -1,25 +1,29 @@
-import Models.DBQueryModel;
+import Models.BusinessLogic.DocTag;
 import Models.DTO.DocTagsDTO;
-import Services.DropDown;
 import Services.IDataBase;
 import Services.IHigherService;
+import Services.Impl.Cache;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
-import Services.QueryBuilder;
+import Services.Pagination;
 
 import java.sql.SQLException;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestRunner {
     public void AssertAll() throws SQLException {
-//        System.out.println(AssertDbConnection());
-//        System.out.println(AssertDocTagsCollection());
-//        System.out.println(AssertDocTagsIds());
-//        System.out.println(AssertDocTagsIds2());
+        System.out.println(AssertDbConnection());
+        System.out.println(AssertDocTagsCollection());
+        System.out.println(AssertDocTagsIds());
+        System.out.println(AssertDocTagsIds2());
         System.out.println(AssertDocTagsIds3());
+        System.out.println(AssertTenTopicsById());
         System.out.println(AssertDropDownCollection());
-        System.out.println(AssertQueryBuilder());
+        System.out.println(CheckCache());
+        System.out.println(CheckCache2());
+        System.out.println(AssertListFromPagination());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -81,29 +85,59 @@ public class TestRunner {
         return false;
     }
 
+    private boolean AssertTenTopicsById() {
+
+        IHigherService higher = new HigherService();
+
+        if (higher.getTenTopicsById(true, "3").getData().size() == 10) {
+            return true;
+        }
+        return false;
+    }
+
     private boolean AssertDropDownCollection() {
-
 //        DropDown dropDown = new DropDown();
-
-//        System.out.println(dropDown.getList().size());
-//        System.out.println(dropDown.getSize());
-//        if (dropDown.getList().size() == dropDown.getSize() && dropDown.getList().get(0) instanceof DocTag) {
+//        if (dropDown.getList().size() == dropDown.getSize()) {
 //            return true;
 //        }
         return false;
     }
 
-    private boolean AssertQueryBuilder(){
-        QueryBuilder qb = new QueryBuilder();
-        DBQueryModel queryModel = new DBQueryModel();
-        queryModel.table = "topics";
-        queryModel.where = "id";
-        queryModel.whereValue = new String[] {"10", "14", "18"};
-        qb.buildQuery(queryModel);
-        String expected = "SELECT * FROM topics WHERE 1 = 1 AND id IN ('10','14','18')";
-//        System.out.println(qb.getQuery());
-//        System.out.println(expected);
-        return qb.getQuery().equals(expected);
+    private boolean CheckCache() {
+        Cache cache = Cache.getInstance();
+        DocTag docTag = new DocTag();
+        docTag.setId(1);
+        cache.put("test", docTag);
+        DocTag newDocTag = (DocTag)cache.get("test");
+        if (newDocTag.getId() == docTag.getId()) {
+            return true;
+        }
+        return false;
+    }
+    private boolean CheckCache2() {
+        Cache cache = Cache.getInstance();
+        List<DocTag> list = new ArrayList<>();
+        DocTag docTag = new DocTag();
+        docTag.setId(1);
+        list.add(docTag);
+        cache.put("test", list);
+        AbstractList newList = (AbstractList)cache.get("test");
+        List<DocTag> newest = new ArrayList<>();
+        for (Object item: newList) {
+            newest.add((DocTag) item);
+        }
+        DocTag newDocTag = (DocTag) newList.get(0);
+        if (newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId())  {
+            return true;
+        }
+        return false;
     }
 
+    private boolean AssertListFromPagination() {
+        Pagination pg = new Pagination();
+        if (pg.getList("2", null, "", true).size() == 10) {
+            return true;
+        }
+        return false;
+    }
 }
