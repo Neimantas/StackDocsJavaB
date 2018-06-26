@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.BusinessLogic.DocTag;
 
+import Models.BusinessLogic.Topic;
 import Models.URLSettingsModel;
 import Services.DropDown;
 
@@ -53,26 +54,5 @@ public class ServletIndex extends HttpServlet {
             request.setAttribute("doctags", dataList);
         }
         request.getRequestDispatcher("index.jsp").forward(request, response);
-//        response.sendRedirect("http://localhost:8080/index.jsp");
     }
 }
-
-
-//            IHigherService higher = new HigherService();
-//            TopicsDTO dto = higher.getAllTopics();
-//
-//            if (dto.isSuccess()){
-//                List<TopicsDAL> dalList = dto.getData();
-//                List<Topic> topicList = new ArrayList<>();
-//                dalList.forEach(dal -> {
-//                    Topic topic = new Topic();
-//                    topic.setId(dal.getId());
-//                    topic.setTitle(dal.getTitle());
-//                    topic.setDocTagTitle();
-//                    topicList.add(topic);
-//                });
-//                request.setAttribute("data", topicList);
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
-//            } else {
-//                response.sendRedirect("http://localhost:8080/index.jsp");
-//            }
