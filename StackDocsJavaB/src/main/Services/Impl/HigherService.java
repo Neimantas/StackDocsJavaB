@@ -58,36 +58,31 @@ public class HigherService implements IHigherService {
     public TopicsDTO getTopicById(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
         model.table = "Topics";
+        model.where = "id";
+        model.whereValue = topicIds;
         DBqueryDTO dbDTO = crud.read(model);
+
         TopicsDTO tDTO = new TopicsDTO();
 
         tDTO.setSuccess(dbDTO.isSuccess());
         tDTO.setMessage(dbDTO.getMessage());
-
+        List<TopicsDAL> list = new ArrayList<>();
         if (dbDTO.isSuccess()) {
-
-            List<TopicsDAL> list = new ArrayList<>();
             List<List<Object>> data = dbDTO.getData();
-
             for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                for (int j = 0; j < topicIds.length; j++) {
-                    if (columns.get(0).toString().equals(topicIds[j])) {
-                        list.add(createTopicsDALfromList(columns));
-                    }
-                }
-            }
-
-            if (!list.isEmpty()) {
-                tDTO.setData(list);
-                return tDTO;
-            } else {
-                tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-                return tDTO;
+                list.add(createTopicsDALfromList(data.get(i)));
             }
         }
+
+        if (!list.isEmpty()) {
+            tDTO.setData(list);
+            return tDTO;
+        } else if (list.isEmpty()){
+            tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+            return tDTO;
+        }
         return tDTO;
-    }
+}
 
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
@@ -241,7 +236,7 @@ public class HigherService implements IHigherService {
             list.add(createTopicsDALfromList(columns));
         }
 
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
             return tDTO;
         }
@@ -370,8 +365,6 @@ public class HigherService implements IHigherService {
         dal.setBodyHtml((String) col.get(7));
         dal.setPinned((int) col.get(8) == 1);
         dal.setBodyMarkdown((String) col.get(9));
-        dal.setBodyMarkdown((String) col.get(8));
-        dal.setPinned((int) col.get(8) == 1);
 
         return dal;
     }

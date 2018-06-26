@@ -17,7 +17,7 @@ public class Pagination {
     private IHigherService hs = new HigherService();
     private ICache cache = Cache.getInstance();
     private List<String[]> topicsAndDocTagsIds = new ArrayList<>();
-    private String[] collectedIds = new String[10];
+    private List<String> collectedIds = new ArrayList<>();
     private List<Topic> topicsList = new ArrayList<>();
     private boolean allConnectionsWithDataBaseIsSuccess;
 
@@ -33,8 +33,38 @@ public class Pagination {
     }
 
     private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
+
+        if (searchQuery != null && docTagId != null) {
+            String[] queries = searchQuery.trim().toLowerCase().split(" ");
+            TopicsDTO topicsDTO = hs.getAllTopics();
+            allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
+            if (topicsDTO.isSuccess()) {
+                List<String[]> tempList = new ArrayList<>();
+                for (int i = 0; i < topicsDTO.getData().size(); i++) {
+                    for (int j = 0; j < queries.length; j++) {
+                        String docId = "" + topicsDTO.getData().get(i).getDocTagId();
+                        String title = topicsDTO.getData().get(i).getTitle().toLowerCase();
+                        String introduction = topicsDTO.getData().get(i).getIntroductionMarkdown().toLowerCase();
+                        String parameters = topicsDTO.getData().get(i).getParametersMarkdown().toLowerCase();
+                        String remarks = topicsDTO.getData().get(i).getRemarksMarkdown().toLowerCase();
+                        String syntax = topicsDTO.getData().get(i).getSyntaxMarkdown().toLowerCase();
+
+                        if ((title.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
+                                || (introduction.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
+                                || (parameters.toLowerCase().contains(normalizeText((queries[j]))) && docId.equals(docTagId))
+                                || (remarks.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
+                                || (syntax.contains(normalizeText((queries[j]))) && docId.equals(docTagId))) {
+                            String[] arr = {"" + topicsDTO.getData().get(i).getId(), "" + topicsDTO.getData().get(i).getDocTagId()};
+                            tempList.add(arr);
+                        }
+                    }
+                }
+                topicsAndDocTagsIds = tempList;
+            }
+
+        }
         //Reduce topicsAndDocTagsIds by docTagId
-        if (docTagId != null) {
+        else if (docTagId != null) {
             List<String[]> tempList = new ArrayList<>();
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (topicsAndDocTagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDocTagsIds.get(i));
@@ -42,24 +72,26 @@ public class Pagination {
             topicsAndDocTagsIds = tempList;
         }
         //Reduce topicsAndDocTagsIds by queries
-        if (searchQuery != null || !normalizeText(searchQuery).equals("")) {
-            String[] queries = searchQuery.trim().split(" ");
-            //Take all list of topic ids
-            String[] idsOfTopic = new String[topicsAndDocTagsIds.size()];
-            for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
-                idsOfTopic[i] = topicsAndDocTagsIds.get(i)[0];
-            }
-            TopicsDTO topicsDTO = hs.getTopicById(idsOfTopic);
+        else if (searchQuery != null) {
+            String[] queries = searchQuery.trim().toLowerCase().split(" ");
+            TopicsDTO topicsDTO = hs.getAllTopics();
             allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
             if (topicsDTO.isSuccess()) {
                 List<String[]> tempList = new ArrayList<>();
                 for (int i = 0; i < topicsDTO.getData().size(); i++) {
                     for (int j = 0; j < queries.length; j++) {
-                        if (topicsDTO.getData().get(i).getTitle().contains(normalizeText((queries[j])))
-                                && topicsDTO.getData().get(i).getIntroductionMarkdown().contains(normalizeText((queries[j])))
-                                && topicsDTO.getData().get(i).getParametersMarkdown().contains(normalizeText((queries[j])))
-                                && topicsDTO.getData().get(i).getRemarksMarkdown().contains(normalizeText((queries[j])))
-                                && topicsDTO.getData().get(i).getSyntaxMarkdown().contains(normalizeText((queries[j])))) {
+
+                        String title = topicsDTO.getData().get(i).getTitle().toLowerCase();
+                        String introduction = topicsDTO.getData().get(i).getIntroductionMarkdown().toLowerCase();
+                        String parameters = topicsDTO.getData().get(i).getParametersMarkdown().toLowerCase();
+                        String remarks = topicsDTO.getData().get(i).getRemarksMarkdown().toLowerCase();
+                        String syntax = topicsDTO.getData().get(i).getSyntaxMarkdown().toLowerCase();
+
+                        if (title.contains(normalizeText((queries[j])))
+                                || introduction.contains(normalizeText((queries[j])))
+                                || parameters.toLowerCase().contains(normalizeText((queries[j])))
+                                || remarks.contains(normalizeText((queries[j])))
+                                || syntax.contains(normalizeText((queries[j])))) {
                             String[] arr = {"" + topicsDTO.getData().get(i).getId(), "" + topicsDTO.getData().get(i).getDocTagId()};
                             tempList.add(arr);
                         }
@@ -73,10 +105,11 @@ public class Pagination {
     private void collectTopicsIds(String topicId, Boolean after) {
         int counter = 0;
         int listSize = 10;
-        if (topicId == null && after) {
+        //
+        if (after && topicId == null) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter >= 0 && counter < listSize) {
-                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i)[0];
+                    collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
                     counter++;
                 }
                 if (counter == 10) {
@@ -84,14 +117,14 @@ public class Pagination {
                 }
             }
         }
-        if (after) {
+        else if (after) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
-                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i + 10)[0];
+                    collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
                     counter++;
                 }
-                if (counter > 0 && counter < listSize) {
-                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i + 10)[0];
+                else if (counter > 0 && counter < listSize) {
+                    collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
                     counter++;
                 }
                 if (counter == 10) {
@@ -99,14 +132,14 @@ public class Pagination {
                 }
             }
         }
-        if (!after) {
+        else if (!after) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
-                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i - 10)[0];
+                    collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
                     counter++;
                 }
-                if (counter > 0 && counter < listSize) {
-                    collectedIds[counter] = "" + topicsAndDocTagsIds.get(i - 10)[0];
+                else if (counter > 0 && counter < listSize) {
+                    collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
                     counter++;
                 }
                 if (counter == 10) {
@@ -117,12 +150,18 @@ public class Pagination {
     }
 
     private void makeListFromColletedIds() {
-        TopicsDTO topicsDTO = hs.getTopicById(collectedIds);
+        String[] idsArr = collectedIds.toArray(new String[collectedIds.size()]);
+        TopicsDTO topicsDTO = hs.getTopicById(idsArr);
         allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
-        if (topicsDTO.isSuccess()) {
+        if (topicsDTO.isSuccess() && topicsDTO.getData() != null) {
             for (int i = 0; i < topicsDTO.getData().size(); i++) {
                 topicsList.add(makeTopicFromTopicsDal(topicsDTO.getData().get(i)));
             }
+        }
+        else {
+            Topic topic = new Topic();
+            topic.setTitle("No results");
+            topicsList.add(topic);
         }
     }
 
