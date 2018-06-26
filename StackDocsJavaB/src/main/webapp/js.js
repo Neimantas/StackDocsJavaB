@@ -12,49 +12,22 @@ function GetTopicInfo(skaicius){
 
 
 function changePage(id){
-    var kalba = GetParam("kalba");
+    var kalba = getParam("kalba");
     var paieskos_laukas = getParam("paieska");
-    var puslapis = parseInt(getParam("puslapis"));
-
+    var trRows = document.getElementsByTagName("tr");
+    if (trRows.length === 0) {
+            return;
+        }
+    var topicId = trRows[0].id;
+    var next;
     if (id === "next") {
-        if (puslapis >= 1) {
-            puslapis++;
-        } else {
-            return;
-        }
+        next = true;
     } else if (id === "previous") {
-        if (puslapis > 1) {
-            puslapis--;
-        } else {
-            return;
-        }
+        next = false;
     }
-    location.href = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&puslapis" + puslapis;
+    location.href = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&after=" + next +
+        "&topicid=" + topicId;
 }
-
-// function funkcija_pirmyn() {
-//     // Need to check whether there actually is a list to move through
-//     var kalba = GetParam("kalba");
-//     var paieskos_laukas = getParam("paieska");
-//     var puslapis = parseInt(getParam("puslapis"));
-//     if (puslapis === -1) {
-//         puslapis = 1;
-//     }
-//     puslapis += 1;
-//     location.href = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&puslapis=" + puslapis;
-//
-// }
-//
-// function funkcija_atgal() {
-//     var kalba = document.getElementById("kalba").value;
-//     var paieskos_laukas = document.getElementById("paieskos-laukas").value;
-//     var puslapis = parseInt(getParam("puslapis"));
-//     var url;
-//     if (puslapis > 1) {
-//         puslapis -= 1;
-//         location.href = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&puslapis=" + puslapis;
-//     }
-// }
 
 function getParam(parameter) {
     var urlParams = new URLSearchParams(window.location.search);
