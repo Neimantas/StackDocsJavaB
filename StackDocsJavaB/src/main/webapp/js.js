@@ -15,13 +15,13 @@ function changePage(id){
     var kalba = GetParam("kalba");
     var paieskos_laukas = getParam("paieska");
     var puslapis = parseInt(getParam("puslapis"));
-    if (puslapis >= 1) {
-        puslapis++;
-    } else {
-        return;
-    }
+
     if (id === "next") {
-        puslapis++;
+        if (puslapis >= 1) {
+            puslapis++;
+        } else {
+            return;
+        }
     } else if (id === "previous") {
         if (puslapis > 1) {
             puslapis--;
