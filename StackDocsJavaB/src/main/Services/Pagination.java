@@ -6,6 +6,7 @@ import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
+import Models.URLSettingsModel;
 import Services.Impl.Cache;
 import Services.Impl.HigherService;
 
@@ -21,10 +22,10 @@ public class Pagination {
     private List<Topic> topicsList = new ArrayList<>();
     private boolean allConnectionsWithDataBaseIsSuccess;
 
-    public List<Topic> getList(String topicId, String docTagId, String searchQuery, Boolean after) {
+    public List<Topic> getList(URLSettingsModel model) {
         getListOftopicsAndDocTagsIdsFromDataBaseOrCache();
-        reduceListByDocTagIdAndSearchQuery(docTagId, searchQuery);
-        collectTopicsIds(topicId, after);
+        reduceListByDocTagIdAndSearchQuery(model.docTagId, model.searchQuery);
+        collectTopicsIds(model.topicId, model.after);
         makeListFromColletedIds();
         if (!allConnectionsWithDataBaseIsSuccess) {
             return null;
@@ -105,8 +106,8 @@ public class Pagination {
     private void collectTopicsIds(String topicId, Boolean after) {
         int counter = 0;
         int listSize = 10;
-        //
-        if (after && topicId == null) {
+        //dar prideti logikos jeigu neimanoma eiti atgal i - 10
+        if (topicId == null) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter >= 0 && counter < listSize) {
                     collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
@@ -120,12 +121,16 @@ public class Pagination {
         else if (after) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
-                    collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
-                    counter++;
+                    if (i + 10 < topicsAndDocTagsIds.size()) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
+                        counter++;
+                    }
                 }
                 else if (counter > 0 && counter < listSize) {
-                    collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
-                    counter++;
+                    if (i + 10 < topicsAndDocTagsIds.size()) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
+                        counter++;
+                    }
                 }
                 if (counter == 10) {
                     break;
@@ -135,12 +140,16 @@ public class Pagination {
         else if (!after) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
-                    collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
-                    counter++;
+                    if (i - 10 >= 0) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
+                        counter++;
+                    }
                 }
                 else if (counter > 0 && counter < listSize) {
-                    collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
-                    counter++;
+                    if (i - 10 >= 0) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
+                        counter++;
+                    }
                 }
                 if (counter == 10) {
                     break;

@@ -3,6 +3,7 @@ import Models.BusinessLogic.Topic;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
+import Models.URLSettingsModel;
 import Services.IDataBase;
 import Services.IHigherService;
 import Services.Impl.Cache;
@@ -140,11 +141,14 @@ public class TestRunner {
 
     private boolean AssertListFromPagination() {
         Pagination pg = new Pagination();
-        List<Topic> list = pg.getList(null, "5", "Installingasjgdfklasbgjnglakg", true);
+        URLSettingsModel model = new URLSettingsModel();
+        model.docTagId = "5";
+        model.searchQuery = "to";
+        List<Topic> list = pg.getList(model);
         for (Topic item : list) {
             System.out.println("testinam test: title - " + item.getTitle() + ", id - " + item.getId());
         }
-        if (pg.getList(null, "5", "Installing", true).size() == 10) {
+        if (pg.getList(model).size() == 10) {
             return true;
         }
         return false;
