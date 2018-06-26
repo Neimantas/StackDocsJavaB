@@ -115,11 +115,10 @@ public class Pagination {
         int indexOfTopicFound = 0;
         if (topicId == null) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
-                if (counter >= 0 && counter < 10) {
+                if (counter < 10) {
                     collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
                     counter++;
-                }
-                if (counter == 10) {
+                } else {
                     break;
                 }
             }
@@ -141,10 +140,9 @@ public class Pagination {
             } else {
                 for (int i = indexOfTopicFound; i < topicsAndDocTagsIds.size(); i++) {
                     if (counter < 10) {
-                            collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
-                            counter++;
-                    }
-                    if (counter == 10) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
+                        counter++;
+                    } else {
                         break;
                     }
                 }
@@ -167,10 +165,9 @@ public class Pagination {
             } else {
                 for (int i = indexOfTopicFound; i < topicsAndDocTagsIds.size(); i++) {
                     if (counter < 10) {
-                            collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
-                            counter++;
-                    }
-                    if (counter == 10) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
+                        counter++;
+                    } else {
                         break;
                     }
                 }
