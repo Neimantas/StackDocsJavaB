@@ -35,37 +35,15 @@
             </h4>
             <select class="custom-select d-block w-100" id="kalba" required>
 
-
-
                 <option value="0">
                     "Pasirinkimas..."
                 </option>
-                <!--<option value="1">-->
-                    <!--Java-->
-                <!--</option>-->
-                <!--<option value="2">-->
-                    <!--.NET-->
-                <!--</option>-->
-                <!--<option value="3">-->
-                    <!--C#-->
-                <!--</option>-->
-                <!--<option value="4">-->
-                    <!--JavaScript-->
-                <!--</option>-->
-
 
                 <java:forEach var="tags" items="${doctags}">
 
                     <option value="${tags.getId()}">
                             ${tags.getTag()}
                     </option>
-
-                    <%--<tr onclick="GetTopicInfo(${topic.getId()});">--%>
-                        <%--<td>${topic.getId()}</td>--%>
-                        <%--<td>${topic.getTag()}</td>--%>
-
-                    <%--</tr>--%>
-
 
                 </java:forEach>
 
@@ -98,11 +76,10 @@
         <tbody>
 
 
-        <java:forEach var="topic" items="${data}">
-            <tr onclick="GetTopicInfo(${topic.getId()});">
+        <java:forEach var="topic" items="${topicList}">
+            <tr id="${topic.getId()}" onclick="GetTopicInfo(${topic.getId()});">
                 <td>${topic.getId()}</td>
                 <td>${topic.getTitle()}</td>
-
             </tr>
         </java:forEach>
 
@@ -115,28 +92,17 @@
 
         <ul class="pagination justify-content-center">
 
-            <!--<li class="page-item">-->
-            <!--<a class="page-link text-dark" id="mugtukas-atgal" href="#" tabindex="-1" onclick="funkcija_atgal()">Atgal</a>-->
-            <!--</li>-->
-            <%--${if(getParam("puslapis") < 1 ? 1 : getParam("puslapis"))}--%>
-            <!--KIEK BUS PUSLAPIU?-->
-            <li class="page-item" id="next"><a class="page-link text-dark"
-                                                         onclick="changePage(this.id)">Atgal</a>
+            <li class="page-item" id="previous" onclick="changePage(this.id)">
+                <a class="page-link text-dark">Atgal</a>
             </li>
             <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
 
-            <li class="page-item" id="previous"><a class="page-link text-dark"
-                                                          onclick="changePage(this.id)">Pirmyn</a></li>
-
-            <!--<li class="page-item">-->
-            <!--<a class="page-link text-dark" id="mygtukas-pirmyn" href="#" onclick="funkcija_pirmyn()">Pirmyn</a>-->
-            <!--</li>-->
+            <li class="page-item" id="next" onclick="changePage(this.id)">
+                <a class="page-link text-dark">Pirmyn</a>
+            </li>
 
         </ul>
     </nav>
-
-
-    <!--</div>-->
 
 
 </div>

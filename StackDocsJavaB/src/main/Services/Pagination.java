@@ -23,6 +23,9 @@ public class Pagination {
     private boolean allConnectionsWithDataBaseIsSuccess;
 
     public List<Topic> getList(URLSettingsModel model) {
+        collectedIds = new ArrayList<>();
+        topicsList = new ArrayList<>();
+        allConnectionsWithDataBaseIsSuccess = true;
         getListOftopicsAndDocTagsIdsFromDataBaseOrCache();
         reduceListByDocTagIdAndSearchQuery(model.docTagId, model.searchQuery);
         collectTopicsIds(model.topicId, model.after);
