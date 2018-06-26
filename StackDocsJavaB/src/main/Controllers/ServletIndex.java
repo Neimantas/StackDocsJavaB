@@ -38,8 +38,8 @@ public class ServletIndex extends HttpServlet {
         System.out.println(language + " || " + search + " || " + page);
         if (paramSize > 0) {
             Pagination pagination = new Pagination();
-            List<Topic> dataList = pagination.listOfThemes(pageNum, language, search);
-            request.setAttribute("data", dataList);
+//            List<Topic> dataList = pagination.getList(pageNum, language, search);
+//            request.setAttribute("data", dataList);
         } else {
             DropDown dropDown = new DropDown();
             List<DocTag> dataList = dropDown.getList();
