@@ -98,7 +98,7 @@
         <tbody>
 
 
-        <java:forEach var="topic" items="${data}">
+        <java:forEach var="topic" items="${topicList}">
             <tr onclick="GetTopicInfo(${topic.getId()});">
                 <td>${topic.getId()}</td>
                 <td>${topic.getTitle()}</td>
