@@ -24,6 +24,7 @@ public class DropDown {
         Cache cache = Cache.getInstance();
 
         List<DocTag> drop = new ArrayList<>();
+
         Object some = cache.get(getDropDown);
 
         if (cache.get(getDropDown) != null) {
@@ -36,25 +37,16 @@ public class DropDown {
 
             IHigherService higher = new HigherService();
 
-            List<DocTagsDTO> dtoList = new ArrayList<>();
+            DocTagsDTO dtoList = higher.getDocTagById(dropDownsNeeded);
 
-            for (int i = 0; i < dropDownsNeeded.length; i++) {
-                dtoList.add(higher.getDocTagById(dropDownsNeeded[i]));
-            }
+            List<DocTagsDAL> dropDown = dtoList.getData();
 
-            for (int i = 0; i < dtoList.size(); i++) {
-                if (!dtoList.get(i).isSuccess()) {
-                    return null;
-                }
-            }
 
-            DocTag docTag = new DocTag();
+            for (int i = 0; i < dropDown.size(); i++) {
 
-            for (int i = 0; i < dtoList.size(); i++) {
+                DocTag docTag = new DocTag();
 
-                List<DocTagsDAL> list = dtoList.get(i).getData();
-
-                DocTagsDAL mydal = list.get(0);
+                DocTagsDAL mydal = dropDown.get(i);
 
                 docTag.setId(mydal.getId());
 

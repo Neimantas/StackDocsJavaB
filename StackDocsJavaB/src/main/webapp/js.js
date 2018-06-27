@@ -16,8 +16,8 @@ function changePage(id){
     var paieskos_laukas = getParam("paieska");
     var trRows = document.getElementsByTagName("tr");
     if (trRows.length === 0) {
-        return;
-    }
+            return;
+        }
     var topicId = trRows[0].id;
     var next;
     if (id === "next") {

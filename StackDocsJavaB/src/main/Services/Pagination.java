@@ -23,7 +23,7 @@ public class Pagination {
     private boolean allConnectionsWithDataBaseIsSuccess;
 
     public List<Topic> getList(URLSettingsModel model) {
-        collectedIds = new ArrayList<>();
+        resetValues();
         topicsList = new ArrayList<>();
         allConnectionsWithDataBaseIsSuccess = true;
         getListOftopicsAndDocTagsIdsFromDataBaseOrCache();
@@ -34,6 +34,12 @@ public class Pagination {
             return null;
         }
         return topicsList;
+    }
+
+    private void resetValues() {
+        collectedIds = new ArrayList<>();
+        topicsList = new ArrayList<>();
+        allConnectionsWithDataBaseIsSuccess = true;
     }
 
     private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
@@ -108,57 +114,68 @@ public class Pagination {
 
     private void collectTopicsIds(String topicId, Boolean after) {
         int counter = 0;
-        int listSize = 10;
-        //dar prideti logikos jeigu neimanoma eiti atgal i - 10
+        int indexOfTopicFound = 0;
         if (topicId == null) {
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
-                if (counter >= 0 && counter < listSize) {
+                if (counter < 10) {
                     collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
                     counter++;
-                }
-                if (counter == 10) {
+                } else {
                     break;
                 }
             }
-        }
-        else if (after) {
+        } else if (after) {
+            //finding index of topic in list
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
-                if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
-                    if (i + 10 < topicsAndDocTagsIds.size()) {
+                if (topicsAndDocTagsIds.get(i)[0].equals(topicId)) indexOfTopicFound = i;
+            }
+            if (indexOfTopicFound + 10 < topicsAndDocTagsIds.size()) {
+                for (int i = indexOfTopicFound; i < topicsAndDocTagsIds.size(); i++) {
+                    if (counter < 10 && i + 10 < topicsAndDocTagsIds.size()) {
                         collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
                         counter++;
                     }
-                }
-                else if (counter > 0 && counter < listSize) {
-                    if (i + 10 < topicsAndDocTagsIds.size()) {
-                        collectedIds.add("" + topicsAndDocTagsIds.get(i + 10)[0]);
-                        counter++;
+                    if (counter == 10) {
+                        break;
                     }
                 }
-                if (counter == 10) {
-                    break;
+            } else {
+                for (int i = indexOfTopicFound; i < topicsAndDocTagsIds.size(); i++) {
+                    if (counter < 10) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
+                        counter++;
+                    } else {
+                        break;
+                    }
                 }
             }
-        }
-        else if (!after) {
+        } else if (!after) {
+            //finding index of topic in list
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
-                if (counter == 0 && topicsAndDocTagsIds.get(i)[0].equals(topicId)) {
-                    if (i - 10 >= 0) {
-                        collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
+                if (topicsAndDocTagsIds.get(i)[0].equals(topicId)) indexOfTopicFound = i;
+            }
+            if (indexOfTopicFound - 1 >= 0) {
+                for (int i = indexOfTopicFound - 10; i < topicsAndDocTagsIds.size(); i++) {
+                    if (counter < 10 && i >= 0) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
                         counter++;
                     }
-                }
-                else if (counter > 0 && counter < listSize) {
-                    if (i - 10 >= 0) {
-                        collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
-                        counter++;
+                    if (counter == 10) {
+                        break;
                     }
                 }
-                if (counter == 10) {
-                    break;
+            } else {
+                for (int i = indexOfTopicFound; i < topicsAndDocTagsIds.size(); i++) {
+                    if (counter < 10) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
+                        counter++;
+                    } else {
+                        break;
+                    }
                 }
             }
         }
+
     }
 
     private void makeListFromColletedIds() {
@@ -169,12 +186,12 @@ public class Pagination {
             for (int i = 0; i < topicsDTO.getData().size(); i++) {
                 topicsList.add(makeTopicFromTopicsDal(topicsDTO.getData().get(i)));
             }
-        }
-        else {
+        } else {
             Topic topic = new Topic();
             topic.setTitle("No results");
             topicsList.add(topic);
         }
+        System.out.println("ListSIZE: " + topicsList.size());
     }
 
     private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
@@ -204,6 +221,6 @@ public class Pagination {
     }
 
     private String normalizeText(String text) {
-        return text != null? text.trim().toLowerCase(): null;
+        return text != null ? text.trim().toLowerCase() : null;
     }
 }

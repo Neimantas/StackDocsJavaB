@@ -1,15 +1,11 @@
 package Controllers;
 
 import Models.BusinessLogic.DocTag;
+
 import Models.BusinessLogic.Topic;
-import Models.DAL.DocTagsDAL;
-import Models.DAL.TopicsDAL;
-import Models.DTO.DocTagsDTO;
-import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.DropDown;
-import Services.IHigherService;
-import Services.Impl.HigherService;
+
 import Services.Pagination;
 
 import javax.servlet.ServletException;
@@ -18,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @WebServlet(name = "ServletIndex", urlPatterns = {"/servletindex"})
