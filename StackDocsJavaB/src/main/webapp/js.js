@@ -24,7 +24,7 @@ function vykstaPaieska() {
 function GetTopicInfo(skaicius){
 
 
-    url = "/topicsservlet?topicId="+skaicius;
+    url = "/topics?topicId="+skaicius;
     location.href = url;
 
 }
@@ -42,7 +42,7 @@ function funkcija_pirmyn() {
 function funkcija_atgal() {
 
     // kelintasAtgal++;
-    url = "index.jsp?atgal=true";
+    url = "servletindex?kalba=&paieska=";
     location.href = url;
 }
 
