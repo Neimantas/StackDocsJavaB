@@ -27,15 +27,15 @@ public class ServletIndex extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int paramSize = request.getParameterMap().size();
-        String language = request.getParameter("kalba");
-        String search = request.getParameter("paieska");
-        String page = request.getParameter("puslapis");
-        String topic = request.getParameter("topicid");
-        boolean after = request.getParameter("after") != null && Boolean.parseBoolean(request.getParameter("after"));
-        int pageNum = page != null ? Integer.parseInt(page) : 1;
         System.out.println(paramSize);
-        System.out.println(language + " || " + search + " || " + page + " || " + topic);
         if (paramSize > 0) {
+            String language = request.getParameter("kalba");
+            String search = request.getParameter("paieska");
+            String page = request.getParameter("page");
+            String topic = request.getParameter("topicid");
+            boolean after = request.getParameter("after") != null && Boolean.parseBoolean(request.getParameter("after"));
+            int pageNum = page != null ? Integer.parseInt(page) : 1;
+            System.out.println(language + " || " + search + " || " + page + " || " + topic);
             Pagination pagination = new Pagination();
             URLSettingsModel url = new URLSettingsModel();
             url.docTagId = language;
@@ -44,15 +44,10 @@ public class ServletIndex extends HttpServlet {
             url.after = after;
             List<Topic> topicList = pagination.getList(url);
             request.setAttribute("topicList", topicList);
-
-            DropDown dropDown = new DropDown();
-            List<DocTag> docList = dropDown.getList();
-            request.setAttribute("doctags", docList);
-        } else {
-            DropDown dropDown = new DropDown();
-            List<DocTag> dataList = dropDown.getList();
-            request.setAttribute("doctags", dataList);
         }
+        DropDown dropDown = new DropDown();
+        List<DocTag> docList = dropDown.getList();
+        request.setAttribute("doctags", docList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

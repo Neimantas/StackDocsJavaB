@@ -1,7 +1,6 @@
 package Models.DTO;
 
 import java.util.List;
-import java.util.List;
 
 public class DBqueryDTO {
     private boolean success;

@@ -1,3 +1,12 @@
+window.addEventListener("load", function () {
+    // Access the form element...
+    var form = document.getElementById("myForm");
+    // ...and take over its submit event.
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        vykstaPaieska();
+    });
+});
 
 function vykstaPaieska() {
     var kalba = document.getElementById("kalba").value;
@@ -12,21 +21,25 @@ function GetTopicInfo(skaicius){
 
 
 function changePage(id){
-    var kalba = getParam("kalba");
-    var paieskos_laukas = getParam("paieska");
+    var language = getParam("kalba");
+    var search = getParam("paieska");
+    var pageNum = parseInt(document.getElementById("puslapio-numeris").firstElementChild.text);
     var trRows = document.getElementsByTagName("tr");
-    if (trRows.length === 0) {
-            return;
+    if (trRows.length !== 0) {
+        var topicId = trRows[0].id;
+        var next;
+        if (id === "next") {
+            next = true;
+            pageNum++;
+            location.href = "/servletindex?kalba=" + language + "&paieska=" + search + "&after=" + next +
+                "&topicid=" + topicId + "&page=" + pageNum;
+        } else if (id === "previous" && pageNum > 1) {
+            next = false;
+            pageNum--;
+            location.href = "/servletindex?kalba=" + language + "&paieska=" + search + "&after=" + next +
+                "&topicid=" + topicId + "&page=" + pageNum;
         }
-    var topicId = trRows[0].id;
-    var next;
-    if (id === "next") {
-        next = true;
-    } else if (id === "previous") {
-        next = false;
     }
-    location.href = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas + "&after=" + next +
-        "&topicid=" + topicId;
 }
 
 
