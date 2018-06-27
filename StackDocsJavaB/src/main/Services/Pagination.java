@@ -24,8 +24,6 @@ public class Pagination {
 
     public List<Topic> getList(URLSettingsModel model) {
         resetValues();
-        topicsList = new ArrayList<>();
-        allConnectionsWithDataBaseIsSuccess = true;
         getListOftopicsAndDocTagsIdsFromDataBaseOrCache();
         reduceListByDocTagIdAndSearchQuery(model.docTagId, model.searchQuery);
         collectTopicsIds(model.topicId, model.after);
@@ -99,7 +97,7 @@ public class Pagination {
 
                         if (title.contains(normalizeText((queries[j])))
                                 || introduction.contains(normalizeText((queries[j])))
-                                || parameters.toLowerCase().contains(normalizeText((queries[j])))
+                                || parameters.contains(normalizeText((queries[j])))
                                 || remarks.contains(normalizeText((queries[j])))
                                 || syntax.contains(normalizeText((queries[j])))) {
                             String[] arr = {"" + topicsDTO.getData().get(i).getId(), "" + topicsDTO.getData().get(i).getDocTagId()};
