@@ -120,9 +120,7 @@ public class TopicsDAL {
         ExampleScore = exampleScore;
     }
 
-    public String getIntroductionHtml() {
-        return IntroductionHtml;
-    }
+    public String getIntroductionHtml() {return IntroductionHtml;}
 
     public void setIntroductionHtml(String introductionHtml) {
         IntroductionHtml = introductionHtml;
