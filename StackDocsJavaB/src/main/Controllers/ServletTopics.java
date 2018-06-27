@@ -1,10 +1,7 @@
 package Controllers;
 
-import Models.BusinessLogic.Topic;
-import Models.DAL.DocTagsDAL;
 import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
-import Models.DTO.DocTagsDTO;
 import Models.DTO.ExampleDTO;
 import Models.DTO.TopicsDTO;
 import Services.IHigherService;
@@ -16,12 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "ServletTopics", urlPatterns = {"/topics"})
 public class ServletTopics extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,21 +29,18 @@ public class ServletTopics extends HttpServlet {
         } else {
             IHigherService higher = new HigherService();
             TopicsDTO dto = higher.getTopicById(topicID);
-            TopicsDAL topic = new TopicsDAL();
-            ExampleDTO exDto = higher.getExampleById(topicID);
-            ExampleDAL example = new ExampleDAL();
+            ExampleDTO exDto = higher.getExamplesByTopicsId(topicID);
+            TopicsDAL topic;
+            ExampleDAL example;
             if (dto.isSuccess()) {
                 topic = dto.getData().get(0);
                 request.setAttribute("data", topic);
                 example = exDto.getData().get(0);
                 request.setAttribute("exData", example);
                 request.getRequestDispatcher("topics.jsp").forward(request, response);
-
             } else {
                 response.sendRedirect("http://localhost:8080/index.jsp");
             }
-
-
         }
     }
 }
