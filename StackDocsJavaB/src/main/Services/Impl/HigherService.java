@@ -22,99 +22,82 @@ public class HigherService implements IHigherService {
 
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
-        DocTagsDTO docTagsDTO = new DocTagsDTO();
         List<DocTagsDAL> list = new ArrayList<>();
-
-        for (int i = 0; i < docTagIds.length; i++) {
-            // Paruosiam modeli
-            DBQueryModel model = new DBQueryModel();
-            model.table = "DocTags";
-            model.where = "id";
-            model.whereValue = new String[]{docTagIds[i]};
-            model.single = true;
-            // Pernesam zinutes
-            DBqueryDTO dBqueryDTO = crud.read(model);
-            docTagsDTO.setSuccess(dBqueryDTO.isSuccess());
-            docTagsDTO.setMessage(dBqueryDTO.getMessage());
-            // Tikrinam
-            if (dBqueryDTO.isSuccess()) {
-                // mano pirmasis narys, nes tik viena id is duombazes
-                List<Object> dataById = dBqueryDTO.getData().get(0);
-                list.add(createDocTagsDALfromList(dataById));
+        DBQueryModel model = new DBQueryModel();
+        model.table = "DocTags";
+        model.where = "id";
+        model.whereValue = docTagIds;
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (dBqueryDTO.isSuccess()) {
+            List<List<Object>> data = dBqueryDTO.getData();
+            for (int i = 0; i < data.size(); i++) {
+                list.add(createDocTagsDALfromList(data.get(i)));
             }
+
         }
+        DocTagsDTO docTagsDTO = new DocTagsDTO();
+        docTagsDTO.setSuccess(dBqueryDTO.isSuccess());
+        docTagsDTO.setMessage(dBqueryDTO.getMessage());
         if (!list.isEmpty()) {
             docTagsDTO.setData(list);
             return docTagsDTO;
         } else if (list.isEmpty()) {
             docTagsDTO.setMessage("DB connection vas successful, but cant find anything by Id");
             return docTagsDTO;
-        } else {
-            return docTagsDTO;
         }
+        return docTagsDTO;
     }
 
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
+        List<TopicsDAL> list = new ArrayList<>();
         DBQueryModel model = new DBQueryModel();
         model.table = "Topics";
         model.where = "id";
         model.whereValue = topicIds;
         DBqueryDTO dbDTO = crud.read(model);
-
-        TopicsDTO tDTO = new TopicsDTO();
-
-        tDTO.setSuccess(dbDTO.isSuccess());
-        tDTO.setMessage(dbDTO.getMessage());
-        List<TopicsDAL> list = new ArrayList<>();
         if (dbDTO.isSuccess()) {
             List<List<Object>> data = dbDTO.getData();
             for (int i = 0; i < data.size(); i++) {
                 list.add(createTopicsDALfromList(data.get(i)));
             }
         }
-
+        TopicsDTO tDTO = new TopicsDTO();
+        tDTO.setSuccess(dbDTO.isSuccess());
+        tDTO.setMessage(dbDTO.getMessage());
         if (!list.isEmpty()) {
             tDTO.setData(list);
             return tDTO;
-        } else if (list.isEmpty()){
+        } else if (list.isEmpty()) {
             tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
             return tDTO;
         }
         return tDTO;
-}
+    }
 
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
+        List<ExampleDAL> list = new ArrayList<>();
         DBQueryModel model = new DBQueryModel();
         model.table = "Examples";
+        model.where = "id";
+        model.whereValue = exampleIds;
         DBqueryDTO dbDTO = crud.read(model);
+        if (dbDTO.isSuccess()) {
+            List<List<Object>> data = dbDTO.getData();
+            for (int i = 0; i < data.size(); i++) {
+                list.add(createExampleDALfromList(data.get(i)));
+            }
+        }
         ExampleDTO eDTO = new ExampleDTO();
-
         eDTO.setSuccess(dbDTO.isSuccess());
         eDTO.setMessage(dbDTO.getMessage());
-
-        if (dbDTO.isSuccess()) {
-
-            List<ExampleDAL> list = new ArrayList<>();
-            List<List<Object>> data = dbDTO.getData();
-
-            for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                for (int j = 0; j < exampleIds.length; j++) {
-                    if (columns.get(0).toString().equals(exampleIds[j])) {
-                        list.add(createExampleDALfromList(columns));
-                    }
-                }
-            }
-
-            if (!list.isEmpty()) {
-                eDTO.setData(list);
-                return eDTO;
-            } else {
-                eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-                return eDTO;
-            }
+        if (!list.isEmpty()) {
+            eDTO.setData(list);
+            return eDTO;
+        } else if (list.isEmpty()) {
+            eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+            return eDTO;
         }
         return eDTO;
     }
@@ -291,14 +274,10 @@ public class HigherService implements IHigherService {
             model.table = "Topics";
             model.where = "id";
             model.whereValue = new String[]{id};
-            // Pernesam zinutes
             DBqueryDTO dBqueryDTO = crud.read(model);
             topicsDTO.setSuccess(dBqueryDTO.isSuccess());
             topicsDTO.setMessage(dBqueryDTO.getMessage());
-
-            // Tikrinam
             if (dBqueryDTO.isSuccess()) {
-                // mano pirmasis narys, nes tik viena id is duombazes
                 List<List<Object>> data = dBqueryDTO.getData();
                 for (int i = 0; i < data.size(); i++) {
                     list.add(createTopicsDALfromList(data.get(i)));
@@ -316,9 +295,7 @@ public class HigherService implements IHigherService {
             topicsDTO.setSuccess(dBqueryDTO.isSuccess());
             topicsDTO.setMessage(dBqueryDTO.getMessage());
 
-            // Tikrinam
             if (dBqueryDTO.isSuccess()) {
-                // mano pirmasis narys, nes tik viena id is duombazes
                 List<List<Object>> data = dBqueryDTO.getData();
                 for (int i = 0; i < data.size(); i++) {
                     list.add(createTopicsDALfromList(data.get(i)));
@@ -358,7 +335,6 @@ public class HigherService implements IHigherService {
         dal.setDocTopicId(Long.parseLong(col.get(1).toString()));
         dal.setTitle((String) col.get(2));
         dal.setCreationDate((String) col.get(3));
-        System.out.println((String) col.get(3));
         dal.setLastEditDate((String) col.get(4));
         dal.setScore(Long.parseLong(col.get(5).toString()));
         dal.setContributorCount(Long.parseLong(col.get(6).toString()));
