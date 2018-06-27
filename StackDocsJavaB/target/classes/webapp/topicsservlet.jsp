@@ -41,14 +41,15 @@
             </li>
         </ul>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <button class="col-sm-2 offset-sm-2" onclick="funkcija_atgal();">Back</button>
-        <div class="col-sm-2 offset-sm-2">Hello</div>
-        <button class="col-sm-2 offset-sm-2" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">
+        <button class="col-auto btn btn-secondary" onclick="funkcija_atgal();">Back</button>
+        <div class="col-sm-2 offset-sm-2"></div>
+        <div class="col-sm-2 offset-sm-2"></div>
+        <button class="col-auto btn btn-info" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">
             Example
         </button>
-        <div class="col-sm-2 offset-sm-2">Hello 2</div>
+
     </div>
 </div>
 
@@ -75,7 +76,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Button 2</button>
+                <%--<button type="button" class="btn btn-primary">Button 2</button>--%>
             </div>
         </div>
     </div>
