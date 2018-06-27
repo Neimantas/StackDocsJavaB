@@ -71,7 +71,6 @@ public class Pagination {
             }
 
         }
-        //Reduce topicsAndDocTagsIds by docTagId
         else if (docTagId != null) {
             List<String[]> tempList = new ArrayList<>();
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
@@ -79,7 +78,6 @@ public class Pagination {
             }
             topicsAndDocTagsIds = tempList;
         }
-        //Reduce topicsAndDocTagsIds by queries
         else if (searchQuery != null) {
             String[] queries = searchQuery.trim().toLowerCase().split(" ");
             TopicsDTO topicsDTO = hs.getAllTopics();
@@ -189,7 +187,6 @@ public class Pagination {
             topic.setTitle("No results");
             topicsList.add(topic);
         }
-        System.out.println("ListSIZE: " + topicsList.size());
     }
 
     private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
