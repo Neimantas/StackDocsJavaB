@@ -24,6 +24,8 @@ public class Pagination {
 
     public List<Topic> getList(URLSettingsModel model) {
         resetValues();
+        topicsList = new ArrayList<>();
+        allConnectionsWithDataBaseIsSuccess = true;
         getListOftopicsAndDocTagsIdsFromDataBaseOrCache();
         reduceListByDocTagIdAndSearchQuery(model.docTagId, model.searchQuery);
         collectTopicsIds(model.topicId, model.after);
@@ -153,9 +155,9 @@ public class Pagination {
                 if (topicsAndDocTagsIds.get(i)[0].equals(topicId)) indexOfTopicFound = i;
             }
             if (indexOfTopicFound - 1 >= 0) {
-                for (int i = indexOfTopicFound; i < topicsAndDocTagsIds.size(); i++) {
-                    if (counter < 10 && i - 10 >= 0) {
-                        collectedIds.add("" + topicsAndDocTagsIds.get(i - 10)[0]);
+                for (int i = indexOfTopicFound - 10; i < topicsAndDocTagsIds.size(); i++) {
+                    if (counter < 10 && i >= 0) {
+                        collectedIds.add("" + topicsAndDocTagsIds.get(i)[0]);
                         counter++;
                     }
                     if (counter == 10) {
@@ -189,6 +191,7 @@ public class Pagination {
             topic.setTitle("No results");
             topicsList.add(topic);
         }
+        System.out.println("ListSIZE: " + topicsList.size());
     }
 
     private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
