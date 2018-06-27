@@ -42,7 +42,7 @@ public class Pagination {
 
     private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
 
-        if (searchQuery != null && docTagId != null) {
+        if ((searchQuery != null && !searchQuery.trim().equals("")) && (docTagId != null && !docTagId.trim().equals(""))) {
             String[] queries = searchQuery.trim().toLowerCase().split(" ");
             TopicsDTO topicsDTO = hs.getAllTopics();
             allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
@@ -69,16 +69,15 @@ public class Pagination {
                 }
                 topicsAndDocTagsIds = tempList;
             }
-
         }
-        else if (docTagId != null) {
+        else if (docTagId != null && !docTagId.trim().equals("")) {
             List<String[]> tempList = new ArrayList<>();
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (topicsAndDocTagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDocTagsIds.get(i));
             }
             topicsAndDocTagsIds = tempList;
         }
-        else if (searchQuery != null) {
+        else if (searchQuery != null && !searchQuery.trim().equals("")) {
             String[] queries = searchQuery.trim().toLowerCase().split(" ");
             TopicsDTO topicsDTO = hs.getAllTopics();
             allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
@@ -171,7 +170,6 @@ public class Pagination {
                 }
             }
         }
-
     }
 
     private void makeListFromColletedIds() {
@@ -193,7 +191,6 @@ public class Pagination {
         Topic topic = new Topic();
         topic.setId(dal.getId());
         topic.setTitle(dal.getTitle());
-        //topic.setDocTagTitle(hs.getDocTagById("" + dal.getDocTagId()).getData().get(0).getTag());
         return topic;
     }
 
