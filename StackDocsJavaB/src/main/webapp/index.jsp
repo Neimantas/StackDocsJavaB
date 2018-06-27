@@ -59,17 +59,12 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
-
                     </div>
                 </div>
             </form>
-
-
         </div>
-
     </div>
 
-    <!--<div class="container">-->
 
     <table class="table table-bordered shadow-lg p-3 mb-5 bg-white rounded">
 
@@ -95,6 +90,7 @@
             <li class="page-item" id="previous" onclick="changePage(this.id)">
                 <a class="page-link text-dark">Atgal</a>
             </li>
+
             <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
 
             <li class="page-item" id="next" onclick="changePage(this.id)">

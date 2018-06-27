@@ -48,36 +48,10 @@ public class ServletIndex extends HttpServlet {
             url.after = after;
             List<Topic> topicList = pagination.getList(url);
             request.setAttribute("topicList", topicList);
-
-            DropDown dropDown = new DropDown();
-            List<DocTag> docList = dropDown.getList();
-            request.setAttribute("doctags", docList);
-        } else {
-            DropDown dropDown = new DropDown();
-            List<DocTag> dataList = dropDown.getList();
-            request.setAttribute("doctags", dataList);
         }
+        DropDown dropDown = new DropDown();
+        List<DocTag> docList = dropDown.getList();
+        request.setAttribute("doctags", docList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
-//        response.sendRedirect("http://localhost:8080/index.jsp");
     }
 }
-
-
-//            IHigherService higher = new HigherService();
-//            TopicsDTO dto = higher.getAllTopics();
-//
-//            if (dto.isSuccess()){
-//                List<TopicsDAL> dalList = dto.getData();
-//                List<Topic> topicList = new ArrayList<>();
-//                dalList.forEach(dal -> {
-//                    Topic topic = new Topic();
-//                    topic.setId(dal.getId());
-//                    topic.setTitle(dal.getTitle());
-//                    topic.setDocTagTitle();
-//                    topicList.add(topic);
-//                });
-//                request.setAttribute("data", topicList);
-//                request.getRequestDispatcher("index.jsp").forward(request, response);
-//            } else {
-//                response.sendRedirect("http://localhost:8080/index.jsp");
-//            }
