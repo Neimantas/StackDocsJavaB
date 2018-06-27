@@ -7,15 +7,7 @@ function vykstaPaieska() {
 
 
 function GetTopicInfo(skaicius){
-<<<<<<< HEAD
-    location.href = "/topicsservlet?topicId=" + skaicius;
-=======
-
-
-    url = "/topics?topicId="+skaicius;
-    location.href = url;
-
->>>>>>> F19
+    location.href = "/topics?topicId=" + skaicius;
 }
 
 
@@ -37,7 +29,7 @@ function changePage(id){
         "&topicid=" + topicId;
 }
 
-<<<<<<< HEAD
+
 function getParam(parameter) {
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has(parameter)) {
@@ -45,12 +37,5 @@ function getParam(parameter) {
     } else {
         return -1;
     }
-=======
-function funkcija_atgal() {
-
-    // kelintasAtgal++;
-    url = "servletindex?kalba=&paieska=";
-    location.href = url;
->>>>>>> F19
 }
 
