@@ -44,7 +44,7 @@ public class Pagination {
 
     private void reduceListByDocTagIdAndSearchQuery(String docTagId, String searchQuery) {
 
-        if (searchQuery != null && docTagId != null) {
+        if (searchQuery != null && (docTagId != null && !docTagId.equals(""))) {
             String[] queries = searchQuery.trim().toLowerCase().split(" ");
             TopicsDTO topicsDTO = hs.getAllTopics();
             allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
@@ -74,7 +74,7 @@ public class Pagination {
 
         }
         //Reduce topicsAndDocTagsIds by docTagId
-        else if (docTagId != null) {
+        else if (docTagId != null && !docTagId.equals("")) {
             List<String[]> tempList = new ArrayList<>();
             for (int i = 0; i < topicsAndDocTagsIds.size(); i++) {
                 if (topicsAndDocTagsIds.get(i)[1].equals(docTagId)) tempList.add(topicsAndDocTagsIds.get(i));

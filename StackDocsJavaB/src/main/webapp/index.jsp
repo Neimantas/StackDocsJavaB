@@ -1,11 +1,6 @@
 <%@ taglib prefix="java" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
 <%@ page import="static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@page import="org.omg.CORBA.Request"%>--%>
-<%--<%@ page language="java" contentType="text/html; charset=ISO-8859-1"--%>
-<%--pageEncoding="ISO-8859-1"%>--%>
-
 
 <html>
 
@@ -13,96 +8,92 @@
     <link rel="stylesheet" href="css.css">
     <script src="js.js"></script>
     <title>Stack Docs JAVA</title>
-
 </head>
 
-
 <body class="bg-light">
-<div class="container">
 
-    <div class="py-5 text-center">
-        <img src="IMG/logo.png" alt="" class="paveikslelis">
-        <h2>Stack Docs JAVA</h2>
-    </div>
-
-
-    <div class="row">
-
-
-        <div class="col-md-4 order-md-1 mb-4">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-muted">Pasirinkite kalbą</span>
-            </h4>
-            <select class="custom-select d-block w-100" id="kalba" required>
-
-                <option value="0">
-                    "Pasirinkimas..."
-                </option>
-
-                <java:forEach var="tags" items="${doctags}">
-
-                    <option value="${tags.getId()}">
-                            ${tags.getTag()}
-                    </option>
-
-                </java:forEach>
-
-            </select>
-
-            <button type="submit" class="btn btn-light" onclick="vykstaPaieska();">Paieška</button>
+    <div class="container">
+        <div class="py-5 text-center">
+            <img src="IMG/logo.png" alt="" class="paveikslelis">
+            <h2>Stack Docs JAVA</h2>
         </div>
 
+        <form id="myForm">
+            <div class="row">
+                <div class="col-md-4 order-md-1 mb-4">
 
-        <div class="col-md-8 order-md-2">
-            <h4 class="mb-3"> Paieška pagal frazę</h4>
-            <form class="needs-validation was-validated">
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
-                    </div>
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted">Pasirinkite kalbą</span>
+                    </h4>
+
+                    <select class="form-control custom-select d-block w-100" id="kalba">
+
+                        <option value="">
+                            "Pasirinkimas..."
+                        </option>
+
+                        <java:forEach var="tags" items="${doctags}">
+
+                            <option value="${tags.getId()}">
+                                    ${tags.getTag()}
+                            </option>
+
+                        </java:forEach>
+
+                    </select>
+
+                    <button type="submit" class="btn btn-light">Paieška</button>
+
                 </div>
-            </form>
-        </div>
+
+
+                <div class="col-md-8 order-md-2">
+
+                    <h4 class="mb-3"> Paieška pagal frazę</h4>
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered shadow-lg p-3 mb-5 bg-white rounded">
+
+            <tbody>
+
+            <java:forEach var="topic" items="${topicList}">
+                <tr id="${topic.getId()}" onclick="GetTopicInfo(${topic.getId()});">
+                    <td>${topic.getTitle()}</td>
+                </tr>
+            </java:forEach>
+
+            </tbody>
+
+        </table>
+
+        <nav aria-label="Puslapiu navigacija">
+
+            <ul class="pagination justify-content-center">
+
+                <li class="page-item" id="previous" onclick="changePage(this.id)">
+                    <a class="page-link text-dark">Atgal</a>
+                </li>
+
+                <li class="page-item" id="puslapio-numeris">
+                    <a class="page-link text-dark"><%= request.getParameter("page") != null ? request.getParameter("page") : 1%></a>
+                </li>
+
+                <li class="page-item" id="next" onclick="changePage(this.id)">
+                    <a class="page-link text-dark">Pirmyn</a>
+                </li>
+
+            </ul>
+        </nav>
     </div>
-
-
-    <table class="table table-bordered shadow-lg p-3 mb-5 bg-white rounded">
-
-        <tbody>
-
-
-        <java:forEach var="topic" items="${topicList}">
-            <tr id="${topic.getId()}" onclick="GetTopicInfo(${topic.getId()});">
-                <td>${topic.getId()}</td>
-                <td>${topic.getTitle()}</td>
-            </tr>
-        </java:forEach>
-
-
-        </tbody>
-
-    </table>
-
-    <nav aria-label="Puslapiu navigacija">
-
-        <ul class="pagination justify-content-center">
-
-            <li class="page-item" id="previous" onclick="changePage(this.id)">
-                <a class="page-link text-dark">Atgal</a>
-            </li>
-
-            <li class="page-item" id="puslapio-numeris"><a class="page-link text-dark">1</a></li>
-
-            <li class="page-item" id="next" onclick="changePage(this.id)">
-                <a class="page-link text-dark">Pirmyn</a>
-            </li>
-
-        </ul>
-    </nav>
-
-
-</div>
-
 
 </body>
 </html>
