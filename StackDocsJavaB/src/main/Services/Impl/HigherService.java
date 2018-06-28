@@ -17,306 +17,254 @@ import java.util.List;
 
 public class HigherService implements IHigherService {
 
-    ICrud crud = new Crud();
-    ICache cache = Cache.getInstance();
+    private ICrud crud = new Crud();
+    private ICache cache = Cache.getInstance();
+    private final static String MESSAGE = "DB connection was successful, but cant find anything by Id or crud is not working properly";
 
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
-        List<DocTagsDAL> list = new ArrayList<>();
+        DocTagsDTO docTagsDTO = new DocTagsDTO();
         DBQueryModel model = new DBQueryModel();
         model.table = "DocTags";
         model.where = "id";
         model.whereValue = docTagIds;
         DBqueryDTO dBqueryDTO = crud.read(model);
-        if (dBqueryDTO.isSuccess()) {
-            List<List<Object>> data = dBqueryDTO.getData();
-            for (int i = 0; i < data.size(); i++) {
-                list.add(createDocTagsDALfromList(data.get(i)));
-            }
-
-        }
-        DocTagsDTO docTagsDTO = new DocTagsDTO();
-        docTagsDTO.setSuccess(dBqueryDTO.isSuccess());
-        docTagsDTO.setMessage(dBqueryDTO.getMessage());
-        if (!list.isEmpty()) {
-            docTagsDTO.setData(list);
-            return docTagsDTO;
-        } else if (list.isEmpty()) {
-            docTagsDTO.setMessage("DB connection vas successful, but cant find anything by Id");
+        if (!dBqueryDTO.isSuccess()) {
+            docTagsDTO.setSuccess(false);
+            docTagsDTO.setMessage(dBqueryDTO.getMessage());
             return docTagsDTO;
         }
+        if (dBqueryDTO.getData() == null) {
+            docTagsDTO.setSuccess(false);
+            docTagsDTO.setMessage(MESSAGE);
+            return docTagsDTO;
+        }
+        List<DocTagsDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createDocTagsDALfromList(columns));
+        }
+        docTagsDTO.setSuccess(true);
+        docTagsDTO.setData(list);
         return docTagsDTO;
     }
 
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
-        List<TopicsDAL> list = new ArrayList<>();
+        TopicsDTO topicsDTO = new TopicsDTO();
         DBQueryModel model = new DBQueryModel();
         model.table = "Topics";
         model.where = "id";
         model.whereValue = topicIds;
-        DBqueryDTO dbDTO = crud.read(model);
-        if (dbDTO.isSuccess()) {
-            List<List<Object>> data = dbDTO.getData();
-            for (int i = 0; i < data.size(); i++) {
-                list.add(createTopicsDALfromList(data.get(i)));
-            }
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (!dBqueryDTO.isSuccess()) {
+            topicsDTO.setSuccess(false);
+            topicsDTO.setMessage(dBqueryDTO.getMessage());
+            return topicsDTO;
         }
-        TopicsDTO tDTO = new TopicsDTO();
-        tDTO.setSuccess(dbDTO.isSuccess());
-        tDTO.setMessage(dbDTO.getMessage());
-        if (!list.isEmpty()) {
-            tDTO.setData(list);
-            return tDTO;
-        } else if (list.isEmpty()) {
-            tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-            return tDTO;
+        if (dBqueryDTO.getData() == null) {
+            topicsDTO.setSuccess(false);
+            topicsDTO.setMessage(MESSAGE);
+            return topicsDTO;
         }
-        return tDTO;
+        List<TopicsDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createTopicsDALfromList(columns));
+        }
+        topicsDTO.setSuccess(true);
+        topicsDTO.setData(list);
+        return topicsDTO;
     }
 
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
-        List<ExampleDAL> list = new ArrayList<>();
+        ExampleDTO exampleDTO = new ExampleDTO();
         DBQueryModel model = new DBQueryModel();
         model.table = "Examples";
         model.where = "id";
         model.whereValue = exampleIds;
-        DBqueryDTO dbDTO = crud.read(model);
-        if (dbDTO.isSuccess()) {
-            List<List<Object>> data = dbDTO.getData();
-            for (int i = 0; i < data.size(); i++) {
-                list.add(createExampleDALfromList(data.get(i)));
-            }
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (!dBqueryDTO.isSuccess()) {
+            exampleDTO.setSuccess(false);
+            exampleDTO.setMessage(dBqueryDTO.getMessage());
+            return exampleDTO;
         }
-        ExampleDTO eDTO = new ExampleDTO();
-        eDTO.setSuccess(dbDTO.isSuccess());
-        eDTO.setMessage(dbDTO.getMessage());
-        if (!list.isEmpty()) {
-            eDTO.setData(list);
-            return eDTO;
-        } else if (list.isEmpty()) {
-            eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-            return eDTO;
+        if (dBqueryDTO.getData() == null) {
+            exampleDTO.setSuccess(false);
+            exampleDTO.setMessage(MESSAGE);
+            return exampleDTO;
         }
-        return eDTO;
+        List<ExampleDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createExampleDALfromList(columns));
+        }
+        exampleDTO.setSuccess(true);
+        exampleDTO.setData(list);
+        return exampleDTO;
     }
 
     @Override
     public DocTagsDTO getAllDocTags() {
+        DocTagsDTO docTagsDTO = new DocTagsDTO();
+        String cachePlacement = "allDocTags";
+        if (cache.get(cachePlacement) != null) {
+            return (DocTagsDTO) cache.get(cachePlacement);
+        }
         DBQueryModel model = new DBQueryModel();
         model.table = "DocTags";
-        DBqueryDTO dbDTO = crud.read(model);
-        DocTagsDTO dtDTO = new DocTagsDTO();
-
-        dtDTO.setSuccess(dbDTO.isSuccess());
-        dtDTO.setMessage(dbDTO.getMessage());
-
-        if (dbDTO.isSuccess()) {
-
-            List<DocTagsDAL> list = new ArrayList<>();
-            List<List<Object>> data = dbDTO.getData();
-
-            for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                list.add(createDocTagsDALfromList(columns));
-            }
-
-            if (!list.isEmpty()) {
-                dtDTO.setData(list);
-                return dtDTO;
-            } else {
-                dtDTO.setMessage("DB connection vas successful, but cant find any DocTags");
-                return dtDTO;
-            }
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (!dBqueryDTO.isSuccess()) {
+            docTagsDTO.setSuccess(false);
+            docTagsDTO.setMessage(dBqueryDTO.getMessage());
+            return docTagsDTO;
         }
-        return dtDTO;
+        if (dBqueryDTO.getData() == null) {
+            docTagsDTO.setSuccess(false);
+            docTagsDTO.setMessage(MESSAGE);
+            return docTagsDTO;
+        }
+        List<DocTagsDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createDocTagsDALfromList(columns));
+        }
+        docTagsDTO.setSuccess(true);
+        docTagsDTO.setData(list);
+        cache.put(cachePlacement, docTagsDTO);
+        return docTagsDTO;
     }
 
     @Override
     public TopicsDTO getAllTopics() {
+        TopicsDTO topicsDTO = new TopicsDTO();
+        String cachePlacement = "allTopics";
+        if (cache.get(cachePlacement) != null) {
+            return (TopicsDTO) cache.get(cachePlacement);
+        }
         DBQueryModel model = new DBQueryModel();
         model.table = "Topics";
         DBqueryDTO dbDTO = crud.read(model);
-        TopicsDTO tDTO = new TopicsDTO();
-
-        tDTO.setSuccess(dbDTO.isSuccess());
-        tDTO.setMessage(dbDTO.getMessage());
-
-        if (dbDTO.isSuccess()) {
-
-            List<TopicsDAL> list = new ArrayList<>();
-            List<List<Object>> data = dbDTO.getData();
-
-            for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                list.add(createTopicsDALfromList(columns));
-            }
-
-            if (!list.isEmpty()) {
-                tDTO.setData(list);
-                return tDTO;
-            } else {
-                tDTO.setMessage("DB connection vas successful, but cant find any Topics");
-                return tDTO;
-            }
-        }
-        return tDTO;
-    }
-
-    @Override
-    public ExampleDTO getAllEcamples() {
-        DBQueryModel model = new DBQueryModel();
-        model.table = "Examples";
-        DBqueryDTO dbDTO = crud.read(model);
-        ExampleDTO eDTO = new ExampleDTO();
-
-        eDTO.setSuccess(dbDTO.isSuccess());
-        eDTO.setMessage(dbDTO.getMessage());
-
-        if (dbDTO.isSuccess()) {
-
-            List<ExampleDAL> list = new ArrayList<>();
-            List<List<Object>> data = dbDTO.getData();
-
-            for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                list.add(createExampleDALfromList(columns));
-            }
-
-            if (!list.isEmpty()) {
-                eDTO.setData(list);
-                return eDTO;
-            } else {
-                eDTO.setMessage("DB connection vas successful, but cant find any Examples");
-                return eDTO;
-            }
-        }
-        return eDTO;
-    }
-
-    @Override
-    public TopicsDTO getTopicsByDocTagId(String docTagId) {
-        //model
-        DBQueryModel model = new DBQueryModel();
-        model.table = "Topics";
-        model.where = "DocTagId";
-        model.whereValue = new String[]{docTagId};
-        //Get data, set messages
-        DBqueryDTO dbDTO = crud.read(model);
-        TopicsDTO tDTO = new TopicsDTO();
-        tDTO.setSuccess(dbDTO.isSuccess());
-        tDTO.setMessage(dbDTO.getMessage());
-
         if (!dbDTO.isSuccess()) {
-            return tDTO;
+            topicsDTO.setSuccess(false);
+            topicsDTO.setMessage(dbDTO.getMessage());
+            return topicsDTO;
         }
-
+        if (dbDTO.getData() == null) {
+            topicsDTO.setSuccess(false);
+            topicsDTO.setMessage(MESSAGE);
+            return topicsDTO;
+        }
         List<TopicsDAL> list = new ArrayList<>();
         List<List<Object>> data = dbDTO.getData();
         for (int i = 0; i < data.size(); i++) {
             List<Object> columns = data.get(i);
             list.add(createTopicsDALfromList(columns));
         }
-
-        if (list.isEmpty()) {
-            tDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-            return tDTO;
-        }
-        tDTO.setData(list);
-        return tDTO;
+        topicsDTO.setSuccess(true);
+        topicsDTO.setData(list);
+        cache.put(cachePlacement, topicsDTO);
+        return topicsDTO;
     }
 
+    @Override
+    public ExampleDTO getAllExamples() {
+        ExampleDTO exampleDTO = new ExampleDTO();
+        String cachePlacement = "allDocTags";
+        if (cache.get(cachePlacement) != null) {
+            return (ExampleDTO) cache.get(cachePlacement);
+        }
+        DBQueryModel model = new DBQueryModel();
+        model.table = "Examples";
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (!dBqueryDTO.isSuccess()) {
+            exampleDTO.setSuccess(false);
+            exampleDTO.setMessage(dBqueryDTO.getMessage());
+            return exampleDTO;
+        }
+        if (dBqueryDTO.getData() == null) {
+            exampleDTO.setSuccess(false);
+            exampleDTO.setMessage(MESSAGE);
+            return exampleDTO;
+        }
+        List<ExampleDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createExampleDALfromList(columns));
+        }
+        exampleDTO.setSuccess(true);
+        exampleDTO.setData(list);
+        cache.put(cachePlacement, exampleDTO);
+        return exampleDTO;
+    }
+
+    @Override
+    public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
+        TopicsDTO topicsDTO = new TopicsDTO();
+        DBQueryModel model = new DBQueryModel();
+        model.table = "Topics";
+        model.where = "DocTagId";
+        model.whereValue = docTagIds;
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (!dBqueryDTO.isSuccess()) {
+            topicsDTO.setSuccess(false);
+            topicsDTO.setMessage(dBqueryDTO.getMessage());
+            return topicsDTO;
+        }
+        if (dBqueryDTO.getData() == null) {
+            topicsDTO.setSuccess(false);
+            topicsDTO.setMessage(MESSAGE);
+            return topicsDTO;
+        }
+        List<TopicsDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createTopicsDALfromList(columns));
+        }
+        topicsDTO.setSuccess(true);
+        topicsDTO.setData(list);
+        return topicsDTO;
+    }
 
     @Override
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
+        ExampleDTO exampleDTO = new ExampleDTO();
         DBQueryModel model = new DBQueryModel();
         model.table = "Examples";
-        DBqueryDTO dbDTO = crud.read(model);
-        ExampleDTO eDTO = new ExampleDTO();
-
-        eDTO.setSuccess(dbDTO.isSuccess());
-        eDTO.setMessage(dbDTO.getMessage());
-
-        if (dbDTO.isSuccess()) {
-
-            List<ExampleDAL> list = new ArrayList<>();
-            List<List<Object>> data = dbDTO.getData();
-
-            for (int i = 0; i < data.size(); i++) {
-                List<Object> columns = data.get(i);
-                for (int j = 0; j < topicIds.length; j++) {
-                    if (columns.get(1).toString().equals(topicIds[j])) {
-                        list.add(createExampleDALfromList(columns));
-                    }
-                }
-            }
-
-            if (!list.isEmpty()) {
-                eDTO.setData(list);
-                return eDTO;
-            } else {
-                eDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-                return eDTO;
-            }
+        model.where = "TopicsId";
+        model.whereValue = topicIds;
+        DBqueryDTO dBqueryDTO = crud.read(model);
+        if (!dBqueryDTO.isSuccess()) {
+            exampleDTO.setSuccess(false);
+            exampleDTO.setMessage(dBqueryDTO.getMessage());
+            return exampleDTO;
         }
-        return eDTO;
-    }
-
-
-    @Override
-    public TopicsDTO getTenTopicsById(Boolean after, String id) {
-        TopicsDTO topicsDTO = new TopicsDTO();
-        List<TopicsDAL> list = new ArrayList<>();
-
-        if (after) {
-            DBQueryModel model = new DBQueryModel();
-            model.table = "Topics";
-            model.where = "id";
-            model.whereValue = new String[]{id};
-            DBqueryDTO dBqueryDTO = crud.read(model);
-            topicsDTO.setSuccess(dBqueryDTO.isSuccess());
-            topicsDTO.setMessage(dBqueryDTO.getMessage());
-            if (dBqueryDTO.isSuccess()) {
-                List<List<Object>> data = dBqueryDTO.getData();
-                for (int i = 0; i < data.size(); i++) {
-                    list.add(createTopicsDALfromList(data.get(i)));
-                }
-            }
+        if (dBqueryDTO.getData() == null) {
+            exampleDTO.setSuccess(false);
+            exampleDTO.setMessage(MESSAGE);
+            return exampleDTO;
         }
-        if (!after) {
-            DBQueryModel model = new DBQueryModel();
-            model.table = "Topics";
-            model.where = "id";
-            model.whereValue = new String[]{id};
-            model.after = false;
-
-            DBqueryDTO dBqueryDTO = crud.read(model);
-            topicsDTO.setSuccess(dBqueryDTO.isSuccess());
-            topicsDTO.setMessage(dBqueryDTO.getMessage());
-
-            if (dBqueryDTO.isSuccess()) {
-                List<List<Object>> data = dBqueryDTO.getData();
-                for (int i = 0; i < data.size(); i++) {
-                    list.add(createTopicsDALfromList(data.get(i)));
-                }
-            }
+        List<ExampleDAL> list = new ArrayList<>();
+        List<List<Object>> data = dBqueryDTO.getData();
+        for (int i = 0; i < data.size(); i++) {
+            List<Object> columns = data.get(i);
+            list.add(createExampleDALfromList(columns));
         }
-        if (!list.isEmpty()) {
-            topicsDTO.setData(list);
-            return topicsDTO;
-        } else if (list.isEmpty()) {
-            topicsDTO.setMessage("DB connection vas successful, but cant find anything by Id");
-            return topicsDTO;
-        } else {
-            return topicsDTO;
-        }
+        exampleDTO.setSuccess(true);
+        exampleDTO.setData(list);
+        return exampleDTO;
     }
 
     private DocTagsDAL createDocTagsDALfromList(List<Object> col) {
 
         DocTagsDAL dal = new DocTagsDAL();
-
         dal.setId(Long.parseLong(col.get(0).toString()));
         dal.setTag((String) col.get(1));
         dal.setTitle((String) col.get(2));
@@ -330,7 +278,6 @@ public class HigherService implements IHigherService {
     private ExampleDAL createExampleDALfromList(List<Object> col) {
 
         ExampleDAL dal = new ExampleDAL();
-
         dal.setId(Long.parseLong(col.get(0).toString()));
         dal.setDocTopicId(Long.parseLong(col.get(1).toString()));
         dal.setTitle((String) col.get(2));
