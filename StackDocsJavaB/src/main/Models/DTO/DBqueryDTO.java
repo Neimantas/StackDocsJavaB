@@ -2,34 +2,14 @@ package Models.DTO;
 
 import java.util.List;
 
-public class DBqueryDTO {
-    private boolean success;
-    private String message;
-    private List<List<Object>> data;
+public class DBqueryDTO<T> {
+    public boolean success;
+    public String message;
+    public List<T> data;
 
-    public boolean isSuccess() {
-        return success;
+    public DBqueryDTO(boolean _success, String msg, List<T> list){
+        success = _success;
+        message = msg;
+        data = list;
     }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public List<List<Object>> getData() {
-        return data;
-    }
-
-    public void setData(List<List<Object>> data) {
-        this.data = data;
-    }
-
-
 }

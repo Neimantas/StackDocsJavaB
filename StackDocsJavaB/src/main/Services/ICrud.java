@@ -5,7 +5,7 @@ import Models.DTO.DBqueryDTO;
 
 public interface ICrud {
     DBqueryDTO create(DBQueryModel create);
-    DBqueryDTO read(DBQueryModel dbQuery);
+    <T> DBqueryDTO<T> read(DBQueryModel dbQuery, Class<T> type);
     DBqueryDTO update(DBQueryModel update);
     DBqueryDTO delete(DBQueryModel delete);
 }
