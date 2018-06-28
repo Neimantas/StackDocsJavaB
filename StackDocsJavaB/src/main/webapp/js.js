@@ -52,3 +52,9 @@ function getParam(parameter) {
     }
 }
 
+function funkcija_atgal() {
+
+    location.href ="servletindex?kalba=&paieska=";
+
+
+}
