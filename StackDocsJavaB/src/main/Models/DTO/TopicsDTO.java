@@ -5,34 +5,13 @@ import Models.DAL.TopicsDAL;
 import java.util.List;
 
 public class TopicsDTO {
-    private boolean Success;
-    private String Message;
-    private List<TopicsDAL> data;
+    public boolean success;
+    public String message;
+    public List<TopicsDAL> data;
 
-    public List<TopicsDAL> getData() {
-        return data;
+    public TopicsDTO(boolean _success, String msg, List<TopicsDAL> list){
+        success = _success;
+        message = msg;
+        data = list;
     }
-
-    public void setData(List<TopicsDAL> data) {
-        this.data = data;
-    }
-
-
-    public boolean isSuccess() {
-        return Success;
-    }
-
-    public void setSuccess(boolean success) {
-        Success = success;
-    }
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public void setMessage(String message) {
-        Message = message;
-    }
-
-
 }

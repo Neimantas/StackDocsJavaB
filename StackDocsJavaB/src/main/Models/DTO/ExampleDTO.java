@@ -6,34 +6,13 @@ import java.util.List;
 
 public class ExampleDTO {
 
-    private boolean Success;
-    private String Message;
-    private List<ExampleDAL> data;
+    public boolean success;
+    public String message;
+    public List<ExampleDAL> data;
 
-    public List<ExampleDAL> getData() {
-        return data;
+    public ExampleDTO(boolean _success, String msg, List<ExampleDAL> list){
+        success = _success;
+        message = msg;
+        data = list;
     }
-
-    public void setData(List<ExampleDAL> data) {
-        this.data = data;
-    }
-
-
-    public boolean isSuccess() {
-        return Success;
-    }
-
-    public void setSuccess(boolean success) {
-        Success = success;
-    }
-
-    public String getMessage() {
-        return Message;
-    }
-
-    public void setMessage(String message) {
-        Message = message;
-    }
-
-
 }
