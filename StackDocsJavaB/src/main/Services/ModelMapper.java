@@ -8,7 +8,7 @@ import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
 
 public class ModelMapper <T>{
-    <T> T map(T obj) {
+    public <T> T map(T obj) {
         if (obj instanceof DocTagsDAL) {
             DocTag docTag = new DocTag();
             docTag.id =((DocTagsDAL) obj).getId();

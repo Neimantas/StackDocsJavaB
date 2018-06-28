@@ -182,15 +182,15 @@ public class Pagination {
             }
         } else {
             Topic topic = new Topic();
-            topic.setTitle("No results");
+            topic.title = "No results";
             topicsList.add(topic);
         }
     }
 
     private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
         Topic topic = new Topic();
-        topic.setId(dal.getId());
-        topic.setTitle(dal.getTitle());
+        topic.id = dal.getId();
+        topic.title = dal.getTitle();
         return topic;
     }
 
