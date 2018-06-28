@@ -48,9 +48,9 @@ public class DropDown {
 
                 DocTagsDAL mydal = dropDown.get(i);
 
-                docTag.setId(mydal.getId());
+                docTag.id = mydal.getId();
 
-                docTag.setTag(mydal.getTag());
+                docTag.tag = mydal.getTag();
 
                 drop.add(docTag);
 
