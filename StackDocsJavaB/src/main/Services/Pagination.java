@@ -45,24 +45,24 @@ public class Pagination {
         if ((searchQuery != null && !searchQuery.trim().equals("")) && (docTagId != null && !docTagId.trim().equals(""))) {
             String[] queries = searchQuery.trim().toLowerCase().split(" ");
             TopicsDTO topicsDTO = hs.getAllTopics();
-            allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
-            if (topicsDTO.isSuccess()) {
+            allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.success;
+            if (topicsDTO.success) {
                 List<String[]> tempList = new ArrayList<>();
-                for (int i = 0; i < topicsDTO.getData().size(); i++) {
+                for (int i = 0; i < topicsDTO.data.size(); i++) {
                     for (int j = 0; j < queries.length; j++) {
-                        String docId = "" + topicsDTO.getData().get(i).getDocTagId();
-                        String title = topicsDTO.getData().get(i).getTitle().toLowerCase();
-                        String introduction = topicsDTO.getData().get(i).getIntroductionMarkdown().toLowerCase();
-                        String parameters = topicsDTO.getData().get(i).getParametersMarkdown().toLowerCase();
-                        String remarks = topicsDTO.getData().get(i).getRemarksMarkdown().toLowerCase();
-                        String syntax = topicsDTO.getData().get(i).getSyntaxMarkdown().toLowerCase();
+                        String docId = "" + topicsDTO.data.get(i).DocTagId;
+                        String title = topicsDTO.data.get(i).Title.toLowerCase();
+                        String introduction = topicsDTO.data.get(i).IntroductionMarkdown.toLowerCase();
+                        String parameters = topicsDTO.data.get(i).ParametersMarkdown.toLowerCase();
+                        String remarks = topicsDTO.data.get(i).RemarksMarkdown.toLowerCase();
+                        String syntax = topicsDTO.data.get(i).SyntaxMarkdown.toLowerCase();
 
                         if ((title.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
                                 || (introduction.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
                                 || (parameters.toLowerCase().contains(normalizeText((queries[j]))) && docId.equals(docTagId))
                                 || (remarks.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
                                 || (syntax.contains(normalizeText((queries[j]))) && docId.equals(docTagId))) {
-                            String[] arr = {"" + topicsDTO.getData().get(i).getId(), "" + topicsDTO.getData().get(i).getDocTagId()};
+                            String[] arr = {"" + topicsDTO.data.get(i).Id, "" + topicsDTO.data.get(i).DocTagId};
                             tempList.add(arr);
                         }
                     }
@@ -80,24 +80,24 @@ public class Pagination {
         else if (searchQuery != null && !searchQuery.trim().equals("")) {
             String[] queries = searchQuery.trim().toLowerCase().split(" ");
             TopicsDTO topicsDTO = hs.getAllTopics();
-            allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
-            if (topicsDTO.isSuccess()) {
+            allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.success;
+            if (topicsDTO.success) {
                 List<String[]> tempList = new ArrayList<>();
-                for (int i = 0; i < topicsDTO.getData().size(); i++) {
+                for (int i = 0; i < topicsDTO.data.size(); i++) {
                     for (int j = 0; j < queries.length; j++) {
 
-                        String title = topicsDTO.getData().get(i).getTitle().toLowerCase();
-                        String introduction = topicsDTO.getData().get(i).getIntroductionMarkdown().toLowerCase();
-                        String parameters = topicsDTO.getData().get(i).getParametersMarkdown().toLowerCase();
-                        String remarks = topicsDTO.getData().get(i).getRemarksMarkdown().toLowerCase();
-                        String syntax = topicsDTO.getData().get(i).getSyntaxMarkdown().toLowerCase();
+                        String title = topicsDTO.data.get(i).Title.toLowerCase();
+                        String introduction = topicsDTO.data.get(i).IntroductionMarkdown.toLowerCase();
+                        String parameters = topicsDTO.data.get(i).ParametersMarkdown.toLowerCase();
+                        String remarks = topicsDTO.data.get(i).RemarksMarkdown.toLowerCase();
+                        String syntax = topicsDTO.data.get(i).SyntaxMarkdown.toLowerCase();
 
                         if (title.contains(normalizeText((queries[j])))
                                 || introduction.contains(normalizeText((queries[j])))
                                 || parameters.contains(normalizeText((queries[j])))
                                 || remarks.contains(normalizeText((queries[j])))
                                 || syntax.contains(normalizeText((queries[j])))) {
-                            String[] arr = {"" + topicsDTO.getData().get(i).getId(), "" + topicsDTO.getData().get(i).getDocTagId()};
+                            String[] arr = {"" + topicsDTO.data.get(i).Id, "" + topicsDTO.data.get(i).DocTagId};
                             tempList.add(arr);
                         }
                     }
@@ -175,22 +175,22 @@ public class Pagination {
     private void makeListFromColletedIds() {
         String[] idsArr = collectedIds.toArray(new String[collectedIds.size()]);
         TopicsDTO topicsDTO = hs.getTopicById(idsArr);
-        allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
-        if (topicsDTO.isSuccess() && topicsDTO.getData() != null) {
-            for (int i = 0; i < topicsDTO.getData().size(); i++) {
-                topicsList.add(makeTopicFromTopicsDal(topicsDTO.getData().get(i)));
+        allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.success;
+        if (topicsDTO.success && topicsDTO.data != null) {
+            for (int i = 0; i < topicsDTO.data.size(); i++) {
+                topicsList.add(makeTopicFromTopicsDal(topicsDTO.data.get(i)));
             }
         } else {
             Topic topic = new Topic();
-            topic.setTitle("No results");
+            topic.Title = "No results";
             topicsList.add(topic);
         }
     }
 
     private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
         Topic topic = new Topic();
-        topic.setId(dal.getId());
-        topic.setTitle(dal.getTitle());
+        topic.Id = dal.Id;
+        topic.Title = dal.Title;
         return topic;
     }
 
@@ -198,10 +198,10 @@ public class Pagination {
         String LIST_PLACEMENT_IN_CACHE = "topicsAndDocTagsIds";
         if (cache.get(LIST_PLACEMENT_IN_CACHE) == null) {
             TopicsDTO tdto = hs.getAllTopics();
-            allConnectionsWithDataBaseIsSuccess = tdto.isSuccess();
-            if (tdto.isSuccess()) {
-                for (int i = 0; i < tdto.getData().size(); i++) {
-                    String[] arr = {"" + tdto.getData().get(i).getId(), "" + tdto.getData().get(i).getDocTagId()};
+            allConnectionsWithDataBaseIsSuccess = tdto.success;
+            if (tdto.success) {
+                for (int i = 0; i < tdto.data.size(); i++) {
+                    String[] arr = {"" + tdto.data.get(i).Id, "" + tdto.data.get(i).DocTagId};
                     topicsAndDocTagsIds.add(arr);
                     cache.put(LIST_PLACEMENT_IN_CACHE, topicsAndDocTagsIds);
                 }

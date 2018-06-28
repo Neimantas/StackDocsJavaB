@@ -1,8 +1,10 @@
 import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Topic;
+import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
+import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.IDataBase;
 import Services.IHigherService;
@@ -24,7 +26,6 @@ public class TestRunner {
         System.out.println(AssertDocTagsIds());
         System.out.println(AssertDocTagsIds2());
         System.out.println(AssertDocTagsIds3());
-        System.out.println(AssertTenTopicsById());
         System.out.println(AssertDropDownCollection());
         System.out.println(CheckCache());
         System.out.println(CheckCache2());
@@ -40,7 +41,7 @@ public class TestRunner {
     private boolean AssertDocTagsCollection() {
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        if (dto.getData().size() > 0) return true;
+        if (dto.data.size() > 0) return true;
 
         return false;
     }
@@ -50,9 +51,9 @@ public class TestRunner {
         int counter = 0;
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        for (int i = 0; i < dto.getData().size(); i++) {
+        for (int i = 0; i < dto.data.size(); i++) {
             for (int j = 0; j < ids.length; j++) {
-                if (dto.getData().get(i).getId() == ids[j]) {
+                if (dto.data.get(i).Id == ids[j]) {
 //                    System.out.println("id: " + dto.getData().get(i).getId() + ", tag: " + dto.getData().get(i).getTag());
                     counter++;
                 }
@@ -69,7 +70,7 @@ public class TestRunner {
         IHigherService higher = new HigherService();
         List<DocTagsDTO> dtoArr = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
-            if (higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
+            if (higher.getDocTagById("" + ids[i]).data.get(0) != null) {
                 dtoArr.add(higher.getDocTagById("" + ids[i]));
 //                System.out.println(dtoArr.get(i).getData().get(0).getId());
             }
@@ -85,17 +86,7 @@ public class TestRunner {
         String[] ids = {"3", "4", "5", "8"};
         IHigherService higher = new HigherService();
 
-        if (higher.getDocTagById(ids).getData().size() == ids.length) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean AssertTenTopicsById() {
-
-        IHigherService higher = new HigherService();
-
-        if (higher.getTenTopicsById(true, "3").getData().size() == 10) {
+        if (higher.getDocTagById(ids).data.size() == ids.length) {
             return true;
         }
         return false;
@@ -112,10 +103,10 @@ public class TestRunner {
     private boolean CheckCache() {
         Cache cache = Cache.getInstance();
         DocTag docTag = new DocTag();
-        docTag.setId(1);
+        docTag.Id = 1;
         cache.put("test", docTag);
         DocTag newDocTag = (DocTag)cache.get("test");
-        if (newDocTag.getId() == docTag.getId()) {
+        if (newDocTag.Id == docTag.Id) {
             return true;
         }
         return false;
@@ -124,7 +115,7 @@ public class TestRunner {
         Cache cache = Cache.getInstance();
         List<DocTag> list = new ArrayList<>();
         DocTag docTag = new DocTag();
-        docTag.setId(1);
+        docTag.Id = 1;
         list.add(docTag);
         cache.put("test", list);
         AbstractList newList = (AbstractList)cache.get("test");
@@ -133,7 +124,7 @@ public class TestRunner {
             newest.add((DocTag) item);
         }
         DocTag newDocTag = (DocTag) newList.get(0);
-        if (newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId())  {
+        if (newDocTag.Id == docTag.Id && newest.get(0).Id == docTag.Id)  {
             return true;
         }
         return false;
@@ -146,7 +137,7 @@ public class TestRunner {
         model.searchQuery = "to";
         List<Topic> list = pg.getList(model);
         for (Topic item : list) {
-            System.out.println("testinam test: title - " + item.getTitle() + ", id - " + item.getId());
+            System.out.println("testinam test: title - " + item.Title + ", id - " + item.Id);
         }
         if (pg.getList(model).size() == 10) {
             return true;
@@ -160,7 +151,7 @@ public class TestRunner {
         query.table = "Topics";
         query.where = "id";
         query.whereValue = new String[] {"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"};
-        DBqueryDTO dto = cd.read(query);
+        DBqueryDTO dto = cd.read(query, TopicsDAL.class);
 
         return false;
     }
