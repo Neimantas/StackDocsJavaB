@@ -9,6 +9,7 @@ import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.Impl.Cache;
 import Services.Impl.HigherService;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,21 +178,15 @@ public class Pagination {
         TopicsDTO topicsDTO = hs.getTopicById(idsArr);
         allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.success;
         if (topicsDTO.success && topicsDTO.data != null) {
-            for (int i = 0; i < topicsDTO.data.size(); i++) {
+            ModelMapper modelMapper = new ModelMapper();
                 topicsList.add(makeTopicFromTopicsDal(topicsDTO.data.get(i)));
+                topicsList.add(modelMapper.map(topicsDTO.getData().get(i), Topic.class));
             }
         } else {
             Topic topic = new Topic();
-            topic.Title = "No results";
+            topic.title = "No results";
             topicsList.add(topic);
         }
-    }
-
-    private Topic makeTopicFromTopicsDal(TopicsDAL dal) {
-        Topic topic = new Topic();
-        topic.Id = dal.Id;
-        topic.Title = dal.Title;
-        return topic;
     }
 
     private void getListOftopicsAndDocTagsIdsFromDataBaseOrCache() {
