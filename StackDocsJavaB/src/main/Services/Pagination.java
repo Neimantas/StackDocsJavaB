@@ -178,13 +178,13 @@ public class Pagination {
         TopicsDTO topicsDTO = hs.getTopicById(idsArr);
         allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.success;
         if (topicsDTO.success && topicsDTO.data != null) {
-            ModelMapper modelMapper = new ModelMapper();
-                topicsList.add(makeTopicFromTopicsDal(topicsDTO.data.get(i)));
-                topicsList.add(modelMapper.map(topicsDTO.getData().get(i), Topic.class));
+            for (int i = 0; i < topicsDTO.data.size(); i++) {
+                ModelMapper modelMapper = new ModelMapper();
+                topicsList.add(modelMapper.map(topicsDTO.data.get(i), Topic.class));
             }
         } else {
             Topic topic = new Topic();
-            topic.title = "No results";
+            topic.Title = "No results";
             topicsList.add(topic);
         }
     }
