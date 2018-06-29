@@ -8,25 +8,25 @@ public class QueryBuilder {
 
 
     public void buildQuery(DBQueryModel queryModel) {
-        if (queryModel.table != null) {
+        if (queryModel.getTable() != null) {
             resetQuery();
-            tableName = queryModel.table;
+            tableName = queryModel.getTable();
             sb.append("SELECT * FROM ").append(tableName).append(" WHERE 1 = 1");
-        } else if (queryModel.table == null && (tableName == null || tableName.isEmpty())) {
+        } else if (queryModel.getTable() == null && (tableName == null || tableName.isEmpty())) {
             //TODO what should happen here ???
             System.out.println("You should have given me a table name...");
             return;
         }
 
-        if (queryModel.where != null && queryModel.whereValue != null) {
+        if (queryModel.getWhere() != null && queryModel.getWhereValue() != null) {
             whereClause(queryModel);
         }
 
     }
 
     public void whereClause(DBQueryModel queryModel) {
-        String[] values = queryModel.whereValue;
-        sb.append(" AND ").append(queryModel.where).append(" IN (");
+        String[] values = queryModel.getWhereValue();
+        sb.append(" AND ").append(queryModel.getWhere()).append(" IN (");
         for (int i = 0; i < values.length; i++) {
             sb.append("'").append(values[i]).append("'");
             if (i != values.length - 1) {

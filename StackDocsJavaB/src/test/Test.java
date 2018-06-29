@@ -1,5 +1,6 @@
 import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Topic;
+import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
@@ -25,14 +26,13 @@ public class Test {
     public void DbgetConnection() throws Exception {
         IDataBase db = new DataBase();
         assertTrue(db.getConnection() != null);
-
     }
 
     @org.junit.Test
     public void AssertDocTagsCollection() throws Exception{
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        assertTrue((dto.getData().size() > 0));
+        assertTrue((dto.data.size() > 0));
     }
 
     @org.junit.Test
@@ -41,9 +41,9 @@ public class Test {
         int counter = 0;
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        for (int i = 0; i < dto.getData().size(); i++) {
+        for (int i = 0; i < dto.data.size(); i++) {
             for (int j = 0; j < ids.length; j++) {
-                if (dto.getData().get(i).getId() == ids[j]) {
+                if (dto.data.get(i).Id == ids[j]) {
                     counter++;
                 }
             }
@@ -57,7 +57,7 @@ public class Test {
         IHigherService higher = new HigherService();
         List<DocTagsDTO> dtoArr = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
-            if (higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
+            if (higher.getDocTagById("" + ids[i]).data.get(0) != null) {
                 dtoArr.add(higher.getDocTagById("" + ids[i]));
 
             }
@@ -69,14 +69,13 @@ public class Test {
     public void AssertDocTagsIds3() throws Exception{
         String[] ids = {"3", "4", "5", "8"};
         IHigherService higher = new HigherService();
-        assertTrue((higher.getDocTagById(ids).getData().size() == ids.length));
+        assertTrue((higher.getDocTagById(ids).data.size() == ids.length));
     }
-
 
     @org.junit.Test
     public void AssertDropDownCollection() throws Exception{
         DropDown dropDown = new DropDown();
-        assertTrue((dropDown.getList().size() == dropDown.getSize()));
+        assertTrue(dropDown.getList().size() == 4);
     }
 
     @org.junit.Test
@@ -84,7 +83,7 @@ public class Test {
         Cache cache = Cache.getInstance();
         List<DocTag> list = new ArrayList<>();
         DocTag docTag = new DocTag();
-        docTag.setId(1);
+        docTag.Id = 1;
         list.add(docTag);
         cache.put("test", list);
         AbstractList newList = (AbstractList) cache.get("test");
@@ -93,7 +92,7 @@ public class Test {
             newest.add((DocTag) item);
         }
         DocTag newDocTag = (DocTag) newList.get(0);
-        assertTrue(newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId());
+        assertTrue(newDocTag.Id == docTag.Id && newest.get(0).Id == docTag.Id);
     }
 
     @org.junit.Test
@@ -104,20 +103,19 @@ public class Test {
         model.searchQuery = "to";
         List<Topic> list = pg.getList(model);
         for (Topic item : list) {
-            System.out.println("testinam test: title - " + item.getTitle() + ", id - " + item.getId());
+            System.out.println("testinam test: title - " + item.Title + ", id - " + item.Id);
         }
         assertTrue(pg.getList(model).size() == 10);
     }
 
     @org.junit.Test
-    public void AssertTenTopicsFromDataBase() throws Exception{
+    public void AssertTenTopicsFromDataBase() {
         Crud cd = new Crud();
         DBQueryModel query = new DBQueryModel();
         query.table = "Topics";
         query.where = "id";
         query.whereValue = new String[]{"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"};
-        DBqueryDTO dto = cd.read(query);
+        DBqueryDTO dto = cd.read(query, TopicsDAL.class);
         assertTrue(dto != null);
     }
-
 }

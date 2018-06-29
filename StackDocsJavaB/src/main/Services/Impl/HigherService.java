@@ -21,46 +21,46 @@ public class HigherService implements IHigherService {
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
         DBQueryModel model = new DBQueryModel();
-        model.table = "DocTags";
-        model.where = "id";
-        model.whereValue = docTagIds;
+        model.setTable("DocTags");
+        model.setWhere("id");
+        model.setWhereValue(docTagIds);
         DBqueryDTO<DocTagsDAL> dBqueryDTO = crud.read(model, DocTagsDAL.class);
 
-        if (!dBqueryDTO.success) return new DocTagsDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new DocTagsDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new DocTagsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new DocTagsDTO(false, MESSAGE, null);
 
-        return new DocTagsDTO(true, null, dBqueryDTO.data);
+        return new DocTagsDTO(true, null, dBqueryDTO.getList());
     }
 
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
-        model.table = "Topics";
-        model.where = "id";
-        model.whereValue = topicIds;
+        model.setTable("Topics");
+        model.setWhere("id");
+        model.setWhereValue(topicIds);
         DBqueryDTO<TopicsDAL> dBqueryDTO = crud.read(model, TopicsDAL.class);
 
-        if (!dBqueryDTO.success) return new TopicsDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new TopicsDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new TopicsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, MESSAGE, null);
 
-        return new TopicsDTO(true, null, dBqueryDTO.data);
+        return new TopicsDTO(true, null, dBqueryDTO.getList());
     }
 
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
         DBQueryModel model = new DBQueryModel();
-        model.table = "Examples";
-        model.where = "id";
-        model.whereValue = exampleIds;
+        model.setTable("Examples");
+        model.setWhere("id");
+        model.setWhereValue(exampleIds);
         DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(model, ExampleDAL.class);
 
-        if (!dBqueryDTO.success) return new ExampleDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new ExampleDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new ExampleDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, MESSAGE, null);
 
-        return new ExampleDTO(true, null, dBqueryDTO.data);
+        return new ExampleDTO(true, null, dBqueryDTO.getList());
     }
 
     @Override
@@ -69,14 +69,14 @@ public class HigherService implements IHigherService {
         if (cache.get(cachePlacement) != null) return (DocTagsDTO) cache.get(cachePlacement);
 
         DBQueryModel model = new DBQueryModel();
-        model.table = "DocTags";
+        model.setTable("DocTags");
         DBqueryDTO<DocTagsDAL> dBqueryDTO = crud.read(model, DocTagsDAL.class);
 
-        if (!dBqueryDTO.success) return new DocTagsDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new DocTagsDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new DocTagsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new DocTagsDTO(false, MESSAGE, null);
 
-        DocTagsDTO docTagsDTO = new DocTagsDTO(true, null, dBqueryDTO.data);
+        DocTagsDTO docTagsDTO = new DocTagsDTO(true, null, dBqueryDTO.getList());
         cache.put(cachePlacement, docTagsDTO);
         return docTagsDTO;
     }
@@ -87,14 +87,14 @@ public class HigherService implements IHigherService {
         if (cache.get(cachePlacement) != null) return (TopicsDTO) cache.get(cachePlacement);
 
         DBQueryModel model = new DBQueryModel();
-        model.table = "Topics";
+        model.setTable("Topics");
         DBqueryDTO<TopicsDAL> dBqueryDTO = crud.read(model, TopicsDAL.class);
 
-        if (!dBqueryDTO.success) return new TopicsDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new TopicsDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new TopicsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, MESSAGE, null);
 
-        TopicsDTO topicsDTO = new TopicsDTO(true, null, dBqueryDTO.data);
+        TopicsDTO topicsDTO = new TopicsDTO(true, null, dBqueryDTO.getList());
         cache.put(cachePlacement, topicsDTO);
         return topicsDTO;
     }
@@ -105,14 +105,14 @@ public class HigherService implements IHigherService {
         if (cache.get(cachePlacement) != null) return (ExampleDTO) cache.get(cachePlacement);
 
         DBQueryModel model = new DBQueryModel();
-        model.table = "Examples";
+        model.setTable("Examples");
         DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(model, ExampleDAL.class);
 
-        if (!dBqueryDTO.success) return new ExampleDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new ExampleDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new ExampleDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, MESSAGE, null);
 
-        ExampleDTO exampleDTO = new ExampleDTO(true, null, dBqueryDTO.data);
+        ExampleDTO exampleDTO = new ExampleDTO(true, null, dBqueryDTO.getList());
         cache.put(cachePlacement, exampleDTO);
         return exampleDTO;
     }
@@ -120,30 +120,30 @@ public class HigherService implements IHigherService {
     @Override
     public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
         DBQueryModel model = new DBQueryModel();
-        model.table = "Topics";
-        model.where = "DocTagId";
-        model.whereValue = docTagIds;
+        model.setTable("Topics");
+        model.setWhere("DocTagId");
+        model.setWhereValue(docTagIds);
         DBqueryDTO<TopicsDAL> dBqueryDTO = crud.read(model, TopicsDAL.class);
 
-        if (!dBqueryDTO.success) return new TopicsDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new TopicsDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new TopicsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, MESSAGE, null);
 
-        return new TopicsDTO(true, null, dBqueryDTO.data);
+        return new TopicsDTO(true, null, dBqueryDTO.getList());
     }
 
     @Override
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
-        model.table = "Examples";
-        model.where = "TopicsId";
-        model.whereValue = topicIds;
+        model.setTable("Examples");
+        model.setWhere("TopicsId");
+        model.setWhereValue(topicIds);
         DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(model, ExampleDAL.class);
 
-        if (!dBqueryDTO.success) return new ExampleDTO(false, dBqueryDTO.message,null);
+        if (!dBqueryDTO.isSuccess()) return new ExampleDTO(false, dBqueryDTO.getMessage(),null);
 
-        if (dBqueryDTO.data == null) return new ExampleDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, MESSAGE, null);
 
-        return new ExampleDTO(true, null, dBqueryDTO.data);
+        return new ExampleDTO(true, null, dBqueryDTO.getList());
     }
 }

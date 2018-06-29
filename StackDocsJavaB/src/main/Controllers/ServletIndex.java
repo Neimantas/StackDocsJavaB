@@ -37,11 +37,7 @@ public class ServletIndex extends HttpServlet {
             int pageNum = page != null ? Integer.parseInt(page) : 1;
             System.out.println(language + " || " + search + " || " + page + " || " + topic);
             Pagination pagination = new Pagination();
-            URLSettingsModel url = new URLSettingsModel();
-            url.docTagId = language;
-            url.topicId = topic;
-            url.searchQuery = search;
-            url.after = after;
+            URLSettingsModel url = new URLSettingsModel(topic, language, search, after);
             List<Topic> topicList = pagination.getList(url);
             request.setAttribute("topicList", topicList);
         }

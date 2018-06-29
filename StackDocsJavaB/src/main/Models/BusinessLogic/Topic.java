@@ -1,7 +1,22 @@
 package Models.BusinessLogic;
 
 public class Topic {
-    public int Id;
-    public String Title;
-    public String DocTagTitle;
+    private int Id;
+    private String Title;
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
 }

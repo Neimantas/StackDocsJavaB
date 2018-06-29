@@ -29,7 +29,7 @@ public class Crud implements ICrud {
         DBqueryDTO dto;
         try {
             connection = db.getConnection();
-            String query = "INSERT INTO " + create.table + " VALUES(" + create.createValues + ")";
+            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
             statement = connection.createStatement();
             statement.executeUpdate(query);
             dto = new DBqueryDTO(true, null, null);
@@ -88,8 +88,8 @@ public class Crud implements ICrud {
     public DBqueryDTO update(DBQueryModel update) {
         DBqueryDTO dto;
         try {
-            String query = "UPDATE " + update.table + " SET '" + update.updateWhat + "' = '"
-                            + update.updateValue + "' WHERE " + update.where + " = " + update.whereValue.toString();
+            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
+                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue().toString();
 //            String query = "";
             connection = db.getConnection();
             statement = connection.createStatement();

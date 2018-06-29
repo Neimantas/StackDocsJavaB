@@ -6,6 +6,7 @@ import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
+import Services.DropDown;
 import Services.IDataBase;
 import Services.IHigherService;
 import Services.Impl.Cache;
@@ -29,8 +30,8 @@ public class TestRunner {
         System.out.println(AssertDropDownCollection());
         System.out.println(CheckCache());
         System.out.println(CheckCache2());
-        System.out.println("Pagination: " + AssertListFromPagination());
-        System.out.println("Crud: " + AssertTenTopicsFromDataBase());
+        System.out.println(AssertListFromPagination());
+        System.out.println(AssertTenTopicsFromDataBase());
     }
 
     private boolean AssertDbConnection() throws SQLException {
@@ -51,10 +52,9 @@ public class TestRunner {
         int counter = 0;
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        for (int i = 0; i < dto.data.size(); i++) {
+        for (int i = 0; i < dto.getList().size(); i++) {
             for (int j = 0; j < ids.length; j++) {
-                if (dto.data.get(i).Id == ids[j]) {
-//                    System.out.println("id: " + dto.getData().get(i).getId() + ", tag: " + dto.getData().get(i).getTag());
+                if (dto.getList().get(i).getId() == ids[j]) {
                     counter++;
                 }
             }
@@ -70,9 +70,8 @@ public class TestRunner {
         IHigherService higher = new HigherService();
         List<DocTagsDTO> dtoArr = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
-            if (higher.getDocTagById("" + ids[i]).data.get(0) != null) {
+            if (higher.getDocTagById("" + ids[i]).getList().get(0) != null) {
                 dtoArr.add(higher.getDocTagById("" + ids[i]));
-//                System.out.println(dtoArr.get(i).getData().get(0).getId());
             }
         }
 
@@ -93,10 +92,10 @@ public class TestRunner {
     }
 
     private boolean AssertDropDownCollection() {
-//        DropDown dropDown = new DropDown();
-//        if (dropDown.getList().size() == dropDown.getSize()) {
-//            return true;
-//        }
+        DropDown dropDown = new DropDown();
+        if (dropDown.getList().size() == dropDown.getSize()) {
+            return true;
+        }
         return false;
     }
 
@@ -136,9 +135,6 @@ public class TestRunner {
         model.docTagId = "5";
         model.searchQuery = "to";
         List<Topic> list = pg.getList(model);
-        for (Topic item : list) {
-            System.out.println("testinam test: title - " + item.Title + ", id - " + item.Id);
-        }
         if (pg.getList(model).size() == 10) {
             return true;
         }
@@ -152,7 +148,9 @@ public class TestRunner {
         query.where = "id";
         query.whereValue = new String[] {"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"};
         DBqueryDTO dto = cd.read(query, TopicsDAL.class);
-
+        if (dto.data.size() == 10) {
+            return true;
+        }
         return false;
     }
 }
