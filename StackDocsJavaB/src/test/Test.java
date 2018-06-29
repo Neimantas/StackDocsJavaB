@@ -29,21 +29,21 @@ public class Test {
     }
 
     @org.junit.Test
-    public void AssertDocTagsCollection() throws Exception{
+    public void AssertDocTagsCollection() {
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        assertTrue((dto.data.size() > 0));
+        assertTrue((dto.getList().size() > 0));
     }
 
     @org.junit.Test
-    public void AssertDocTagsIds() throws Exception{
+    public void AssertDocTagsIds() {
         int[] ids = {3, 4, 5, 8};
         int counter = 0;
         IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
-        for (int i = 0; i < dto.data.size(); i++) {
+        for (int i = 0; i < dto.getList().size(); i++) {
             for (int j = 0; j < ids.length; j++) {
-                if (dto.data.get(i).Id == ids[j]) {
+                if (dto.getList().get(i).getId() == ids[j]) {
                     counter++;
                 }
             }
@@ -52,12 +52,12 @@ public class Test {
     }
 
     @org.junit.Test
-    public void AssertDocTagsIds2() throws Exception{
+    public void AssertDocTagsIds2() {
         int[] ids = {3, 4, 5, 8};
         IHigherService higher = new HigherService();
         List<DocTagsDTO> dtoArr = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
-            if (higher.getDocTagById("" + ids[i]).data.get(0) != null) {
+            if (higher.getDocTagById("" + ids[i]).getList().get(0) != null) {
                 dtoArr.add(higher.getDocTagById("" + ids[i]));
 
             }
@@ -66,24 +66,24 @@ public class Test {
     }
 
     @org.junit.Test
-    public void AssertDocTagsIds3() throws Exception{
+    public void AssertDocTagsIds3() {
         String[] ids = {"3", "4", "5", "8"};
         IHigherService higher = new HigherService();
-        assertTrue((higher.getDocTagById(ids).data.size() == ids.length));
+        assertTrue((higher.getDocTagById(ids).getList().size() == ids.length));
     }
 
     @org.junit.Test
-    public void AssertDropDownCollection() throws Exception{
+    public void AssertDropDownCollection() {
         DropDown dropDown = new DropDown();
         assertTrue(dropDown.getList().size() == 4);
     }
 
     @org.junit.Test
-    public void CheckCache() throws Exception{
+    public void CheckCache() {
         Cache cache = Cache.getInstance();
         List<DocTag> list = new ArrayList<>();
         DocTag docTag = new DocTag();
-        docTag.Id = 1;
+        docTag.setId(1);
         list.add(docTag);
         cache.put("test", list);
         AbstractList newList = (AbstractList) cache.get("test");
@@ -92,18 +92,16 @@ public class Test {
             newest.add((DocTag) item);
         }
         DocTag newDocTag = (DocTag) newList.get(0);
-        assertTrue(newDocTag.Id == docTag.Id && newest.get(0).Id == docTag.Id);
+        assertTrue(newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId());
     }
 
     @org.junit.Test
-    public void AssertListFromPagination() throws Exception{
+    public void AssertListFromPagination() {
         Pagination pg = new Pagination();
-        URLSettingsModel model = new URLSettingsModel();
-        model.docTagId = "5";
-        model.searchQuery = "to";
+        URLSettingsModel model = new URLSettingsModel("5", null, "to", true);
         List<Topic> list = pg.getList(model);
         for (Topic item : list) {
-            System.out.println("testinam test: title - " + item.Title + ", id - " + item.Id);
+            System.out.println("testinam test: title - " + item.getTitle() + ", id - " + item.getId());
         }
         assertTrue(pg.getList(model).size() == 10);
     }
@@ -112,9 +110,9 @@ public class Test {
     public void AssertTenTopicsFromDataBase() {
         Crud cd = new Crud();
         DBQueryModel query = new DBQueryModel();
-        query.table = "Topics";
-        query.where = "id";
-        query.whereValue = new String[]{"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"};
+        query.setTable("Topics");
+        query.setWhere("id");
+        query.setWhereValue(new String[]{"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"});
         DBqueryDTO dto = cd.read(query, TopicsDAL.class);
         assertTrue(dto != null);
     }
