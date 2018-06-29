@@ -41,7 +41,10 @@
             </li>
         </ul>
     </div>
-    <div class="row justify-content-center">
+
+
+   <br>
+       <div class="row justify-content-center">
         <!-- Button trigger modal -->
         <button class="col-auto btn btn-info" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">
             Example
@@ -51,6 +54,8 @@
         <button class="col-auto btn btn-secondary" onclick="funkcija_atgal();">Back</button>
 
     </div>
+    <br>
+
 </div>
 
 
