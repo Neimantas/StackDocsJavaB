@@ -11,14 +11,21 @@ import Models.DTO.TopicsDTO;
 import Services.ICache;
 import Services.ICrud;
 import Services.IHigherService;
+import com.google.inject.Inject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HigherService implements IHigherService {
 
-    ICrud crud = new Crud();
-    ICache cache = Cache.getInstance();
+    private ICrud crud;
+    private ICache cache;
+
+    @Inject
+    public HigherService(ICrud iCrud) {
+        crud = iCrud;
+        cache = Cache.getInstance();
+    }
 
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {

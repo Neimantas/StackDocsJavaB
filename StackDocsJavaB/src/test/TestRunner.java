@@ -2,15 +2,15 @@ import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Topic;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
-import Models.DTO.DocTagsDTO;
 import Models.URLSettingsModel;
+import Services.ICrud;
 import Services.IDataBase;
-import Services.IHigherService;
 import Services.Impl.Cache;
-import Services.Impl.Crud;
 import Services.Impl.DataBase;
-import Services.Impl.HigherService;
+import Services.Modules.HigherServiceModule;
 import Services.Pagination;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import java.sql.SQLException;
 import java.util.AbstractList;
@@ -20,11 +20,11 @@ import java.util.List;
 public class TestRunner {
     public void AssertAll() throws SQLException {
         System.out.println(AssertDbConnection());
-        System.out.println(AssertDocTagsCollection());
-        System.out.println(AssertDocTagsIds());
-        System.out.println(AssertDocTagsIds2());
-        System.out.println(AssertDocTagsIds3());
-        System.out.println(AssertTenTopicsById());
+       // System.out.println(AssertDocTagsCollection());
+      //  System.out.println(AssertDocTagsIds());
+       // System.out.println(AssertDocTagsIds2());
+     //   System.out.println(AssertDocTagsIds3());
+       // System.out.println(AssertTenTopicsById());
         System.out.println(AssertDropDownCollection());
         System.out.println(CheckCache());
         System.out.println(CheckCache2());
@@ -37,69 +37,74 @@ public class TestRunner {
         return db.getConnection() != null;
     }
 
-    private boolean AssertDocTagsCollection() {
-        IHigherService higher = new HigherService();
-        DocTagsDTO dto = higher.getAllDocTags();
-        if (dto.getData().size() > 0) return true;
+//    private boolean AssertDocTagsCollection() {
+//        Injector injector = Guice.createInjector(new HigherServiceModule());
+//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        DocTagsDTO dto = higher.getAllDocTags();
+//        if (dto.getData().size() > 0) return true;
+//
+//        return false;
+//    }
 
-        return false;
-    }
+//    private boolean AssertDocTagsIds() {
+//        int[] ids = {3, 4, 5, 8};
+//        int counter = 0;
+//        Injector injector = Guice.createInjector(new HigherServiceModule());
+//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        DocTagsDTO dto = higher.getAllDocTags();
+//        for (int i = 0; i < dto.getData().size(); i++) {
+//            for (int j = 0; j < ids.length; j++) {
+//                if (dto.getData().get(i).getId() == ids[j]) {
+////                    System.out.println("id: " + dto.getData().get(i).getId() + ", tag: " + dto.getData().get(i).getTag());
+//                    counter++;
+//                }
+//            }
+//        }
+//        if (counter == ids.length) {
+//            return true;
+//        }
+//        return false;
+//    }
 
-    private boolean AssertDocTagsIds() {
-        int[] ids = {3, 4, 5, 8};
-        int counter = 0;
-        IHigherService higher = new HigherService();
-        DocTagsDTO dto = higher.getAllDocTags();
-        for (int i = 0; i < dto.getData().size(); i++) {
-            for (int j = 0; j < ids.length; j++) {
-                if (dto.getData().get(i).getId() == ids[j]) {
-//                    System.out.println("id: " + dto.getData().get(i).getId() + ", tag: " + dto.getData().get(i).getTag());
-                    counter++;
-                }
-            }
-        }
-        if (counter == ids.length) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean AssertDocTagsIds2() {
-        int[] ids = {3, 4, 5, 8};
-        IHigherService higher = new HigherService();
-        List<DocTagsDTO> dtoArr = new ArrayList<>();
-        for (int i = 0; i < ids.length; i++) {
-            if (higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
-                dtoArr.add(higher.getDocTagById("" + ids[i]));
-//                System.out.println(dtoArr.get(i).getData().get(0).getId());
-            }
-        }
-
-        if (dtoArr.size() == ids.length) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean AssertDocTagsIds3() {
-        String[] ids = {"3", "4", "5", "8"};
-        IHigherService higher = new HigherService();
-
-        if (higher.getDocTagById(ids).getData().size() == ids.length) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean AssertTenTopicsById() {
-
-        IHigherService higher = new HigherService();
-
-        if (higher.getTenTopicsById(true, "3").getData().size() == 10) {
-            return true;
-        }
-        return false;
-    }
+//    private boolean AssertDocTagsIds2() {
+//        int[] ids = {3, 4, 5, 8};
+//        Injector injector = Guice.createInjector(new HigherServiceModule());
+//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        List<DocTagsDTO> dtoArr = new ArrayList<>();
+//        for (int i = 0; i < ids.length; i++) {
+//            if (higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
+//                dtoArr.add(higher.getDocTagById("" + ids[i]));
+////                System.out.println(dtoArr.get(i).getData().get(0).getId());
+//            }
+//        }
+//
+//        if (dtoArr.size() == ids.length) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private boolean AssertDocTagsIds3() {
+//        String[] ids = {"3", "4", "5", "8"};
+//        Injector injector = Guice.createInjector(new HigherServiceModule());
+//        IHigherService higher = injector.getInstance(IHigherService.class);
+//
+//        if (higher.getDocTagById(ids).getData().size() == ids.length) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private boolean AssertTenTopicsById() {
+//
+//        Injector injector = Guice.createInjector(new HigherServiceModule());
+//        IHigherService higher = injector.getInstance(IHigherService.class);
+//
+//        if (higher.getTenTopicsById(true, "3").getData().size() == 10) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     private boolean AssertDropDownCollection() {
 //        DropDown dropDown = new DropDown();
@@ -155,7 +160,8 @@ public class TestRunner {
     }
 
     private boolean AssertTenTopicsFromDataBase() {
-        Crud cd = new Crud();
+        Injector injector = Guice.createInjector(new HigherServiceModule());
+        ICrud cd = injector.getInstance(ICrud.class);
         DBQueryModel query = new DBQueryModel();
         query.table = "Topics";
         query.where = "id";

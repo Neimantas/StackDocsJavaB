@@ -5,6 +5,7 @@ import Models.DTO.DBqueryDTO;
 import Services.IDataBase;
 import Services.ICrud;
 import Services.QueryBuilder;
+import com.google.inject.Inject;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -20,8 +21,9 @@ public class Crud implements ICrud {
     private IDataBase db;
     private DBqueryDTO dto;
 
-    public Crud(){
-        db = new DataBase();
+    @Inject
+    public Crud(IDataBase iDB){
+        db = iDB;
     }
 
     @Override

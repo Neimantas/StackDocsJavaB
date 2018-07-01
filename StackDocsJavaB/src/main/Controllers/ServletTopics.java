@@ -5,7 +5,6 @@ import Models.DAL.TopicsDAL;
 import Models.DTO.ExampleDTO;
 import Models.DTO.TopicsDTO;
 import Services.IHigherService;
-import Services.Impl.HigherService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class ServletTopics extends HttpServlet {
         if (topicID == null) {
             response.sendRedirect("http://localhost:8080/index.jsp");
         } else {
-            IHigherService higher = new HigherService();
+            IHigherService higher = ServletListener.injector.getInstance(IHigherService.class);
             TopicsDTO dto = higher.getTopicById(topicID);
             ExampleDTO exDto = higher.getExamplesByTopicsId(topicID);
             TopicsDAL topic;

@@ -1,26 +1,28 @@
 package Services;
 
+
+import Controllers.ServletListener;
 import Models.BusinessLogic.Topic;
-import Models.DAL.DocTagsDAL;
 import Models.DAL.TopicsDAL;
-import Models.DBQueryModel;
-import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.Impl.Cache;
-import Services.Impl.HigherService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pagination {
 
-    private IHigherService hs = new HigherService();
+    private IHigherService hs;
     private ICache cache = Cache.getInstance();
     private List<String[]> topicsAndDocTagsIds = new ArrayList<>();
     private List<String> collectedIds = new ArrayList<>();
     private List<Topic> topicsList = new ArrayList<>();
     private boolean allConnectionsWithDataBaseIsSuccess;
+
+    public Pagination(){
+        hs = ServletListener.injector.getInstance(IHigherService.class);
+    }
 
     public List<Topic> getList(URLSettingsModel model) {
         resetValues();
