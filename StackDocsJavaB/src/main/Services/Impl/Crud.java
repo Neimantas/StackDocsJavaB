@@ -2,8 +2,8 @@ package Services.Impl;
 
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
-import Services.IDataBase;
 import Services.ICrud;
+import Services.IDataBase;
 import Services.QueryBuilder;
 import com.google.inject.Inject;
 
@@ -57,15 +57,6 @@ public class Crud implements ICrud {
             connection = db.getConnection();
             statement = connection.createStatement();
             ResultSet rs  = statement.executeQuery(qb.getQuery());
-//            int colCount = rs.getMetaData().getColumnCount();
-//            List<List<Object>> rows = new ArrayList<>();
-//            while (rs.next()) {
-//                List<Object> columns = new ArrayList<>();
-//                for (int i = 1; i <= colCount; i++) {
-//                    columns.add(rs.getObject(i));
-//                }
-//                rows.add(columns);
-//            }
             List<T> rows = new ArrayList<>();
             while (rs.next()) {
                 T dal = type.newInstance();
@@ -92,7 +83,6 @@ public class Crud implements ICrud {
         try {
             String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
                             + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue().toString();
-//            String query = "";
             connection = db.getConnection();
             statement = connection.createStatement();
             statement.executeUpdate(query);

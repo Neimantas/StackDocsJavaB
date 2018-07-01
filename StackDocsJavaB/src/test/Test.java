@@ -1,3 +1,4 @@
+import Controllers.ServletListener;
 import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Topic;
 import Models.DAL.TopicsDAL;
@@ -5,14 +6,14 @@ import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
 import Models.DTO.DocTagsDTO;
 import Models.URLSettingsModel;
-import Services.DropDown;
-import Services.IDataBase;
-import Services.IHigherService;
+import Services.*;
 import Services.Impl.Cache;
 import Services.Impl.Crud;
 import Services.Impl.DataBase;
 import Services.Impl.HigherService;
-import Services.Pagination;
+import Services.Modules.HigherServiceModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -22,15 +23,25 @@ import static org.junit.Assert.assertTrue;
 
 public class Test {
 
+    static IDataBase db;
+    static ICrud crud;
+    static IHigherService higher;
+
+    @org.junit.BeforeClass
+    public static void setup() {
+        ServletListener.injector = Guice.createInjector(new HigherServiceModule());
+        db = ServletListener.injector.getInstance(IDataBase.class);
+        crud = ServletListener.injector.getInstance(ICrud.class);
+        higher = ServletListener.injector.getInstance(IHigherService.class);
+    }
+
     @org.junit.Test
     public void DbgetConnection() throws Exception {
-        IDataBase db = new DataBase();
         assertTrue(db.getConnection() != null);
     }
 
     @org.junit.Test
     public void AssertDocTagsCollection() {
-        IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
         assertTrue((dto.getList().size() > 0));
     }
@@ -39,7 +50,6 @@ public class Test {
     public void AssertDocTagsIds() {
         int[] ids = {3, 4, 5, 8};
         int counter = 0;
-        IHigherService higher = new HigherService();
         DocTagsDTO dto = higher.getAllDocTags();
         for (int i = 0; i < dto.getList().size(); i++) {
             for (int j = 0; j < ids.length; j++) {
@@ -54,7 +64,6 @@ public class Test {
     @org.junit.Test
     public void AssertDocTagsIds2() {
         int[] ids = {3, 4, 5, 8};
-        IHigherService higher = new HigherService();
         List<DocTagsDTO> dtoArr = new ArrayList<>();
         for (int i = 0; i < ids.length; i++) {
             if (higher.getDocTagById("" + ids[i]).getList().get(0) != null) {
@@ -68,7 +77,6 @@ public class Test {
     @org.junit.Test
     public void AssertDocTagsIds3() {
         String[] ids = {"3", "4", "5", "8"};
-        IHigherService higher = new HigherService();
         assertTrue((higher.getDocTagById(ids).getList().size() == ids.length));
     }
 
@@ -108,12 +116,11 @@ public class Test {
 
     @org.junit.Test
     public void AssertTenTopicsFromDataBase() {
-        Crud cd = new Crud();
         DBQueryModel query = new DBQueryModel();
         query.setTable("Topics");
         query.setWhere("id");
         query.setWhereValue(new String[]{"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"});
-        DBqueryDTO dto = cd.read(query, TopicsDAL.class);
+        DBqueryDTO dto = crud.read(query, TopicsDAL.class);
         assertTrue(dto != null);
     }
 }

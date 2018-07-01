@@ -3,7 +3,6 @@ package Services;
 
 import Controllers.ServletListener;
 import Models.BusinessLogic.Topic;
-import Models.DAL.TopicsDAL;
 import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.Impl.Cache;
@@ -60,11 +59,11 @@ public class Pagination {
                         String remarks = topicsDTO.getList().get(i).getRemarksMarkdown().toLowerCase();
                         String syntax = topicsDTO.getList().get(i).getSyntaxMarkdown().toLowerCase();
 
-                        if ((title.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (introduction.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (parameters.toLowerCase().contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (remarks.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (syntax.contains(normalizeText((queries[j]))) && docId.equals(docTagId))) {
+                        if(docId.equals(docTagId) && (title.contains(normalizeText((queries[j])))
+                                || introduction.contains(normalizeText((queries[j])))
+                                || parameters.toLowerCase().contains(normalizeText((queries[j])))
+                                || remarks.contains(normalizeText((queries[j])))
+                                || syntax.contains(normalizeText((queries[j]))))) {
                             String[] arr = {"" + topicsDTO.getList().get(i).getId(), "" + topicsDTO.getList().get(i).getDocTagId()};
                             tempList.add(arr);
                         }
@@ -176,7 +175,7 @@ public class Pagination {
     }
 
     private void makeListFromColletedIds() {
-        String[] idsArr = collectedIds.toArray(new String[collectedIds.size()]);
+        String[] idsArr = collectedIds.toArray(new String[0]);
         TopicsDTO topicsDTO = hs.getTopicById(idsArr);
         allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
         if (topicsDTO.isSuccess() && topicsDTO.getList() != null) {
