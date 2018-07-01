@@ -40,7 +40,7 @@ public class DropDown {
 
             DocTagsDTO dtoList = higher.getDocTagById(dropDownsNeeded);
 
-            List<DocTagsDAL> dropDown = dtoList.getData();
+            List<DocTagsDAL> dropDown = dtoList.getList();
 
 
             for (int i = 0; i < dropDown.size(); i++) {

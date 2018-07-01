@@ -1,42 +1,42 @@
 package Models.DAL;
 
 public class TopicsDAL {
-    long Id;
-    long DocTagId;
-    boolean IsHelloWorldTopic;
-    String Title;
-    String CreationDate;
-    long ViewCount;
-    String LastEditDate;
-    long LastEditUserId;
-    String LastEditUserDisplayName;
-    long ContributorCount;
-    long ExampleCount;
-    long ExampleScore;
-    String IntroductionHtml;
-    String SyntaxHtml;
-    String ParametersHtml;
-    String RemarksHtml;
-    String IntroductionMarkdown;
-    String SyntaxMarkdown;
-    String ParametersMarkdown;
-    String RemarksMarkdown;
-    String HelloWorldVersionsHtml;
-    String VersionsJson;
+    private int Id;
+    private int DocTagId;
+    private boolean IsHelloWorldTopic;
+    private String Title;
+    private String CreationDate;
+    private int ViewCount;
+    private String LastEditDate;
+    private int LastEditUserId;
+    private String LastEditUserDisplayName;
+    private int ContributorCount;
+    private int ExampleCount;
+    private int ExampleScore;
+    private String IntroductionHtml;
+    private String SyntaxHtml;
+    private String ParametersHtml;
+    private String RemarksHtml;
+    private String IntroductionMarkdown;
+    private String SyntaxMarkdown;
+    private String ParametersMarkdown;
+    private String RemarksMarkdown;
+    private String HelloWorldVersionsHtml;
+    private String VersionsJson;
 
-    public long getId() {
+    public int getId() {
         return Id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         Id = id;
     }
 
-    public long getDocTagId() {
+    public int getDocTagId() {
         return DocTagId;
     }
 
-    public void setDocTagId(long docTagId) {
+    public void setDocTagId(int docTagId) {
         DocTagId = docTagId;
     }
 
@@ -64,11 +64,11 @@ public class TopicsDAL {
         CreationDate = creationDate;
     }
 
-    public long getViewCount() {
+    public int getViewCount() {
         return ViewCount;
     }
 
-    public void setViewCount(long viewCount) {
+    public void setViewCount(int viewCount) {
         ViewCount = viewCount;
     }
 
@@ -80,11 +80,11 @@ public class TopicsDAL {
         LastEditDate = lastEditDate;
     }
 
-    public long getLastEditUserId() {
+    public int getLastEditUserId() {
         return LastEditUserId;
     }
 
-    public void setLastEditUserId(long lastEditUserId) {
+    public void setLastEditUserId(int lastEditUserId) {
         LastEditUserId = lastEditUserId;
     }
 
@@ -96,31 +96,33 @@ public class TopicsDAL {
         LastEditUserDisplayName = lastEditUserDisplayName;
     }
 
-    public long getContributorCount() {
+    public int getContributorCount() {
         return ContributorCount;
     }
 
-    public void setContributorCount(long contributorCount) {
+    public void setContributorCount(int contributorCount) {
         ContributorCount = contributorCount;
     }
 
-    public long getExampleCount() {
+    public int getExampleCount() {
         return ExampleCount;
     }
 
-    public void setExampleCount(long exampleCount) {
+    public void setExampleCount(int exampleCount) {
         ExampleCount = exampleCount;
     }
 
-    public long getExampleScore() {
+    public int getExampleScore() {
         return ExampleScore;
     }
 
-    public void setExampleScore(long exampleScore) {
+    public void setExampleScore(int exampleScore) {
         ExampleScore = exampleScore;
     }
 
-    public String getIntroductionHtml() {return IntroductionHtml;}
+    public String getIntroductionHtml() {
+        return IntroductionHtml;
+    }
 
     public void setIntroductionHtml(String introductionHtml) {
         IntroductionHtml = introductionHtml;
@@ -197,6 +199,4 @@ public class TopicsDAL {
     public void setVersionsJson(String versionsJson) {
         VersionsJson = versionsJson;
     }
-
-
 }

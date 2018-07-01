@@ -8,16 +8,13 @@ public class ExampleDTO {
 
     private boolean Success;
     private String Message;
-    private List<ExampleDAL> data;
+    private List<ExampleDAL> List;
 
-    public List<ExampleDAL> getData() {
-        return data;
+    public ExampleDTO(boolean success, String message, List<ExampleDAL> list){
+        Success = success;
+        Message = message;
+        List = list;
     }
-
-    public void setData(List<ExampleDAL> data) {
-        this.data = data;
-    }
-
 
     public boolean isSuccess() {
         return Success;
@@ -35,5 +32,11 @@ public class ExampleDTO {
         Message = message;
     }
 
+    public java.util.List<ExampleDAL> getList() {
+        return List;
+    }
 
+    public void setList(java.util.List<ExampleDAL> list) {
+        List = list;
+    }
 }

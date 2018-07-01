@@ -1,27 +1,22 @@
 package Models.BusinessLogic;
 
 public class Topic {
-	private long Id;
-	private String Title;
-    private String DocTagTitle;
+    private int Id;
+    private String Title;
 
-    public long getId() {
+    public int getId() {
         return Id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         Id = id;
     }
 
-    public String getTitle() { return Title; }
-
-    public void setTitle(String title) { Title = title; }
-
-    public String getDocTagTitle() {
-        return DocTagTitle;
+    public String getTitle() {
+        return Title;
     }
 
-    public void setDocTagTitle(String docTagTitle) {
-        DocTagTitle = docTagTitle;
+    public void setTitle(String title) {
+        Title = title;
     }
 }

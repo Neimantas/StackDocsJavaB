@@ -1,61 +1,60 @@
-import Models.BusinessLogic.DocTag;
-import Models.BusinessLogic.Topic;
-import Models.DBQueryModel;
-import Models.DTO.DBqueryDTO;
-import Models.URLSettingsModel;
-import Services.ICrud;
-import Services.IDataBase;
-import Services.Impl.Cache;
-import Services.Impl.DataBase;
-import Services.Modules.HigherServiceModule;
-import Services.Pagination;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-import java.sql.SQLException;
-import java.util.AbstractList;
-import java.util.ArrayList;
-import java.util.List;
-
-public class TestRunner {
-    public void AssertAll() throws SQLException {
-        System.out.println(AssertDbConnection());
-       // System.out.println(AssertDocTagsCollection());
-      //  System.out.println(AssertDocTagsIds());
-       // System.out.println(AssertDocTagsIds2());
-     //   System.out.println(AssertDocTagsIds3());
-       // System.out.println(AssertTenTopicsById());
-        System.out.println(AssertDropDownCollection());
-        System.out.println(CheckCache());
-        System.out.println(CheckCache2());
-        System.out.println("Pagination: " + AssertListFromPagination());
-        System.out.println("Crud: " + AssertTenTopicsFromDataBase());
-    }
-
-    private boolean AssertDbConnection() throws SQLException {
-        IDataBase db = new DataBase();
-        return db.getConnection() != null;
-    }
-
+//import Models.BusinessLogic.DocTag;
+//import Models.BusinessLogic.Topic;
+//import Models.DAL.TopicsDAL;
+//import Models.DBQueryModel;
+//import Models.DTO.DBqueryDTO;
+//import Models.DTO.DocTagsDTO;
+//import Models.DTO.TopicsDTO;
+//import Models.URLSettingsModel;
+//import Services.DropDown;
+//import Services.IDataBase;
+//import Services.IHigherService;
+//import Services.Impl.Cache;
+//import Services.Impl.Crud;
+//import Services.Impl.DataBase;
+//import Services.Impl.HigherService;
+//import Services.Pagination;
+//
+//import java.sql.SQLException;
+//import java.util.AbstractList;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class TestRunner {
+//    public void AssertAll() throws SQLException {
+//        System.out.println(AssertDbConnection());
+//        System.out.println(AssertDocTagsCollection());
+//        System.out.println(AssertDocTagsIds());
+//        System.out.println(AssertDocTagsIds2());
+//        System.out.println(AssertDocTagsIds3());
+//        System.out.println(AssertDropDownCollection());
+//        System.out.println(CheckCache());
+//        System.out.println(CheckCache2());
+//        System.out.println(AssertListFromPagination());
+//        System.out.println(AssertTenTopicsFromDataBase());
+//    }
+//
+//    private boolean AssertDbConnection() throws SQLException {
+//        IDataBase db = new DataBase();
+//        return db.getConnection() != null;
+//    }
+//
 //    private boolean AssertDocTagsCollection() {
-//        Injector injector = Guice.createInjector(new HigherServiceModule());
-//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        IHigherService higher = new HigherService();
 //        DocTagsDTO dto = higher.getAllDocTags();
-//        if (dto.getData().size() > 0) return true;
+//        if (dto.getList().size() > 0) return true;
 //
 //        return false;
 //    }
-
+//
 //    private boolean AssertDocTagsIds() {
 //        int[] ids = {3, 4, 5, 8};
 //        int counter = 0;
-//        Injector injector = Guice.createInjector(new HigherServiceModule());
-//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        IHigherService higher = new HigherService();
 //        DocTagsDTO dto = higher.getAllDocTags();
-//        for (int i = 0; i < dto.getData().size(); i++) {
+//        for (int i = 0; i < dto.getList().size(); i++) {
 //            for (int j = 0; j < ids.length; j++) {
-//                if (dto.getData().get(i).getId() == ids[j]) {
-////                    System.out.println("id: " + dto.getData().get(i).getId() + ", tag: " + dto.getData().get(i).getTag());
+//                if (dto.getList().get(i).getId() == ids[j]) {
 //                    counter++;
 //                }
 //            }
@@ -65,16 +64,14 @@ public class TestRunner {
 //        }
 //        return false;
 //    }
-
+//
 //    private boolean AssertDocTagsIds2() {
 //        int[] ids = {3, 4, 5, 8};
-//        Injector injector = Guice.createInjector(new HigherServiceModule());
-//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        IHigherService higher = new HigherService();
 //        List<DocTagsDTO> dtoArr = new ArrayList<>();
 //        for (int i = 0; i < ids.length; i++) {
-//            if (higher.getDocTagById("" + ids[i]).getData().get(0) != null) {
+//            if (higher.getDocTagById("" + ids[i]).getList().get(0) != null) {
 //                dtoArr.add(higher.getDocTagById("" + ids[i]));
-////                System.out.println(dtoArr.get(i).getData().get(0).getId());
 //            }
 //        }
 //
@@ -86,88 +83,73 @@ public class TestRunner {
 //
 //    private boolean AssertDocTagsIds3() {
 //        String[] ids = {"3", "4", "5", "8"};
-//        Injector injector = Guice.createInjector(new HigherServiceModule());
-//        IHigherService higher = injector.getInstance(IHigherService.class);
+//        IHigherService higher = new HigherService();
 //
-//        if (higher.getDocTagById(ids).getData().size() == ids.length) {
+//        if (higher.getDocTagById(ids).getList().size() == ids.length) {
 //            return true;
 //        }
 //        return false;
 //    }
 //
-//    private boolean AssertTenTopicsById() {
-//
-//        Injector injector = Guice.createInjector(new HigherServiceModule());
-//        IHigherService higher = injector.getInstance(IHigherService.class);
-//
-//        if (higher.getTenTopicsById(true, "3").getData().size() == 10) {
-//            return true;
-//        }
-//        return false;
-//    }
-
-    private boolean AssertDropDownCollection() {
+//    private boolean AssertDropDownCollection() {
 //        DropDown dropDown = new DropDown();
 //        if (dropDown.getList().size() == dropDown.getSize()) {
 //            return true;
 //        }
-        return false;
-    }
-
-    private boolean CheckCache() {
-        Cache cache = Cache.getInstance();
-        DocTag docTag = new DocTag();
-        docTag.setId(1);
-        cache.put("test", docTag);
-        DocTag newDocTag = (DocTag)cache.get("test");
-        if (newDocTag.getId() == docTag.getId()) {
-            return true;
-        }
-        return false;
-    }
-    private boolean CheckCache2() {
-        Cache cache = Cache.getInstance();
-        List<DocTag> list = new ArrayList<>();
-        DocTag docTag = new DocTag();
-        docTag.setId(1);
-        list.add(docTag);
-        cache.put("test", list);
-        AbstractList newList = (AbstractList)cache.get("test");
-        List<DocTag> newest = new ArrayList<>();
-        for (Object item: newList) {
-            newest.add((DocTag) item);
-        }
-        DocTag newDocTag = (DocTag) newList.get(0);
-        if (newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId())  {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean AssertListFromPagination() {
-        Pagination pg = new Pagination();
-        URLSettingsModel model = new URLSettingsModel();
-        model.docTagId = "5";
-        model.searchQuery = "to";
-        List<Topic> list = pg.getList(model);
-        for (Topic item : list) {
-            System.out.println("testinam test: title - " + item.getTitle() + ", id - " + item.getId());
-        }
-        if (pg.getList(model).size() == 10) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean AssertTenTopicsFromDataBase() {
-        Injector injector = Guice.createInjector(new HigherServiceModule());
-        ICrud cd = injector.getInstance(ICrud.class);
-        DBQueryModel query = new DBQueryModel();
-        query.table = "Topics";
-        query.where = "id";
-        query.whereValue = new String[] {"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"};
-        DBqueryDTO dto = cd.read(query);
-
-        return false;
-    }
-}
+//        return false;
+//    }
+//
+//    private boolean CheckCache() {
+//        Cache cache = Cache.getInstance();
+//        DocTag docTag = new DocTag();
+//        docTag.setId(1);
+//        cache.put("test", docTag);
+//        DocTag newDocTag = (DocTag)cache.get("test");
+//        if (newDocTag.getId() == docTag.getId()) {
+//            return true;
+//        }
+//        return false;
+//    }
+//    private boolean CheckCache2() {
+//        Cache cache = Cache.getInstance();
+//        List<DocTag> list = new ArrayList<>();
+//        DocTag docTag = new DocTag();
+//        docTag.setId(1);
+//        list.add(docTag);
+//        cache.put("test", list);
+//        AbstractList newList = (AbstractList)cache.get("test");
+//        List<DocTag> newest = new ArrayList<>();
+//        for (Object item: newList) {
+//            newest.add((DocTag) item);
+//        }
+//        DocTag newDocTag = (DocTag) newList.get(0);
+//        if (newDocTag.getId() == docTag.getId() && newest.get(0).getId() == docTag.getId())  {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private boolean AssertListFromPagination() {
+//        Pagination pg = new Pagination();
+//        URLSettingsModel model = new URLSettingsModel();
+//        model.setDocTagId("5");
+//        model.setSearchQuery("to");
+//        if (pg.getList(model).size() == 10) {
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    private boolean AssertTenTopicsFromDataBase() {
+//        Crud cd = new Crud();
+//        DBQueryModel query = new DBQueryModel();
+//        query.setTable("Topics");
+//        query.setWhere("id");
+//        query.setWhereValue(new String[]{"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"});
+//        DBqueryDTO dto = cd.read(query, TopicsDAL.class);
+//        if (dto.getList().size() == 10) {
+//            return true;
+//        }
+//        return false;
+//    }
+//}

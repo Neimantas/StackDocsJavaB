@@ -11,10 +11,8 @@ public interface IHigherService {
 
     DocTagsDTO getAllDocTags();
     TopicsDTO getAllTopics();
-    ExampleDTO getAllEcamples();
+    ExampleDTO getAllExamples();
 
-    TopicsDTO getTopicsByDocTagId(String docTagId);
+    TopicsDTO getTopicsByDocTagId(String... docTagId);
     ExampleDTO getExamplesByTopicsId(String... topicIds);
-
-    TopicsDTO getTenTopicsById(Boolean after, String id);
 }

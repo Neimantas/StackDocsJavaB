@@ -1,31 +1,30 @@
 package Models.DAL;
 
-public class
-ExampleDAL {
-    long Id;
-    long DocTopicId;
-    String Title;
-    String CreationDate;
-    String LastEditDate;
-    long Score;
-    long ContributorCount;
-    String BodyHtml;
-    String BodyMarkdown;
-    boolean IsPinned;
+public class ExampleDAL {
+    private int Id;
+    private int DocTopicId;
+    private String Title;
+    private String CreationDate;
+    private String LastEditDate;
+    private int Score;
+    private int ContributorCount;
+    private String BodyHtml;
+    private String BodyMarkdown;
+    private boolean IsPinned;
 
-    public long getId() {
+    public int getId() {
         return Id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         Id = id;
     }
 
-    public long getDocTopicId() {
+    public int getDocTopicId() {
         return DocTopicId;
     }
 
-    public void setDocTopicId(long docTopicId) {
+    public void setDocTopicId(int docTopicId) {
         DocTopicId = docTopicId;
     }
 
@@ -53,19 +52,19 @@ ExampleDAL {
         LastEditDate = lastEditDate;
     }
 
-    public long getScore() {
+    public int getScore() {
         return Score;
     }
 
-    public void setScore(long score) {
+    public void setScore(int score) {
         Score = score;
     }
 
-    public long getContributorCount() {
+    public int getContributorCount() {
         return ContributorCount;
     }
 
-    public void setContributorCount(long contributorCount) {
+    public void setContributorCount(int contributorCount) {
         ContributorCount = contributorCount;
     }
 
@@ -92,6 +91,4 @@ ExampleDAL {
     public void setPinned(boolean pinned) {
         IsPinned = pinned;
     }
-
-
 }

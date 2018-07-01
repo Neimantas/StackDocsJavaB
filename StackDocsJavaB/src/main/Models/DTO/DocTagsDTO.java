@@ -7,16 +7,13 @@ import java.util.List;
 public class DocTagsDTO {
     private boolean Success;
     private String Message;
-    private List<DocTagsDAL> data;
+    private List<DocTagsDAL> List;
 
-    public List<DocTagsDAL> getData() {
-        return data;
+    public DocTagsDTO(boolean success, String message, List<DocTagsDAL> list){
+        Success = success;
+        Message = message;
+        List = list;
     }
-
-    public void setData(List<DocTagsDAL> data) {
-        this.data = data;
-    }
-
 
     public boolean isSuccess() {
         return Success;
@@ -34,5 +31,11 @@ public class DocTagsDTO {
         Message = message;
     }
 
+    public java.util.List<DocTagsDAL> getList() {
+        return List;
+    }
 
+    public void setList(java.util.List<DocTagsDAL> list) {
+        List = list;
+    }
 }

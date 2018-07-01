@@ -32,9 +32,9 @@ public class ServletTopics extends HttpServlet {
             TopicsDAL topic;
             ExampleDAL example;
             if (dto.isSuccess()) {
-                topic = dto.getData().get(0);
+                topic = dto.getList().get(0);
                 request.setAttribute("data", topic);
-                example = exDto.getData().get(0);
+                example = exDto.getList().get(0);
                 request.setAttribute("exData", example);
                 request.getRequestDispatcher("topics.jsp").forward(request, response);
             } else {

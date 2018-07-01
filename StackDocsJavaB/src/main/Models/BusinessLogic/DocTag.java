@@ -1,26 +1,22 @@
 package Models.BusinessLogic;
 
 public class DocTag {
-	private long _id;
-	private String _tag;
+	private int Id;
+	private String Tag;
 
-
-	public long getId() {
-		return _id;
+	public int getId() {
+		return Id;
 	}
 
-	public void setId(long id) {
-		_id = id;
+	public void setId(int id) {
+		Id = id;
 	}
 
 	public String getTag() {
-		return _tag;
+		return Tag;
 	}
 
 	public void setTag(String tag) {
-		_tag = tag;
+		Tag = tag;
 	}
-
-
-
 }

@@ -7,16 +7,13 @@ import java.util.List;
 public class TopicsDTO {
     private boolean Success;
     private String Message;
-    private List<TopicsDAL> data;
+    private List<TopicsDAL> List;
 
-    public List<TopicsDAL> getData() {
-        return data;
+    public TopicsDTO(boolean success, String message, List<TopicsDAL> list){
+        Success = success;
+        Message = message;
+        List = list;
     }
-
-    public void setData(List<TopicsDAL> data) {
-        this.data = data;
-    }
-
 
     public boolean isSuccess() {
         return Success;
@@ -34,5 +31,11 @@ public class TopicsDTO {
         Message = message;
     }
 
+    public java.util.List<TopicsDAL> getList() {
+        return List;
+    }
 
+    public void setList(java.util.List<TopicsDAL> list) {
+        List = list;
+    }
 }

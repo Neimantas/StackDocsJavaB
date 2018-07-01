@@ -7,6 +7,7 @@ import Services.ICrud;
 import Services.QueryBuilder;
 import com.google.inject.Inject;
 
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,6 @@ public class Crud implements ICrud {
     private Connection connection;
     private Statement statement;
     private IDataBase db;
-    private DBqueryDTO dto;
 
     @Inject
     public Crud(IDataBase iDB){
@@ -28,18 +28,16 @@ public class Crud implements ICrud {
 
     @Override
     public DBqueryDTO create(DBQueryModel create) {
+        DBqueryDTO dto;
         try {
-            dto = new DBqueryDTO();
             connection = db.getConnection();
-//            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
-            String query = "";
+            String query = "INSERT INTO " + create.getTable() + " VALUES(" + create.getCreateValues() + ")";
             statement = connection.createStatement();
             statement.executeUpdate(query);
-            dto.setSuccess(true);
+            dto = new DBqueryDTO(true, null, null);
         } catch (SQLException e) {
-            dto.setSuccess(false);
-            dto.setMessage(e.getMessage());
             System.out.println(e.getMessage());
+            dto = new DBqueryDTO(false, e.getMessage(), null);
         } finally {
             try {
                 db.closeConnection();
@@ -51,42 +49,33 @@ public class Crud implements ICrud {
     }
 
     @Override
-    public DBqueryDTO read(DBQueryModel dbQuery) {
+    public <T> DBqueryDTO<T> read(DBQueryModel dbQuery, Class<T> type) {
+        DBqueryDTO<T> dto;
         try {
-//            String query;
-//            if (dbQuery.getWhere() == null) {
-//                query = "SELECT * FROM " + dbQuery.getTable();
-//            } else if (dbQuery.isSingle()) {
-//                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " = " +
-//                        dbQuery.getWhereValue();
-//            } else if (dbQuery.isAfter()){
-//                query = "SELECT * FROM " + dbQuery.getTable() + " WHERE " + dbQuery.getWhere() + " >= " +
-//                        dbQuery.getWhereValue() + " LIMIT " + dbQuery.getQuantity();
-//            } else {
-//                query = "";
-//            }
             QueryBuilder qb = new QueryBuilder();
             qb.buildQuery(dbQuery);
-            String query = qb.getQuery();
-            dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
-            ResultSet rs  = statement.executeQuery(query);
-            int colCount = rs.getMetaData().getColumnCount();
-            List<List<Object>> rows = new ArrayList<>();
+            ResultSet rs  = statement.executeQuery(qb.getQuery());
+//            int colCount = rs.getMetaData().getColumnCount();
+//            List<List<Object>> rows = new ArrayList<>();
+//            while (rs.next()) {
+//                List<Object> columns = new ArrayList<>();
+//                for (int i = 1; i <= colCount; i++) {
+//                    columns.add(rs.getObject(i));
+//                }
+//                rows.add(columns);
+//            }
+            List<T> rows = new ArrayList<>();
             while (rs.next()) {
-                List<Object> columns = new ArrayList<>();
-                for (int i = 1; i <= colCount; i++) {
-                    columns.add(rs.getObject(i));
-                }
-                rows.add(columns);
+                T dal = type.newInstance();
+                loadResultSetIntoObject(rs, dal);
+                rows.add(dal);
             }
-            dto.setData(rows);
-            dto.setSuccess(true);
-        } catch (SQLException e) {
-            dto.setSuccess(false);
-            dto.setMessage(e.getMessage());
+            dto = new DBqueryDTO<>(true, null, rows);
+        } catch (SQLException | InstantiationException | IllegalArgumentException | IllegalAccessException e) {
             System.out.println(e.getMessage());
+            dto = new DBqueryDTO(false, e.getMessage(), null);
         } finally {
             try {
                 db.closeConnection();
@@ -99,19 +88,18 @@ public class Crud implements ICrud {
 
     @Override
     public DBqueryDTO update(DBQueryModel update) {
+        DBqueryDTO dto;
         try {
-//            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
-//                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue();
-            String query = "";
-            dto = new DBqueryDTO();
+            String query = "UPDATE " + update.getTable() + " SET '" + update.getUpdateWhat() + "' = '"
+                            + update.getUpdateValue() + "' WHERE " + update.getWhere() + " = " + update.getWhereValue().toString();
+//            String query = "";
             connection = db.getConnection();
             statement = connection.createStatement();
             statement.executeUpdate(query);
-            dto.setSuccess(true);
+            dto = new DBqueryDTO(true, null, null);
         } catch (SQLException e) {
-            dto.setSuccess(false);
-            dto.setMessage(e.getMessage());
             System.out.println(e.getMessage());
+            dto = new DBqueryDTO(false, e.getMessage(), null);
         } finally {
             try {
                 db.closeConnection();
@@ -124,19 +112,18 @@ public class Crud implements ICrud {
 
     @Override
     public DBqueryDTO delete(DBQueryModel delete) {
+        DBqueryDTO dto;
         try {
 //            String query = "DELETE FROM " + delete.getTable() + " WHERE " + delete.getWhere() +  " = " +
 //                            delete.getWhereValue() + " LIMIT 1";
             String query = "";
-            dto = new DBqueryDTO();
             connection = db.getConnection();
             statement = connection.createStatement();
             statement.executeUpdate(query);
-            dto.setSuccess(true);
+            dto = new DBqueryDTO(true, null, null);
         } catch (SQLException e) {
-            dto.setSuccess(false);
-            dto.setMessage(e.getMessage());
             System.out.println(e.getMessage());
+            dto = new DBqueryDTO(false, e.getMessage(), null);
         } finally {
             try {
                 db.closeConnection();
@@ -145,5 +132,51 @@ public class Crud implements ICrud {
             }
         }
         return dto;
+    }
+
+    private static void loadResultSetIntoObject(ResultSet rst, Object object)
+            throws IllegalArgumentException, IllegalAccessException, SQLException
+    {
+        Class<?> zclass = object.getClass();
+        for(Field field : zclass.getDeclaredFields()) {
+            String name = field.getName();
+            field.setAccessible(true);
+            Object value = rst.getObject(name);
+            Class<?> type = field.getType();
+            if (isPrimitive(type)) {
+                Class<?> boxed = boxPrimitiveClass(type);
+                if (type == boolean.class) {
+                    value = (int) value == 1;
+                } else {
+                    value = boxed.cast(value);
+                }
+            }
+            field.set(object, value);
+        }
+    }
+
+    private static boolean isPrimitive(Class<?> type)
+    {
+        return (type == int.class || type == long.class ||
+                type == double.class  || type == float.class
+                || type == boolean.class || type == byte.class
+                || type == char.class || type == short.class);
+    }
+
+    private static Class<?> boxPrimitiveClass(Class<?> type)
+    {
+        if (type == int.class){return Integer.class;}
+        else if (type == long.class){return Long.class;}
+        else if (type == double.class){return Double.class;}
+        else if (type == float.class){return Float.class;}
+        else if (type == boolean.class){return Boolean.class;}
+        else if (type == byte.class){return Byte.class;}
+        else if (type == char.class){return Character.class;}
+        else if (type == short.class){return Short.class;}
+        else
+        {
+            String string = "Class '" + type.getName() + "' is not a primitive";
+            throw new IllegalArgumentException(string);
+        }
     }
 }

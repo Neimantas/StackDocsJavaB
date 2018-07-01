@@ -1,18 +1,18 @@
 package Models.DAL;
 
 public class DocTagsDAL {
-    long Id;
-    String Tag;
-    String Title;
-    String CreationDate;
-    long HelloWorldDocTopicId;
-    long TopicCount;
+    private int Id;
+    private String Tag;
+    private String Title;
+    private String CreationDate;
+    private int HelloWorldDocTopicId;
+    private int TopicCount;
 
-    public long getId() {
+    public int getId() {
         return Id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         Id = id;
     }
 
@@ -40,21 +40,19 @@ public class DocTagsDAL {
         CreationDate = creationDate;
     }
 
-    public long getHelloWorldDocTopicId() {
+    public int getHelloWorldDocTopicId() {
         return HelloWorldDocTopicId;
     }
 
-    public void setHelloWorldDocTopicId(long helloWorldDocTopicId) {
+    public void setHelloWorldDocTopicId(int helloWorldDocTopicId) {
         HelloWorldDocTopicId = helloWorldDocTopicId;
     }
 
-    public long getTopicCount() {
+    public int getTopicCount() {
         return TopicCount;
     }
 
-    public void setTopicCount(long topicCount) {
+    public void setTopicCount(int topicCount) {
         TopicCount = topicCount;
     }
-
-
 }
