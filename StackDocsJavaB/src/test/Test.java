@@ -1,4 +1,3 @@
-import Controllers.ServletListener;
 import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Topic;
 import Models.DAL.TopicsDAL;
@@ -8,12 +7,6 @@ import Models.DTO.DocTagsDTO;
 import Models.URLSettingsModel;
 import Services.*;
 import Services.Impl.Cache;
-import Services.Impl.Crud;
-import Services.Impl.DataBase;
-import Services.Impl.HigherService;
-import Services.Modules.HigherServiceModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -29,10 +22,9 @@ public class Test {
 
     @org.junit.BeforeClass
     public static void setup() {
-        ServletListener.injector = Guice.createInjector(new HigherServiceModule());
-        db = ServletListener.injector.getInstance(IDataBase.class);
-        crud = ServletListener.injector.getInstance(ICrud.class);
-        higher = ServletListener.injector.getInstance(IHigherService.class);
+        db = DIContainer.getInjector().getInstance(IDataBase.class);
+        crud = DIContainer.getInjector().getInstance(ICrud.class);
+        higher = DIContainer.getInjector().getInstance(IHigherService.class);
     }
 
     @org.junit.Test

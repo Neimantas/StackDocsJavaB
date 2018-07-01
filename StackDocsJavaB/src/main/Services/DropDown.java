@@ -1,6 +1,5 @@
 package Services;
 
-import Controllers.ServletListener;
 import Models.BusinessLogic.DocTag;
 import Models.DAL.DocTagsDAL;
 import Models.DTO.DocTagsDTO;
@@ -35,9 +34,7 @@ public class DropDown {
 
         } else {
 
-            //Injector injector = Guice.createInjector(new HigherServiceModule());
-            IHigherService higher = ServletListener.injector.getInstance(IHigherService.class);
-
+            IHigherService higher = DIContainer.getInjector().getInstance(IHigherService.class);
             DocTagsDTO dtoList = higher.getDocTagById(dropDownsNeeded);
 
             List<DocTagsDAL> dropDown = dtoList.getList();

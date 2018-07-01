@@ -16,13 +16,14 @@ import com.google.inject.Inject;
 public class HigherService implements IHigherService {
 
     private ICrud crud;
-    private ICache cache = Cache.getInstance();
+    private ICache cache;
     private final static String MESSAGE = "DB connection was successful, but cant find anything by Id or crud is not working properly";
     private DBQueryModel model;
     
     @Inject
-    public HigherService(ICrud iCrud) {
+    public HigherService(ICrud iCrud, ICache iCache) {
         crud = iCrud;
+        cache = iCache;
     }
 
     @Override

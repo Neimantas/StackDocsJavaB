@@ -1,7 +1,5 @@
 package Services;
 
-
-import Controllers.ServletListener;
 import Models.BusinessLogic.Topic;
 import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
@@ -21,7 +19,7 @@ public class Pagination {
     private boolean allConnectionsWithDataBaseIsSuccess;
 
     public Pagination(){
-        hs = ServletListener.injector.getInstance(IHigherService.class);
+        hs = DIContainer.getInjector().getInstance(IHigherService.class);
     }
 
     public List<Topic> getList(URLSettingsModel model) {
