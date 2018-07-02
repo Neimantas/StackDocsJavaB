@@ -136,7 +136,7 @@ public class HigherService implements IHigherService {
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
         DBQueryModel model = new DBQueryModel();
         model.setTable("Examples");
-        model.setWhere("TopicsId");
+        model.setWhere("DocTopicId");
         model.setWhereValue(topicIds);
         DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(model, ExampleDAL.class);
 
