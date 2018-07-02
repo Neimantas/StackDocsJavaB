@@ -5,7 +5,7 @@
   Time: 1:13 PM
   To change this template use File | Settings | File Templates.
 --%>
-
+<%@ taglib prefix="java" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,7 +41,10 @@
             </li>
         </ul>
     </div>
-    <div class="row justify-content-center">
+
+
+   <br>
+       <div class="row justify-content-center">
         <!-- Button trigger modal -->
         <button class="col-auto btn btn-info" type="button" data-toggle="modal" data-target=".bd-example-modal-lg">
             Example
@@ -49,7 +52,10 @@
         <div class="col-sm-2 offset-sm-2"></div>
         <div class="col-sm-2 offset-sm-2"></div>
         <button class="col-auto btn btn-secondary" onclick="funkcija_atgal();">Back</button>
+
     </div>
+    <br>
+
 </div>
 
 
@@ -68,7 +74,9 @@
             <div class="modal-body">
                 <ul>
                     <li>
-                        <p>${exData.getBodyHtml()}</p>
+                        <java:forEach var="id" items="${exData}">
+                         <p>${id.getBodyHtml()}</p>
+                        </java:forEach>
                     </li>
                 </ul>
             </div>

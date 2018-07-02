@@ -17,7 +17,7 @@ function vykstaPaieska() {
 
 function GetTopicInfo(skaicius){
     location.href = "/topics?topicId=" + skaicius;
-}
+  }
 
 
 function changePage(id){
@@ -52,3 +52,7 @@ function getParam(parameter) {
     }
 }
 
+function funkcija_atgal() {
+    window.history.back();
+
+}

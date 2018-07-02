@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ServletTopics", urlPatterns = {"/topics"})
 public class ServletTopics extends HttpServlet {
@@ -31,11 +32,11 @@ public class ServletTopics extends HttpServlet {
             TopicsDTO dto = higher.getTopicById(topicID);
             ExampleDTO exDto = higher.getExamplesByTopicsId(topicID);
             TopicsDAL topic;
-            ExampleDAL example;
+            List<ExampleDAL> example;
             if (dto.isSuccess()) {
-                topic = dto.getList().get(0);
+                topic = dto.getData().get(0);
                 request.setAttribute("data", topic);
-                example = exDto.getList().get(0);
+                example = exDto.getData();
                 request.setAttribute("exData", example);
                 request.getRequestDispatcher("topics.jsp").forward(request, response);
             } else {
