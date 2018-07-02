@@ -17,7 +17,7 @@ function vykstaPaieska() {
 
 function GetTopicInfo(skaicius){
     location.href = "/topics?topicId=" + skaicius;
-}
+  }
 
 
 function changePage(id){
@@ -53,8 +53,6 @@ function getParam(parameter) {
 }
 
 function funkcija_atgal() {
-
-    location.href ="servletindex?kalba=&paieska=";
-
+    window.history.back();
 
 }
