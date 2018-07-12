@@ -1,6 +1,10 @@
 package Services.Impl;
 
 import Services.ICache;
+import com.google.inject.Inject;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +19,11 @@ public class Cache implements ICache {
     //------------Singleton-----------
     private static Cache instance = null;
 
+    @Inject
     private Cache() {}
 
+    @Provides
+    @Singleton
     public static Cache getInstance() {
 
         if(instance == null) {

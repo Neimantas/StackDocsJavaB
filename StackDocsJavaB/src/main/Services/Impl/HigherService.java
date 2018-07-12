@@ -11,16 +11,24 @@ import Models.DTO.TopicsDTO;
 import Services.ICache;
 import Services.ICrud;
 import Services.IHigherService;
+import com.google.inject.Inject;
 
 public class HigherService implements IHigherService {
 
-    private ICrud crud = new Crud();
-    private ICache cache = Cache.getInstance();
+    private ICrud crud;
+    private ICache cache;
     private final static String MESSAGE = "DB connection was successful, but cant find anything by Id or crud is not working properly";
+    private DBQueryModel model;
+    
+    @Inject
+    public HigherService(ICrud iCrud, ICache iCache) {
+        crud = iCrud;
+        cache = iCache;
+    }
 
     @Override
     public DocTagsDTO getDocTagById(String... docTagIds) {
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("DocTags");
         model.setWhere("id");
         model.setWhereValue(docTagIds);
@@ -35,7 +43,7 @@ public class HigherService implements IHigherService {
 
     @Override
     public TopicsDTO getTopicById(String... topicIds) {
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("Topics");
         model.setWhere("id");
         model.setWhereValue(topicIds);
@@ -50,7 +58,7 @@ public class HigherService implements IHigherService {
 
     @Override
     public ExampleDTO getExampleById(String... exampleIds) {
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("Examples");
         model.setWhere("id");
         model.setWhereValue(exampleIds);
@@ -68,7 +76,7 @@ public class HigherService implements IHigherService {
         String cachePlacement = "allDocTags";
         if (cache.get(cachePlacement) != null) return (DocTagsDTO) cache.get(cachePlacement);
 
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("DocTags");
         DBqueryDTO<DocTagsDAL> dBqueryDTO = crud.read(model, DocTagsDAL.class);
 
@@ -86,7 +94,7 @@ public class HigherService implements IHigherService {
         String cachePlacement = "allTopics";
         if (cache.get(cachePlacement) != null) return (TopicsDTO) cache.get(cachePlacement);
 
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("Topics");
         DBqueryDTO<TopicsDAL> dBqueryDTO = crud.read(model, TopicsDAL.class);
 
@@ -104,7 +112,7 @@ public class HigherService implements IHigherService {
         String cachePlacement = "allDocTags";
         if (cache.get(cachePlacement) != null) return (ExampleDTO) cache.get(cachePlacement);
 
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("Examples");
         DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(model, ExampleDAL.class);
 
@@ -119,7 +127,7 @@ public class HigherService implements IHigherService {
 
     @Override
     public TopicsDTO getTopicsByDocTagId(String... docTagIds) {
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("Topics");
         model.setWhere("DocTagId");
         model.setWhereValue(docTagIds);
@@ -134,7 +142,7 @@ public class HigherService implements IHigherService {
 
     @Override
     public ExampleDTO getExamplesByTopicsId(String... topicIds) {
-        DBQueryModel model = new DBQueryModel();
+        model = new DBQueryModel();
         model.setTable("Examples");
         model.setWhere("DocTopicId");
         model.setWhereValue(topicIds);

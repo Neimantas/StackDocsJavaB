@@ -1,14 +1,9 @@
 package Services;
 
 import Models.BusinessLogic.Topic;
-import Models.DAL.DocTagsDAL;
-import Models.DAL.TopicsDAL;
-import Models.DBQueryModel;
-import Models.DTO.DocTagsDTO;
 import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.Impl.Cache;
-import Services.Impl.HigherService;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -16,12 +11,16 @@ import java.util.List;
 
 public class Pagination {
 
-    private IHigherService hs = new HigherService();
+    private IHigherService hs;
     private ICache cache = Cache.getInstance();
     private List<String[]> topicsAndDocTagsIds = new ArrayList<>();
     private List<String> collectedIds = new ArrayList<>();
     private List<Topic> topicsList = new ArrayList<>();
     private boolean allConnectionsWithDataBaseIsSuccess;
+
+    public Pagination(){
+        hs = DIContainer.getInjector().getInstance(IHigherService.class);
+    }
 
     public List<Topic> getList(URLSettingsModel model) {
         resetValues();
@@ -58,11 +57,11 @@ public class Pagination {
                         String remarks = topicsDTO.getList().get(i).getRemarksMarkdown().toLowerCase();
                         String syntax = topicsDTO.getList().get(i).getSyntaxMarkdown().toLowerCase();
 
-                        if ((title.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (introduction.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (parameters.toLowerCase().contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (remarks.contains(normalizeText((queries[j]))) && docId.equals(docTagId))
-                                || (syntax.contains(normalizeText((queries[j]))) && docId.equals(docTagId))) {
+                        if(docId.equals(docTagId) && (title.contains(normalizeText((queries[j])))
+                                || introduction.contains(normalizeText((queries[j])))
+                                || parameters.toLowerCase().contains(normalizeText((queries[j])))
+                                || remarks.contains(normalizeText((queries[j])))
+                                || syntax.contains(normalizeText((queries[j]))))) {
                             String[] arr = {"" + topicsDTO.getList().get(i).getId(), "" + topicsDTO.getList().get(i).getDocTagId()};
                             tempList.add(arr);
                         }
@@ -174,7 +173,7 @@ public class Pagination {
     }
 
     private void makeListFromColletedIds() {
-        String[] idsArr = collectedIds.toArray(new String[collectedIds.size()]);
+        String[] idsArr = collectedIds.toArray(new String[0]);
         TopicsDTO topicsDTO = hs.getTopicById(idsArr);
         allConnectionsWithDataBaseIsSuccess = allConnectionsWithDataBaseIsSuccess && topicsDTO.isSuccess();
         if (topicsDTO.isSuccess() && topicsDTO.getList() != null) {
