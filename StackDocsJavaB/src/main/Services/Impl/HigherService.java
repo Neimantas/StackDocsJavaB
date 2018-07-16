@@ -1,5 +1,6 @@
 package Services.Impl;
 
+import Models.CONS.Errors;
 import Models.DAL.DocTagsDAL;
 import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
@@ -17,7 +18,6 @@ public class HigherService implements IHigherService {
 
     private ICrud crud;
     private ICache cache;
-    private final static String MESSAGE = "DB connection was successful, but cant find anything by Id or crud is not working properly";
     private DBQueryModel model;
     
     @Inject
@@ -79,7 +79,7 @@ public class HigherService implements IHigherService {
         model.setTable("DocTags");
         DBqueryDTO<DocTagsDAL> dBqueryDTO = crud.read(model, DocTagsDAL.class);
         if (!dBqueryDTO.isSuccess()) return new DocTagsDTO(false, dBqueryDTO.getMessage(),null);
-        if (dBqueryDTO.getList() == null) return new DocTagsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new DocTagsDTO(false, Errors.HIGHERSERVICE_ERROR.getMessage(), null);
         DocTagsDTO docTagsDTO = new DocTagsDTO(true, null, dBqueryDTO.getList());
         cache.put(cachePlacement, docTagsDTO);
         return docTagsDTO;
@@ -93,7 +93,7 @@ public class HigherService implements IHigherService {
         model.setTable("Topics");
         DBqueryDTO<TopicsDAL> dBqueryDTO = crud.read(model, TopicsDAL.class);
         if (!dBqueryDTO.isSuccess()) return new TopicsDTO(false, dBqueryDTO.getMessage(),null);
-        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, Errors.HIGHERSERVICE_ERROR.getMessage(), null);
         TopicsDTO topicsDTO = new TopicsDTO(true, null, dBqueryDTO.getList());
         cache.put(cachePlacement, topicsDTO);
         return topicsDTO;
@@ -107,7 +107,7 @@ public class HigherService implements IHigherService {
         model.setTable("Examples");
         DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(model, ExampleDAL.class);
         if (!dBqueryDTO.isSuccess()) return new ExampleDTO(false, dBqueryDTO.getMessage(),null);
-        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, Errors.HIGHERSERVICE_ERROR.getMessage(), null);
         ExampleDTO exampleDTO = new ExampleDTO(true, null, dBqueryDTO.getList());
         cache.put(cachePlacement, exampleDTO);
         return exampleDTO;
@@ -115,19 +115,19 @@ public class HigherService implements IHigherService {
 
     private DocTagsDTO getDocTagsDTO(DBqueryDTO<DocTagsDAL> dBqueryDTO) {
         if (!dBqueryDTO.isSuccess()) return new DocTagsDTO(false, dBqueryDTO.getMessage(),null);
-        if (dBqueryDTO.getList() == null) return new DocTagsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new DocTagsDTO(false, Errors.HIGHERSERVICE_ERROR.getMessage(), null);
         return new DocTagsDTO(true, null, dBqueryDTO.getList());
     }
 
     private TopicsDTO getTopicsDTO(DBqueryDTO<TopicsDAL> dBqueryDTO) {
         if (!dBqueryDTO.isSuccess()) return new TopicsDTO(false, dBqueryDTO.getMessage(),null);
-        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new TopicsDTO(false, Errors.HIGHERSERVICE_ERROR.getMessage(), null);
         return new TopicsDTO(true, null, dBqueryDTO.getList());
     }
 
     private ExampleDTO getExampleDTO(DBqueryDTO<ExampleDAL> dBqueryDTO) {
         if (!dBqueryDTO.isSuccess()) return new ExampleDTO(false, dBqueryDTO.getMessage(),null);
-        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, MESSAGE, null);
+        if (dBqueryDTO.getList() == null) return new ExampleDTO(false, Errors.HIGHERSERVICE_ERROR.getMessage(), null);
         return new ExampleDTO(true, null, dBqueryDTO.getList());
     }
 }
