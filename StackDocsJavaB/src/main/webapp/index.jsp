@@ -6,7 +6,7 @@
 
 <head>
     <link rel="stylesheet" href="css.css">
-    <script src="js.js"></script>
+    <script src="SCRIPTS/js.js"></script>
     <title>Stack Docs JAVA</title>
 </head>
 
@@ -14,7 +14,7 @@
 
     <div class="container">
         <div class="py-5 text-center">
-            <img src="IMG/logo.png" alt="" class="paveikslelis">
+            <img src="IMG/logo.png" alt="" class="image">
             <h2>Stack Docs JAVA</h2>
         </div>
 
@@ -26,7 +26,7 @@
                         <span class="text-muted">Pasirinkite kalbą</span>
                     </h4>
 
-                    <select class="form-control custom-select d-block w-100" id="kalba">
+                    <select class="form-control custom-select d-block w-100" id="language">
 
                         <option value="">
                             "Pasirinkimas..."
@@ -53,7 +53,7 @@
 
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <input class="form-control" id="paieskos-laukas" type="text" placeholder="Įveskite frazę">
+                            <input class="form-control" id="search-field" type="text" placeholder="Įveskite frazę">
                         </div>
                     </div>
 
@@ -83,7 +83,7 @@
                     <a class="page-link text-dark">Atgal</a>
                 </li>
 
-                <li class="page-item" id="puslapio-numeris">
+                <li class="page-item" id="page-number">
                     <a class="page-link text-dark"><%= request.getParameter("page") != null ? request.getParameter("page") : 1%></a>
                 </li>
 

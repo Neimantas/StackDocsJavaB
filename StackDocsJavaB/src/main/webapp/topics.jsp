@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Lenovo
-  Date: 6/19/2018
-  Time: 1:13 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ taglib prefix="java" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -51,7 +45,7 @@
         </button>
         <div class="col-sm-2 offset-sm-2"></div>
         <div class="col-sm-2 offset-sm-2"></div>
-        <button class="col-auto btn btn-secondary" onclick="funkcija_atgal();">Back</button>
+        <button class="col-auto btn btn-secondary" onclick="Go_Back();">Back</button>
 
     </div>
     <br>
@@ -82,14 +76,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <%--<button type="button" class="btn btn-primary">Button 2</button>--%>
             </div>
         </div>
     </div>
 </div>
 
 
-<script src="js.js"></script>
+<script src="SCRIPTS/js.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
