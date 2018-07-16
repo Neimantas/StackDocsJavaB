@@ -1,9 +1,8 @@
 package Services;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import Models.DTO.ConnectionDTO;
 
 public interface IDataBase {
-    Connection getConnection() throws SQLException;
-    void closeConnection() throws SQLException;
+    ConnectionDTO getConnection();
+    ConnectionDTO closeConnection();
 }

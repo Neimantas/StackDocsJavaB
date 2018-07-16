@@ -1,42 +1,38 @@
 package Services.Impl;
 
+import Models.DTO.ConnectionDTO;
 import Services.IDataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DataBase implements IDataBase {
     private Connection connection;
 
     @Override
-    public Connection getConnection() throws SQLException {
-//        try {
-//            System.setProperty(Context.INITIAL_CONTEXT_FACTORY,
-//                    "org.apache.naming.java.javaURLContextFactory");
-//            Class.forName("org.sqlite.JDBC");
-//            Context initContext = new InitialContext();
-//            Context envContext  = (Context) initContext.lookup("java:comp/env");
-//            DataSource ds = (DataSource)envContext.lookup("jdbc/mydb.sqlite");
-//            connection = ds.getConnection();
-//        } catch (ClassNotFoundException e) {
-//            System.out.println(e.getMessage());
-//        } catch (NamingException e) {
-//            System.out.println(e.getMessage());
-//        }
+    public ConnectionDTO getConnection(){
         try {
             Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e){
-            System.out.println(e.getMessage());
+            connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
+        } catch (Exception e){
+            return new ConnectionDTO(false, e.getMessage(), null);
         }
-        connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
-        return connection;
+        return new ConnectionDTO(true, "", connection);
     }
 
     @Override
-    public void closeConnection() throws SQLException {
+    public ConnectionDTO closeConnection(){
         if (connection != null) {
-            connection.close();
+            try{
+                connection.close();
+                return new ConnectionDTO(true, "", null);
+            } catch (Exception e) {
+                // TODO same as below
+                return new ConnectionDTO(false, "ERROR: failed to close the DB connection.", connection);
+            }
+        } else {
+            //TODO use the error enum class here
+            return new ConnectionDTO(false, "ERROR: Nothing to close", null);
         }
     }
 }

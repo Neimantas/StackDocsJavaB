@@ -6,42 +6,60 @@ public class QueryBuilder {
     private StringBuilder sb = new StringBuilder();
     private String tableName;
 
+    public QueryBuilder(String tn) {
+        tableName = tn;
+    }
 
-    public void buildQuery(DBQueryModel queryModel) {
-        if (queryModel.getTable() != null) {
-            resetQuery();
-            tableName = queryModel.getTable();
-            sb.append("SELECT * FROM ").append(tableName).append(" WHERE 1 = 1");
-        } else if (queryModel.getTable() == null && (tableName == null || tableName.isEmpty())) {
-            //TODO what should happen here ???
-            System.out.println("You should have given me a table name...");
-            return;
+    public QueryBuilder buildQuery(DBQueryModel queryModel, String readOrDelete) {
+        if (tableName == null || tableName.isEmpty()) {
+            throw new IllegalArgumentException("Missing table name!");
+        }
+
+        if (readOrDelete == null || readOrDelete.isEmpty()) {
+            throw new IllegalArgumentException("Cannot build a query without specifying Read or Delete operation.");
+        }
+
+        sb.setLength(0);
+
+        switch (readOrDelete.toUpperCase()) {
+            case "READ":
+                sb.append("SELECT * FROM ").append(tableName).append(" WHERE 1 = 1");
+                break;
+            case "DELETE":
+                sb.append("DELETE FROM ").append(tableName).append(" WHERE 1 = 1");
+                break;
+            default:
+                throw new IllegalArgumentException("Please specify either Read or Delete as third argument.");
         }
 
         if (queryModel.getWhere() != null && queryModel.getWhereValue() != null) {
-            whereClause(queryModel);
+            return whereClause(queryModel);
         }
 
+        return this;
     }
 
-    public void whereClause(DBQueryModel queryModel) {
+    public QueryBuilder whereClause(DBQueryModel queryModel) {
         String[] values = queryModel.getWhereValue();
         sb.append(" AND ").append(queryModel.getWhere()).append(" IN (");
         for (int i = 0; i < values.length; i++) {
             sb.append("'").append(values[i]).append("'");
+            // We check if it's the last value if it is we omit the ','
             if (i != values.length - 1) {
                 sb.append(",");
             }
         }
         sb.append(")");
+        return this;
+    }
+
+    public QueryBuilder setTableName(String tn) {
+        tableName = tn;
+        return this;
     }
 
     public String getQuery(){
         return sb.toString();
     }
 
-    private void resetQuery(){
-        sb.setLength(0);
-        tableName = "";
-    }
 }

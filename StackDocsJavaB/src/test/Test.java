@@ -1,5 +1,6 @@
 import Models.BusinessLogic.DocTag;
 import Models.BusinessLogic.Topic;
+import Models.DAL.DocTagsDAL;
 import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
@@ -7,6 +8,7 @@ import Models.DTO.DocTagsDTO;
 import Models.URLSettingsModel;
 import Services.*;
 import Services.Impl.Cache;
+import Services.Impl.Crud;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -114,5 +116,39 @@ public class Test {
         query.setWhereValue(new String[]{"1", "2", "3", "4", "5", "6", "8", "10", "11", "12"});
         DBqueryDTO dto = crud.read(query, TopicsDAL.class);
         assertTrue(dto != null);
+    }
+
+    @org.junit.Test
+    public void AssertCreateMethod() {
+        DocTagsDAL dal = new DocTagsDAL();
+        dal.setTag("TAGNAME");
+        dal.setTitle("TITLE");
+        dal.setCreationDate("CREATION DATE");
+        dal.setHelloWorldDocTopicId(1111111);
+        dal.setTopicCount(222222);
+        DBqueryDTO dto = crud.create(dal);
+        assertTrue(dto.isSuccess());
+    }
+
+    @org.junit.Test
+    public void AssertUpdateMethod() {
+        DocTagsDAL dal = new DocTagsDAL();
+        dal.setId(1200);
+        dal.setTag("TAG CHANGED");
+        dal.setTitle("TITLE CHANGED");
+        dal.setCreationDate("CREATION DATE CHANGED");
+        dal.setHelloWorldDocTopicId(666666);
+        dal.setTopicCount(99999);
+        DBqueryDTO dto = crud.update(dal, "Id");
+        assertTrue(dto.isSuccess());
+    }
+
+    @org.junit.Test
+    public void AssertDeleteMethod() {
+        DBQueryModel delModel = new DBQueryModel();
+        delModel.setWhere("Id");
+        delModel.setWhereValue(new String[]{"1200"});
+        DBqueryDTO dto = crud.delete(delModel, DocTagsDAL.class);
+        assertTrue(dto.isSuccess());
     }
 }
