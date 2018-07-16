@@ -4,26 +4,26 @@ window.addEventListener("load", function () {
     // ...and take over its submit event.
     form.addEventListener("submit", function (event) {
         event.preventDefault();
-        vykstaPaieska();
+        Search();
     });
 });
 
-function vykstaPaieska() {
-    var kalba = document.getElementById("kalba").value;
-    var paieskos_laukas = document.getElementById("paieskos-laukas").value;
-    location.href = "/servletindex?kalba=" + kalba + "&paieska=" + paieskos_laukas;
+function Search() {
+    var language = document.getElementById("language").value;
+    var search_field = document.getElementById("search-field").value;
+    location.href = "/servletindex?language=" + language + "&search=" + search_field;
 }
 
 
-function GetTopicInfo(skaicius){
-    location.href = "/topics?topicId=" + skaicius;
+function GetTopicInfo(number){
+    location.href = "/topics?topicId=" + number;
   }
 
 
 function changePage(id){
-    var language = getParam("kalba");
-    var search = getParam("paieska");
-    var pageNum = parseInt(document.getElementById("puslapio-numeris").firstElementChild.text);
+    var language = getParam("language");
+    var search = getParam("search");
+    var pageNum = parseInt(document.getElementById("page-number").firstElementChild.text);
     var trRows = document.getElementsByTagName("tr");
     if (trRows.length !== 0) {
         var topicId = trRows[0].id;
@@ -31,12 +31,12 @@ function changePage(id){
         if (id === "next") {
             next = true;
             pageNum++;
-            location.href = "/servletindex?kalba=" + language + "&paieska=" + search + "&after=" + next +
+            location.href = "/servletindex?language=" + language + "&search=" + search + "&after=" + next +
                 "&topicid=" + topicId + "&page=" + pageNum;
         } else if (id === "previous" && pageNum > 1) {
             next = false;
             pageNum--;
-            location.href = "/servletindex?kalba=" + language + "&paieska=" + search + "&after=" + next +
+            location.href = "/servletindex?language=" + language + "&search=" + search + "&after=" + next +
                 "&topicid=" + topicId + "&page=" + pageNum;
         }
     }
@@ -52,7 +52,7 @@ function getParam(parameter) {
     }
 }
 
-function funkcija_atgal() {
+function Go_Back() {
     window.history.back();
 
 }
