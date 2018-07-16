@@ -1,7 +1,7 @@
 package Controllers;
 
-import Models.BusinessLogic.DocTag;
-import Models.BusinessLogic.Topic;
+import Models.BL.DocTag;
+import Models.BL.Topic;
 import Models.URLSettingsModel;
 import Services.DropDown;
 import Services.Pagination;

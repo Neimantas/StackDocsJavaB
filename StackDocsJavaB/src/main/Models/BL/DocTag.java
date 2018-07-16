@@ -1,4 +1,4 @@
-package Models.BusinessLogic;
+package Models.BL;
 
 public class DocTag {
 	private int Id;

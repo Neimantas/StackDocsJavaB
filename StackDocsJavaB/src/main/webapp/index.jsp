@@ -1,12 +1,11 @@
 <%@ taglib prefix="java" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 
 <head>
-    <link rel="stylesheet" href="css.css">
-    <script src="SCRIPTS/js.js"></script>
+    <link rel="stylesheet" href="Styles/styles.css">
+    <script src="Scripts/script.js"></script>
     <title>Stack Docs JAVA</title>
 </head>
 
@@ -14,7 +13,7 @@
 
     <div class="container">
         <div class="py-5 text-center">
-            <img src="IMG/logo.png" alt="" class="image">
+            <img src="Images/logo.png" alt="" class="image">
             <h2>Stack Docs JAVA</h2>
         </div>
 

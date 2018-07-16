@@ -10,8 +10,8 @@ window.addEventListener("load", function () {
 
 function Search() {
     var language = document.getElementById("language").value;
-    var search_field = document.getElementById("search-field").value;
-    location.href = "/servletindex?language=" + language + "&search=" + search_field;
+    var searchField = document.getElementById("search-field").value;
+    location.href = "/servletindex?language=" + language + "&search=" + searchField;
 }
 
 
@@ -50,9 +50,4 @@ function getParam(parameter) {
     } else {
         return -1;
     }
-}
-
-function Go_Back() {
-    window.history.back();
-
 }

@@ -1,11 +1,8 @@
-
 <%@ taglib prefix="java" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
-    <link rel="stylesheet" href="css.css">
-
+    <link rel="stylesheet" href="Styles/styles.css">
     <title>Topics</title>
 </head>
 <body>
@@ -45,7 +42,7 @@
         </button>
         <div class="col-sm-2 offset-sm-2"></div>
         <div class="col-sm-2 offset-sm-2"></div>
-        <button class="col-auto btn btn-secondary" onclick="Go_Back();">Back</button>
+        <button class="col-auto btn btn-secondary" onclick="window.history.back();">Back</button>
 
     </div>
     <br>
@@ -82,7 +79,7 @@
 </div>
 
 
-<script src="SCRIPTS/js.js"></script>
+<script src="Scripts/script.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?callback=myMap"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

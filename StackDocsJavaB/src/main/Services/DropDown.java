@@ -1,13 +1,12 @@
 package Services;
 
-import Models.BusinessLogic.DocTag;
+import Models.BL.DocTag;
 import Models.DAL.DocTagsDAL;
 import Models.DTO.DocTagsDTO;
 import Services.Impl.Cache;
 import Services.Impl.HigherService;
 import org.modelmapper.ModelMapper;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 

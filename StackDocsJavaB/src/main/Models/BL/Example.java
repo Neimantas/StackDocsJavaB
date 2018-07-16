@@ -1,4 +1,4 @@
-package Models.BusinessLogic;
+package Models.BL;
 
 public class Example {
 	private int Id;

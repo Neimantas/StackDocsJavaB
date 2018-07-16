@@ -1,4 +1,4 @@
-package Models.BusinessLogic;
+package Models.BL;
 
 public class Topic {
     private int Id;
