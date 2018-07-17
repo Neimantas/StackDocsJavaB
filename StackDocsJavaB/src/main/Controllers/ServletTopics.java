@@ -4,6 +4,7 @@ import Models.DAL.ExampleDAL;
 import Models.DAL.TopicsDAL;
 import Models.DTO.ExampleDTO;
 import Models.DTO.TopicsDTO;
+import Services.ConvertToJSON;
 import Services.DIContainer;
 import Services.IHigherService;
 
@@ -33,11 +34,11 @@ public class ServletTopics extends HttpServlet {
             ExampleDTO exDto = higher.getExamplesByTopicsId(topicID);
             TopicsDAL topic;
             List<ExampleDAL> example;
-            if (dto.isSuccess()) {
-                topic = dto.getList().get(0);
-                request.setAttribute("data", topic);
-                example = exDto.getList();
-                request.setAttribute("exData", example);
+            if (dto.success) {
+                topic = dto.list.get(0);
+                request.setAttribute("topic", ConvertToJSON.getJSON(topic));
+                example = exDto.list;
+                request.setAttribute("examples", ConvertToJSON.getJSON(example));
                 request.getRequestDispatcher("topics.jsp").forward(request, response);
             } else {
                 response.sendRedirect("http://localhost:8080/index.jsp");

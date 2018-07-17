@@ -3,8 +3,10 @@ package Controllers;
 import Models.BL.DocTag;
 import Models.BL.Topic;
 import Models.URLSettingsModel;
+import Services.ConvertToJSON;
 import Services.DropDown;
 import Services.Pagination;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,11 +38,11 @@ public class ServletIndex extends HttpServlet {
             Pagination pagination = new Pagination();
             URLSettingsModel url = new URLSettingsModel(topic, language, search, after);
             List<Topic> topicList = pagination.getList(url);
-            request.setAttribute("topicList", topicList);
+            request.setAttribute("topicList", ConvertToJSON.getJSON(topicList));
         }
         DropDown dropDown = new DropDown();
         List<DocTag> docList = dropDown.getList();
-        request.setAttribute("doctags", docList);
+        request.setAttribute("doctags", ConvertToJSON.getJSON(docList));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

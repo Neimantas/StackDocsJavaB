@@ -32,7 +32,7 @@ public class QueryBuilder {
                 throw new IllegalArgumentException("Please specify either Read or Delete as third argument.");
         }
 
-        if (queryModel.getWhere() != null && queryModel.getWhereValue() != null) {
+        if (queryModel.where != null && queryModel.whereValue != null) {
             return whereClause(queryModel);
         }
 
@@ -40,8 +40,8 @@ public class QueryBuilder {
     }
 
     public QueryBuilder whereClause(DBQueryModel queryModel) {
-        String[] values = queryModel.getWhereValue();
-        sb.append(" AND ").append(queryModel.getWhere()).append(" IN (");
+        String[] values = queryModel.whereValue;
+        sb.append(" AND ").append(queryModel.where).append(" IN (");
         for (int i = 0; i < values.length; i++) {
             sb.append("'").append(values[i]).append("'");
             // We check if it's the last value if it is we omit the ','

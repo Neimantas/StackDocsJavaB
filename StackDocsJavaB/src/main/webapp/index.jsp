@@ -34,8 +34,8 @@
 
                         <java:forEach var="tags" items="${doctags}">
 
-                            <option value="${tags.getId()}">
-                                    ${tags.getTag()}
+                            <option value="${tags.id}">
+                                    ${tags.tag}
                             </option>
 
                         </java:forEach>
@@ -66,8 +66,8 @@
             <tbody>
 
             <java:forEach var="topic" items="${topicList}">
-                <tr id="${topic.getId()}" onclick="GetTopicInfo(${topic.getId()});">
-                    <td>${topic.getTitle()}</td>
+                <tr id="${topic.id}" onclick="GetTopicInfo(${topic.id});">
+                    <td>${topic.title}</td>
                 </tr>
             </java:forEach>
 
