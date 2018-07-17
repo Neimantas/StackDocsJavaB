@@ -4,10 +4,7 @@ import Models.BusinessLogic.DocTag;
 import Models.DAL.DocTagsDAL;
 import Models.DTO.DocTagsDTO;
 import Services.Impl.Cache;
-import Services.Impl.HigherService;
 import org.modelmapper.ModelMapper;
-
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +12,6 @@ public class DropDown {
 
     private String getDropDown = "dropdownGet";
     private String[] dropDownsNeeded = {"3", "4", "5", "8"};
-
     public int getSize() {
         return dropDownsNeeded.length;
     }
@@ -27,9 +23,8 @@ public class DropDown {
         if (cache.get(getDropDown) != null) {
             docTagsList = (List<DocTag>) obj;
             return docTagsList;
-
         } else {
-            IHigherService higher = new HigherService();
+            IHigherService higher = DIContainer.getInjector().getInstance(IHigherService.class);
             DocTagsDTO docTagsDTO = higher.getDocTagById(dropDownsNeeded);
             if (docTagsDTO.isSuccess()) {
                 List<DocTagsDAL> docTagsDALsList = docTagsDTO.getList();
