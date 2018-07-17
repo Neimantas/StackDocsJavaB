@@ -11,8 +11,8 @@ import java.util.List;
 
 public class DropDown {
 
-    private String getDropDown = (String) Settings.DROPDOWN_CASH.get();
-    private String[] dropDownsNeeded = (String[]) Settings.DROPDOWN_LANGUAGES.get();
+    private String getDropDown = (String) Settings.DROPDOWN_CACHE;
+    private String[] dropDownsNeeded = (String[]) Settings.DROPDOWN_LANGUAGES;
     public int getSize() {
         return dropDownsNeeded.length;
     }
