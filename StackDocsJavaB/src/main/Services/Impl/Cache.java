@@ -32,7 +32,7 @@ public class Cache implements ICache {
     @Override
     public void put(String key, Object obj) {
         cachedObjects.put(key, obj);
-        cachedLiveTime.put(key, System.currentTimeMillis() + Settings.LIVE_TIME.getData());
+        cachedLiveTime.put(key, System.currentTimeMillis() + (Integer) Settings.LIVE_TIME.get());
     }
 
     @Override

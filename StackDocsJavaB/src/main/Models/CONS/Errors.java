@@ -9,7 +9,7 @@ public enum Errors {
 
     private final String message;
 
-    public String getMessage() {
+    public String get() {
         return message;
     }
 }
