@@ -39,10 +39,12 @@ public class ServletIndex extends HttpServlet {
             URLSettingsModel url = new URLSettingsModel(topic, language, search, after);
             List<Topic> topicList = pagination.getList(url);
             request.setAttribute("topicList", ConvertToJSON.getJSON(topicList));
+            System.out.println(ConvertToJSON.getJSON(topicList));
         }
         DropDown dropDown = new DropDown();
         List<DocTag> docList = dropDown.getList();
         request.setAttribute("doctags", ConvertToJSON.getJSON(docList));
+        System.out.println(ConvertToJSON.getJSON(docList));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

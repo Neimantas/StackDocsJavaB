@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="header">
-    <h2>${topic.title}</h2>
+    <h2>${topic[title]}</h2>
 </div>
 
 <div class="container2">
@@ -25,19 +25,19 @@
         <ul>
             <li>
                 <h3>Introduction</h3>
-                <p>${topic.introductionHtml}</p>
+                <p>${topic[introductionHtml]}</p>
             </li>
             <li>
                 <h3>Syntax</h3>
-                <p>${topic.syntaxHtml}</p>
+                <p>${topic[syntaxHtml]}</p>
             </li>
             <li>
                 <h3>Parameters</h3>
-                <p>${topic.parametersHtml}</p>
+                <p>${topic[parametersHtml]}</p>
             </li>
             <li>
                 <h3>Remarks</h3>
-                <p>${topic.remarksHtml}</p>
+                <p>${topic[remarksHtml]}</p>
             </li>
         </ul>
     </div>
@@ -66,7 +66,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">${topic.title}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">${topic[title]}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -75,7 +75,7 @@
                 <ul>
                     <li>
                         <java:forEach var="ex" items="${examples}">
-                         <p>${ex.bodyHtml}</p>
+                         <p>${ex[bodyHtml]}</p>
                         </java:forEach>
                     </li>
                 </ul>

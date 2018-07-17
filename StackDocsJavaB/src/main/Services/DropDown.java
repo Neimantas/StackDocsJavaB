@@ -6,13 +6,15 @@ import Models.DAL.DocTagsDAL;
 import Models.DTO.DocTagsDTO;
 import Services.Impl.Cache;
 import org.modelmapper.ModelMapper;
+
+import javax.print.attribute.standard.Destination;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DropDown {
 
-    private String getDropDown = (String) Settings.DROPDOWN_CACHE;
-    private String[] dropDownsNeeded = (String[]) Settings.DROPDOWN_LANGUAGES;
+    private String getDropDown = Settings.DROPDOWN_CACHE;
+    private String[] dropDownsNeeded = Settings.DROPDOWN_LANGUAGES;
     public int getSize() {
         return dropDownsNeeded.length;
     }
@@ -31,6 +33,7 @@ public class DropDown {
                 List<DocTagsDAL> docTagsDALsList = docTagsDTO.list;
                 for (int i = 0; i < docTagsDALsList.size(); i++) {
                     ModelMapper modelMapper = new ModelMapper();
+                    modelMapper.getConfiguration().setFieldMatchingEnabled(true);
                     docTagsList.add(modelMapper.map(docTagsDALsList.get(i) ,DocTag.class));
                 }
             }
