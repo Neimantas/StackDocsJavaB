@@ -1,6 +1,6 @@
 package Services;
 
-import Models.BusinessLogic.Topic;
+import Models.BL.Topic;
 import Models.DTO.TopicsDTO;
 import Models.URLSettingsModel;
 import Services.Impl.Cache;

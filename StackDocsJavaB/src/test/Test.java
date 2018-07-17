@@ -1,5 +1,5 @@
-import Models.BusinessLogic.DocTag;
-import Models.BusinessLogic.Topic;
+import Models.BL.DocTag;
+import Models.BL.Topic;
 import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;

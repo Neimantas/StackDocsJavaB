@@ -1,5 +1,6 @@
 package Services.Impl;
 
+import Models.CONS.Settings;
 import Services.ICache;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
@@ -13,10 +14,6 @@ public class Cache implements ICache {
 
     private Map<String, Object> cachedObjects = Collections.synchronizedMap(new HashMap<>());
     private Map<String, Long> cachedLiveTime = Collections.synchronizedMap(new HashMap<>());
-    private long timeToLive = 120;
-
-
-    //------------Singleton-----------
     private static Cache instance = null;
 
     @Inject
@@ -25,21 +22,17 @@ public class Cache implements ICache {
     @Provides
     @Singleton
     public static Cache getInstance() {
-
         if(instance == null) {
             instance = new Cache();
             return instance;
         }
         return instance;
     }
-    //---------------------------------
-
 
     @Override
     public void put(String key, Object obj) {
-
         cachedObjects.put(key, obj);
-        cachedLiveTime.put(key, System.currentTimeMillis() + timeToLive * 1000);
+        cachedLiveTime.put(key, System.currentTimeMillis() + Settings.LIVE_TIME.getData());
     }
 
     @Override
