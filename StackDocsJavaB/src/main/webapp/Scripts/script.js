@@ -1,4 +1,39 @@
 window.addEventListener("load", function () {
+    var script = document.createElement("script");
+    script.src = "https://maps.googleapis.com/maps/api/js?callback=myMap"
+    script.async = true;
+    document.getElementsByTagName("script")[0].parentNode.appendChild(script);
+});
+
+window.addEventListener("load", function () {
+    var script = document.createElement("script");
+    script.src = "https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    script.integrity = "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    script.crossOrigin = "anonymous"
+    script.async = true;
+    document.getElementsByTagName("script")[1].parentNode.appendChild(script);
+});
+
+window.addEventListener("load", function () {
+    var script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+    script.integrity = "sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+    script.crossOrigin = "anonymous"
+    script.async = true;
+    document.getElementsByTagName("script")[2].parentNode.appendChild(script);
+});
+
+window.addEventListener("load", function () {
+    var script = document.createElement("script");
+    script.src = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+    script.integrity = "sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+    script.crossOrigin = "anonymous"
+    script.async = true;
+    document.getElementsByTagName("script")[3].parentNode.appendChild(script);
+
+});
+
+window.addEventListener("load", function () {
     // Access the form element...
     var form = document.getElementById("myForm");
     // ...and take over its submit event.
@@ -8,6 +43,7 @@ window.addEventListener("load", function () {
     });
 });
 
+
 function Search() {
     var language = document.getElementById("language").value;
     var searchField = document.getElementById("search-field").value;
@@ -15,12 +51,12 @@ function Search() {
 }
 
 
-function GetTopicInfo(number){
+function GetTopicInfo(number) {
     location.href = "/topics?topicId=" + number;
-  }
+}
 
 
-function changePage(id){
+function changePage(id) {
     var language = getParam("language");
     var search = getParam("search");
     var pageNum = parseInt(document.getElementById("page-number").firstElementChild.text);
