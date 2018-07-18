@@ -1,22 +1,11 @@
 package Models.BL;
 
 public class Topic {
-    private int Id;
-    private String Title;
+    public int id;
+    public String title;
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
+    public Topic(int Id, String Title) {
+        id = Id;
+        title = Title;
     }
 }

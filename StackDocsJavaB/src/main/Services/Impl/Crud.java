@@ -29,12 +29,12 @@ public class Crud implements ICrud {
     public DBqueryDTO create(Object object) {
         try {
             connDTO = db.getConnection();
-            if (connDTO.Success) {
-                statement = connDTO.Connection.createStatement();
+            if (connDTO.success) {
+                statement = connDTO.connection.createStatement();
                 statement.executeUpdate(createInsertQuery(object));
                 dto = new DBqueryDTO(true, "", null);
             } else {
-                dto = new DBqueryDTO(false, connDTO.Message, null);
+                dto = new DBqueryDTO(false, connDTO.message, null);
             }
         } catch (Exception e) {
             dto =  new DBqueryDTO(false, e.getMessage(), null);
@@ -48,8 +48,8 @@ public class Crud implements ICrud {
     public <T> DBqueryDTO<T> read(DBQueryModel dbQuery, Class<T> dalType) {
         try {
             connDTO = db.getConnection();
-            if (connDTO.Success) {
-                statement = connDTO.Connection.createStatement();
+            if (connDTO.success) {
+                statement = connDTO.connection.createStatement();
                 ResultSet rs  = statement
                         .executeQuery(new QueryBuilder(getClassNameWithoutDAL(dalType))
                         .buildQuery(dbQuery, "read")
@@ -62,7 +62,7 @@ public class Crud implements ICrud {
                 }
                 dto = new DBqueryDTO<>(true, "", rows);
             } else {
-                dto = new DBqueryDTO(false, connDTO.Message, null);
+                dto = new DBqueryDTO(false, connDTO.message, null);
             }
         } catch (Exception e) {
             dto = new DBqueryDTO(false, e.getMessage(), null);
@@ -76,13 +76,13 @@ public class Crud implements ICrud {
     public DBqueryDTO update(Object dal, String primaryKey) {
         try {
             connDTO = db.getConnection();
-            if (connDTO.Success) {
+            if (connDTO.success) {
                 PreparedStatement stmt = createUpdatePreparedStatement(dal,
                         getClassNameWithoutDAL(dal.getClass()), primaryKey);
                 stmt.executeUpdate();
                 dto = new DBqueryDTO(true, "", null);
             } else {
-                dto = new DBqueryDTO(false, connDTO.Message, null);
+                dto = new DBqueryDTO(false, connDTO.message, null);
             }
         } catch (Exception e) {
             dto = new DBqueryDTO(false, e.getMessage(), null);
@@ -96,14 +96,14 @@ public class Crud implements ICrud {
     public DBqueryDTO delete(DBQueryModel deleteModel, Class dal) {
         try {
             connDTO = db.getConnection();
-            if (connDTO.Success) {
-                statement = connDTO.Connection.createStatement();
+            if (connDTO.success) {
+                statement = connDTO.connection.createStatement();
                 statement.executeUpdate(new QueryBuilder(getClassNameWithoutDAL(dal))
                         .buildQuery(deleteModel, "delete")
                         .getQuery());
                 dto = new DBqueryDTO(true, "", null);
             } else {
-                dto = new DBqueryDTO(false, connDTO.Message, null);
+                dto = new DBqueryDTO(false, connDTO.message, null);
             }
         } catch (Exception e) {
             dto = new DBqueryDTO(false, e.getMessage(), null);
@@ -163,7 +163,7 @@ public class Crud implements ICrud {
         try {
             Class<?> zclass = object.getClass();
             String Sql = createUpdateQuery(zclass, tableName, primaryKey);
-            stmt = connDTO.Connection.prepareStatement(Sql);
+            stmt = connDTO.connection.prepareStatement(Sql);
             Field[] fields = zclass.getDeclaredFields();
             int pkSequence = fields.length;
             for(int i = 0; i < fields.length; i++) {

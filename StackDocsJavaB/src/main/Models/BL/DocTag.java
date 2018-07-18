@@ -1,22 +1,11 @@
 package Models.BL;
 
 public class DocTag {
-	private int Id;
-	private String Tag;
+	public int id;
+	public String tag;
 
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public String getTag() {
-		return Tag;
-	}
-
-	public void setTag(String tag) {
-		Tag = tag;
+	public DocTag(int Id, String Tag) {
+		id = Id;
+		tag = Tag;
 	}
 }

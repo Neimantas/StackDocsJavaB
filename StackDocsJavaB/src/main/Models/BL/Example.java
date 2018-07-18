@@ -1,22 +1,11 @@
 package Models.BL;
 
 public class Example {
-	private int Id;
-	private String BodyHTML;
+	public int id;
+	public String bodyHTML;
 
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public String getBodyHTML() {
-		return BodyHTML;
-	}
-
-	public void setBodyHTML(String bodyHTML) {
-		BodyHTML = bodyHTML;
+	public Example(int Id, String BodyHTML) {
+		id = Id;
+		bodyHTML = BodyHTML;
 	}
 }
