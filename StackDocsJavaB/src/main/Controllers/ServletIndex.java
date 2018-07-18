@@ -28,8 +28,8 @@ public class ServletIndex extends HttpServlet {
         int paramSize = request.getParameterMap().size();
         System.out.println(paramSize);
         if (paramSize > 0) {
-            String language = request.getParameter("kalba");
-            String search = request.getParameter("paieska");
+            String language = request.getParameter("language");
+            String search = request.getParameter("search");
             String page = request.getParameter("page");
             String topic = request.getParameter("topicid");
             boolean after = request.getParameter("after") != null && Boolean.parseBoolean(request.getParameter("after"));

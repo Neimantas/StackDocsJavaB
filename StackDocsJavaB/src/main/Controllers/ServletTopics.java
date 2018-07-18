@@ -25,7 +25,6 @@ public class ServletTopics extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String topicID = request.getParameter("topicId");
-        System.out.println(topicID);
         if (topicID == null) {
             response.sendRedirect("http://localhost:8080/index.jsp");
         } else {
