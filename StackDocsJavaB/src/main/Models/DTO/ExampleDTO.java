@@ -1,6 +1,6 @@
 package Models.DTO;
 
-import Models.DAL.ExampleDAL;
+import Models.DAL.ExamplesDAL;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ public class ExampleDTO {
 
     public boolean success;
     public String message;
-    public List<ExampleDAL> list;
+    public List<ExamplesDAL> list;
 
-    public ExampleDTO(boolean Success, String Message, List<ExampleDAL> List) {
+    public ExampleDTO(boolean Success, String Message, List<ExamplesDAL> List) {
         success = Success;
         message = Message;
         list = List;

@@ -2,7 +2,7 @@ package Services.Impl;
 
 import Models.CONS.Errors;
 import Models.DAL.DocTagsDAL;
-import Models.DAL.ExampleDAL;
+import Models.DAL.ExamplesDAL;
 import Models.DAL.TopicsDAL;
 import Models.DBQueryModel;
 import Models.DTO.DBqueryDTO;
@@ -47,7 +47,7 @@ public class HigherService implements IHigherService {
         model = new DBQueryModel();
         model.where = "id";
         model.whereValue = exampleIds;
-        return getExampleDTO(crud.read(model, ExampleDAL.class));
+        return getExampleDTO(crud.read(model, ExamplesDAL.class));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class HigherService implements IHigherService {
         model = new DBQueryModel();
         model.where = "DocTopicId";
         model.whereValue = topicIds;
-        return getExampleDTO(crud.read(model, ExampleDAL.class));
+        return getExampleDTO(crud.read(model, ExamplesDAL.class));
     }
 
     @Override
@@ -94,7 +94,7 @@ public class HigherService implements IHigherService {
     public ExampleDTO getAllExamples() {
         String cachePlacement = "allDocTags";
         if (cache.get(cachePlacement) != null) return (ExampleDTO) cache.get(cachePlacement);
-        DBqueryDTO<ExampleDAL> dBqueryDTO = crud.read(new DBQueryModel(), ExampleDAL.class);
+        DBqueryDTO<ExamplesDAL> dBqueryDTO = crud.read(new DBQueryModel(), ExamplesDAL.class);
         if (!dBqueryDTO.success) return new ExampleDTO(false, dBqueryDTO.message,null);
         if (dBqueryDTO.list == null) return new ExampleDTO(false, Errors.HIGHERSERVICE_ERROR.get(), null);
         ExampleDTO exampleDTO = new ExampleDTO(true, null, dBqueryDTO.list);
@@ -114,7 +114,7 @@ public class HigherService implements IHigherService {
         return new TopicsDTO(true, null, dBqueryDTO.list);
     }
 
-    private ExampleDTO getExampleDTO(DBqueryDTO<ExampleDAL> dBqueryDTO) {
+    private ExampleDTO getExampleDTO(DBqueryDTO<ExamplesDAL> dBqueryDTO) {
         if (!dBqueryDTO.success) return new ExampleDTO(false, dBqueryDTO.message,null);
         if (dBqueryDTO.list == null) return new ExampleDTO(false, Errors.HIGHERSERVICE_ERROR.get(), null);
         return new ExampleDTO(true, null, dBqueryDTO.list);

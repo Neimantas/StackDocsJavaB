@@ -3,10 +3,9 @@ package Controllers;
 import Models.BL.DocTag;
 import Models.BL.Topic;
 import Models.URLSettingsModel;
-import Services.ConvertToJSON;
 import Services.DropDown;
+import Services.ObjectConverterToString;
 import Services.Pagination;
-import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,13 +37,21 @@ public class ServletIndex extends HttpServlet {
             Pagination pagination = new Pagination();
             URLSettingsModel url = new URLSettingsModel(topic, language, search, after);
             List<Topic> topicList = pagination.getList(url);
-            request.setAttribute("topicList", ConvertToJSON.getJSON(topicList));
-            System.out.println(ConvertToJSON.getJSON(topicList));
+            request.setAttribute("topicList", ObjectConverterToString.objectListToString(topicList));
+            String[][] arr = ObjectConverterToString.objectListToString(topicList);
+            for (int i = 0; i < arr.length; i++) {
+                System.out.println(arr[i][0]);
+                System.out.println(arr[i][1]);
+            }
         }
         DropDown dropDown = new DropDown();
         List<DocTag> docList = dropDown.getList();
-        request.setAttribute("doctags", ConvertToJSON.getJSON(docList));
-        System.out.println(ConvertToJSON.getJSON(docList));
+        request.setAttribute("doctags", ObjectConverterToString.objectListToString(docList));
+        String[][] arr = ObjectConverterToString.objectListToString(docList);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i][0]);
+            System.out.println(arr[i][1]);
+        }
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
