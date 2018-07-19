@@ -49,6 +49,25 @@
             <artifactId>modelmapper</artifactId>
             <version>2.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/catalina -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>catalina</artifactId>
+            <version>6.0.53</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>9.0.10</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/eu.lestard/easy-di -->
+        <dependency>
+            <groupId>eu.lestard</groupId>
+            <artifactId>easy-di</artifactId>
+            <version>0.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -98,7 +117,7 @@
                             <configuration>
                                 <path>/</path>
                                 <enableNaming>false</enableNaming>
-                                <charset>utf-8</charset>
+                                <!--<charset>utf-8</charset>-->
                             </configuration>
                         </execution>
                     </executions>

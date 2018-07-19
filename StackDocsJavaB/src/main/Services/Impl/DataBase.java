@@ -12,12 +12,13 @@ public class DataBase implements IDataBase {
     @Override
     public ConnectionDTO getConnection(){
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:src/main/External/mydb.sqlite.db");
+            String url = "jdbc:sqlite:mydb.sqlite.db";
+            Class.forName("org.sqlite.JDBC").newInstance();
+            connection = DriverManager.getConnection(url);
+            return new ConnectionDTO(true, "", connection);
         } catch (Exception e){
             return new ConnectionDTO(false, e.getMessage(), null);
         }
-        return new ConnectionDTO(true, "", connection);
     }
 
     @Override
