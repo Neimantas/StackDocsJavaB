@@ -1,4 +1,4 @@
-package Configuration;
+package main.Configuration;
 import java.util.Optional;
 
 import Controllers.ServletIndex;
@@ -20,12 +20,13 @@ public class Main {
         tomcat.setHostname(HOSTNAME.orElse("localhost"));
         tomcat.getHost().setAppBase(appBase);
         Context context = tomcat.addWebapp(contextPath,appBase);
-        EasyDI easyDI = new EasyDI();
+//        EasyDI easyDI = new EasyDI();
         Tomcat.addServlet(context, "ServletIndex", new ServletIndex());  //paduot easyDi reikia :)
         Tomcat.addServlet(context,"ServletTopics",new ServletTopics());  //paduot easyDi reikia :)
 
-        context.addServletMapping("/ServletIndex" , "ServletIndex");
-        context.addServletMapping("/ServletTopics","ServletTopics");
+//        context.
+//        context.addServletMapping("/ServletIndex" , "ServletIndex");
+//        context.addServletMapping("/ServletTopics","ServletTopics");
 
 
 
