@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="header">
-    <h2>${topic[0]}</h2>
+    <h2>${topic.get("id")}</h2>
 </div>
 
 <div class="container2">
@@ -17,19 +17,19 @@
         <ul>
             <li>
                 <h3>Introduction</h3>
-                <p>${topic[1]}</p>
+                <p>${topic.get("introductionHTML")}</p>
             </li>
             <li>
                 <h3>Syntax</h3>
-                <p>${topic[2]}</p>
+                <p>${topic.get("syntaxHTML")}</p>
             </li>
             <li>
                 <h3>Parameters</h3>
-                <p>${topic[3]}</p>
+                <p>${topic.get("parametersHTML")}</p>
             </li>
             <li>
                 <h3>Remarks</h3>
-                <p>${topic[4]}</p>
+                <p>${topic.get("remarksHTML")}</p>
             </li>
         </ul>
     </div>
@@ -50,14 +50,13 @@
 
 </div>
 
-
 <%--Modal--%>
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">${topic[1]}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">${topic.get("introductionHTML")}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -66,7 +65,7 @@
                 <ul>
                     <li>
                         <java:forEach var="ex" items="${examples}">
-                            <p>${ex[0]}</p>
+                            <p>${ex.get("bodyHTML")}</p>
                         </java:forEach>
                     </li>
                 </ul>

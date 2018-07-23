@@ -37,21 +37,11 @@ public class ServletIndex extends HttpServlet {
             Pagination pagination = new Pagination();
             URLSettingsModel url = new URLSettingsModel(topic, language, search, after);
             List<Topic> topicList = pagination.getList(url);
-            request.setAttribute("topicList", ObjectConverterToString.objectListToString(topicList));
-            String[][] arr = ObjectConverterToString.objectListToString(topicList);
-            for (int i = 0; i < arr.length; i++) {
-                System.out.println(arr[i][0]);
-                System.out.println(arr[i][1]);
-            }
+            request.setAttribute("topicList", ObjectConverterToString.listOfObjectsToStringList(topicList));
         }
         DropDown dropDown = new DropDown();
         List<DocTag> docList = dropDown.getList();
-        request.setAttribute("doctags", ObjectConverterToString.objectListToString(docList));
-        String[][] arr = ObjectConverterToString.objectListToString(docList);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i][0]);
-            System.out.println(arr[i][1]);
-        }
+        request.setAttribute("doctags", ObjectConverterToString.listOfObjectsToStringList(docList));
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

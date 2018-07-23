@@ -29,8 +29,8 @@ public class ServletTopics extends HttpServlet {
             TopicsDTO dto = higher.getTopicById(topicID);
             ExampleDTO exDto = higher.getExamplesByTopicsId(topicID);
             if (dto.success && exDto.success) {
-                request.setAttribute("topic", ObjectConverterToString.objectToString(dto.list.get(0)));
-                request.setAttribute("examples", ObjectConverterToString.objectListToString(exDto.list));
+                request.setAttribute("topic", ObjectConverterToString.objectToStringMap(dto.list.get(0)));
+                request.setAttribute("examples", ObjectConverterToString.listOfObjectsToStringList(exDto.list));
                 request.getRequestDispatcher("topics.jsp").forward(request, response);
             } else {
                 response.sendRedirect("http://localhost:8080/index.jsp");

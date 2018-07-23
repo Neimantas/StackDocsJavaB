@@ -6,48 +6,47 @@ import Models.BL.Topic;
 import Models.DAL.ExamplesDAL;
 import Models.DAL.TopicsDAL;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class ObjectConverterToString {
-    // 5 is the maximum number of fields
-    private static final int maxNumOfFields = 5;
 
-    public static String[][] objectListToString(List list) {
-        String[][] arr = new String[list.size()][maxNumOfFields];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = objectToString(list.get(i));
-        }
-        return arr;
+    public static List<Map<String, String>> listOfObjectsToStringList(List listOfObjects) {
+        List<Map<String, String>> list = new ArrayList<>();
+        listOfObjects.forEach(ob -> list.add(objectToStringMap(ob)));
+        return list;
     }
 
-    public static String[] objectToString(Object ob) {
-        String[] arr = new String[maxNumOfFields];
+    public static Map<String, String> objectToStringMap(Object ob) {
+        Map<String, String> map = new HashMap<>();
         if (ob instanceof Topic) {
             Topic tp = (Topic) ob;
-            arr[0] = String.valueOf(tp.id);
-            arr[1] = tp.title;
+            map.put("id", String.valueOf(tp.id));
+            map.put("title", tp.title);
         } else if (ob instanceof DocTag) {
             DocTag dt = (DocTag) ob;
-            arr[0] = String.valueOf(dt.id);
-            arr[1] = dt.tag;
+            map.put("id", String.valueOf(dt.id));
+            map.put("tag", dt.tag);
         } else if (ob instanceof Example) {
             Example ex = (Example) ob;
-            arr[0] = String.valueOf(ex.id);
-            arr[1] = ex.bodyHTML;
+            map.put("id", String.valueOf(ex.id));
+            map.put("bodyHTML", ex.bodyHTML);
         } else if (ob instanceof TopicsDAL) {
             TopicsDAL td = (TopicsDAL) ob;
-            arr[0] = td.title;
-            arr[1] = td.introductionHtml;
-            arr[2] = td.syntaxHtml;
-            arr[3] = td.parametersHtml;
-            arr[4] = td.remarksHtml;
+            map.put("title", td.title);
+            map.put("introductionHTML", td.introductionHtml);
+            map.put("syntaxHTML", td.syntaxHtml);
+            map.put("parametersHTML", td.parametersHtml);
+            map.put("remarksHTML", td.remarksHtml);
         } else if (ob instanceof ExamplesDAL) {
             ExamplesDAL ed = (ExamplesDAL) ob;
-            arr[0] = ed.bodyHtml;
+            map.put("bodyHTML", ed.bodyHtml);
         } else {
-            throw new IllegalArgumentException("Can only except Topic or DocTag objects.");
+            throw new IllegalArgumentException("Can only except Topic, DocTag, Example or their DAL's objects.");
         }
-        return arr;
+        return map;
     }
 
     private ObjectConverterToString(){}
